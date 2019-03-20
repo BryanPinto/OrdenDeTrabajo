@@ -1,6 +1,51 @@
 ﻿/*.panel-default > .panel-heading {
     background-color: #2EFEF7;
 }*/
+/*NUEVOS ESTILOS*/
+header{
+    border-bottom:none;
+}
+.footer {
+    max-width: 1349px;
+    min-height: 135px;
+    margin: 0 auto;
+    padding-top: 0px;
+    position: relative;
+    color: #4a4a4a;
+}
+iframe {
+    overflow: hidden;
+}
+th {
+    background-color: #FFCD00;
+    color: white;
+    letter-spacing: 1px;
+    text-align:center;
+}
+.panel-primary > .panel-heading {
+    color: white;
+    background-color: #FFCD00;
+    border-color: #FFCD00;
+}
+.panel-primary {
+    border-color: #FFCD00;
+}
+.buscar {
+    background-color: #fcce01;
+    font-family: Oswald, Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 17px;
+    padding-bottom: 14px;
+    margin: 11px 0px 0px 75px;
+    border: 1px solid #aeaeae;
+    -webkit-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+/*FIN NUEVOS ESTILOS*/
 
 form {
     /*all: initial;*/
