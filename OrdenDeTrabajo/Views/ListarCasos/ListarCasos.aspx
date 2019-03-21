@@ -112,7 +112,7 @@
     <%--FILTROS--%>
 
     <div class="panel panel-primary">
-        <div class="panel-heading">Filtros órdenes</div>
+        <div class="panel-heading">Filtros</div>
         <div class="panel-body">
             <div class="row">
                 <fieldset class="form-group col-md-1">
@@ -149,7 +149,9 @@
                     </select>
                 </fieldset>
                 <fieldset class="form-group col-md-2">
-                    <input type="button" id="medidor_buscar" value="Buscar" class="buscar">
+                    <%--<div id="buscarListar">--%>
+                        <input type="button" id="btnBuscarListar" value="Buscar" class="buscar">
+                    <%--</div>--%>
                 </fieldset>
             </div>
         </div>
@@ -162,11 +164,11 @@
                 <tr>
                     <%--<th class="col-xs-2">Proceso</th>--%>
                     <th class="col-xs-1">Número de caso</th>
-                    <th class="col-xs-2">Estado del caso</th>
+                    <th class="col-xs-1">Estado del caso</th>
                     <th class="col-xs-1">Fecha de creación</th>
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
-                    <th class="col-xs-1">Detalle</th>
+                    <th class="col-xs-1">Motivo</th>
                 </tr>
             </thead>
             <tbody><%= ViewData["valores"] %></tbody>

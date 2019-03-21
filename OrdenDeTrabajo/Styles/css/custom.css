@@ -5,6 +5,7 @@
 header{
     border-bottom:none;
 }
+/*FOOTER*/
 .footer {
     max-width: 1349px;
     min-height: 135px;
@@ -13,14 +14,62 @@ header{
     position: relative;
     color: #4a4a4a;
 }
+@media (min-width:577px) and (max-width:768px) {
+    .footer {
+        /*padding:0px 10px 0px 0px;*/
+    }
+}
+/*FIN FOOTER*/
+/* BOTONES SIGUIENTE/ANTERIOR*/
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    background-color: #fcce01;
+    font-family: Oswald, Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 22px;
+    padding-bottom: 14px;
+    margin: 11px 0px 0px 75px;
+    border-radius: 0;
+    border: 1px solid #aeaeae;
+    -webkit-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    background-color: #fcce01;
+    font-family: Oswald, Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 17px;
+    padding-bottom: 14px;
+    margin: 11px 0px 0px 75px;
+    border-radius: 0;
+    border: 1px solid #aeaeae;
+    -webkit-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+@media (max-width:450px) {
+    .pagination > li:last-child > a, .pagination > li:last-child > span {
+        margin-left: 35%;
+    }
+    .pagination > li:first-child > a, .pagination > li:first-child > span {
+        margin-left: 35%;
+    }
+}
+/*FIN BOTONES SIGUIENTE/ANTERIOR*/
 iframe {
     overflow: hidden;
 }
-th {
+.col-xs-1 {
     background-color: #FFCD00;
     color: white;
     letter-spacing: 1px;
-    text-align:center;
+    text-align: center;
 }
 .panel-primary > .panel-heading {
     color: white;
@@ -30,6 +79,7 @@ th {
 .panel-primary {
     border-color: #FFCD00;
 }
+/* botón buscar página Listar Casos */
 .buscar {
     background-color: #fcce01;
     font-family: Oswald, Verdana, Geneva, sans-serif;
@@ -45,6 +95,23 @@ th {
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
 }
+@media (max-width:576px) {
+    #btnBuscarListar {
+        /*margin: 11px 0px 0px 105px;*/
+        margin-left:35%;
+    }
+}
+@media (min-width:577px) and (max-width:768px) {
+    #btnBuscarListar {
+        margin-left: 40%;
+    }
+}
+@media (min-width:769px) and (max-width:992px) {
+    #btnBuscarListar {
+        margin-left: 45%;
+    }
+}
+/* FIN botón buscar página Listar Casos */
 /*FIN NUEVOS ESTILOS*/
 
 form {

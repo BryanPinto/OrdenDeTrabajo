@@ -23,6 +23,7 @@
     
     <link href="<%: Url.Content("~/Styles/css/jquery.ui.css") %>" rel="stylesheet" />
     <script src="<%: Url.Content("~/Styles/js/bootstrap-combobox.js?02052018") %>"></script>
+    <link rel="icon" type="image/png" href="http://200.68.17.69/alta_des/img/favicon.ico"><%--FAV ICON--%>
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -96,16 +97,6 @@ FOOTER
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <footer>
         <div class="footer">
-            <%--<div class="logo">
-                <img src="<%: Url.Content("~/Styles/image/logo.png") %>">
-            </div>
-            <div class="links">
-                <p>Links de Interés</p>
-                <ul>
-                    <li><a href="http://www.gob.cl/">Gobierno de Chile</a></li>
-                    <li id="two"><a href="http://www.ine.cl/">Página Oficial INE</a></li>
-                </ul>
-            </div>--%>
             <iframe id="iframe" style="width:100%;height:508px" scrolling="no" src="https://www.lipigas.cl/?sf=1"></iframe> 
         </div>
     </footer>
