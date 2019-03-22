@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ConversorBase64.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListarCasosController.cs" />
+    <Compile Include="Controllers\TratarCasoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +266,7 @@
     <Content Include="Views\Home\Login.aspx" />
     <Content Include="Views\Home\Test.aspx" />
     <Content Include="Views\ListarCasos\ListarCasos.aspx" />
+    <Content Include="Views\TratarCaso\TratarCaso.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

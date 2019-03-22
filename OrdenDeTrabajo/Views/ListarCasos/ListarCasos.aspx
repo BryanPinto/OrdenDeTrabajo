@@ -38,6 +38,31 @@
                 }
             });
 
+            $("#formBusqueda").submit(function (e) {
+                e.preventDefault();
+                // Buscar cabeceras
+                $.ajax({
+                    url: '<%: Url.Content("~/ListarCasos/BusquedaCasos/") %>',
+                    data: $("#formBusqueda").serialize(),
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        if (data != "error") {
+                            $('#tablaordenes').find('tbody').hide();
+                            table.clear();
+                            table.rows.add(JSON.parse(data));
+                            table.draw();
+                            $('#tablaordenes').find('tbody').fadeIn("slow");
+                        }
+                        else
+                            alert("Error al buscar");
+                    },
+                    error: function () {
+                        alert("Error al buscar");
+                    }
+                });
+            });
+
             // Reconocer inputs
             $("#txtNroCaso").on("input", function () {
                 table.draw();
@@ -110,52 +135,53 @@
     <h2 style="text-align:center;color:#AEAEAE">Estado de órdenes</h2><br />
 
     <%--FILTROS--%>
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">Filtros</div>
-        <div class="panel-body">
-            <div class="row">
-                <fieldset class="form-group col-md-1">
-                </fieldset>
-                <fieldset class="form-group col-md-2">
-                    <label for="txtFechaDesde">Fecha desde</label>
-                    <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
-                </fieldset>
-                <fieldset class="form-group col-md-2">
-                    <label for="txtFechaHasta">Fecha hasta</label>
-                    <input type="date" class="form-control" id="txtFechaHasta" name="txtFechaHasta" />
-                </fieldset>
-                <fieldset class="form-group col-md-2">
-                    <label for="txtNroCaso">Número de caso</label>
-                    <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
-                </fieldset>
-               <%-- <fieldset class="form-group col-md-3">
-                    <label for="txtProceso">Nombre proceso</label>
-                    <select name="txtProceso" id="txtProceso" class="form-control">
-                        <option value="0">Todos</option>
-                        <option value="1">Proceso adquisiciones</option>
-                        <option value="2">Proceso fondos a rendir</option>
-                        <option value="3">Proceso reembolsos</option>
-                    </select>
-                </fieldset>--%>
-                <fieldset class="form-group col-md-2">
-                    <label for="txtEstadoCaso">Estado del caso</label>
-                    <select name="txtEstadoCaso" id="txtEstadoCaso" class="form-control">
-                        <option value="0">Todos</option>
-                        <option value="1">Iniciado</option>
-                        <option value="2">Completado</option>
-                        <%--<option value="3">No iniciado</option>
-                        <option value="4">Suspendido</option>--%>
-                    </select>
-                </fieldset>
-                <fieldset class="form-group col-md-2">
-                    <%--<div id="buscarListar">--%>
-                        <input type="button" id="btnBuscarListar" value="Buscar" class="buscar">
-                    <%--</div>--%>
-                </fieldset>
+    <form id="formBusqueda">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Filtros</div>
+            <div class="panel-body">
+                <div class="row">
+                    <fieldset class="form-group col-md-1">
+                    </fieldset>
+                    <fieldset class="form-group col-md-2">
+                        <label for="txtFechaDesde">Fecha desde</label>
+                        <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
+                    </fieldset>
+                    <fieldset class="form-group col-md-2">
+                        <label for="txtFechaHasta">Fecha hasta</label>
+                        <input type="date" class="form-control" id="txtFechaHasta" name="txtFechaHasta" />
+                    </fieldset>
+                    <fieldset class="form-group col-md-2">
+                        <label for="txtNroCaso">Número de caso</label>
+                        <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
+                    </fieldset>
+                   <%-- <fieldset class="form-group col-md-3">
+                        <label for="txtProceso">Nombre proceso</label>
+                        <select name="txtProceso" id="txtProceso" class="form-control">
+                            <option value="0">Todos</option>
+                            <option value="1">Proceso adquisiciones</option>
+                            <option value="2">Proceso fondos a rendir</option>
+                            <option value="3">Proceso reembolsos</option>
+                        </select>
+                    </fieldset>--%>
+                    <fieldset class="form-group col-md-2">
+                        <label for="txtEstadoCaso">Estado del caso</label>
+                        <select name="txtEstadoCaso" id="txtEstadoCaso" class="form-control">
+                            <option value="0">Todos</option>
+                            <option value="1">Iniciado</option>
+                            <option value="2">Completado</option>
+                            <%--<option value="3">No iniciado</option>
+                            <option value="4">Suspendido</option>--%>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group col-md-2">
+                        <%--<div id="buscarListar">--%>
+                            <input type="submit" id="btnBuscarListar" value="Buscar" class="buscar">
+                        <%--</div>--%>
+                    </fieldset>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <%--TABLA--%>
     <div class="table-responsive">
