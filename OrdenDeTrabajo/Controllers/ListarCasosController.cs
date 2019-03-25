@@ -140,8 +140,16 @@ namespace WebSolicitudes.Controllers
                         if (row.SelectNodes("Column[@Name='IDCASE']")[0] != null)
                         {
                             numCaso = row.SelectNodes("Column[@Name='IDCASE']")[0].InnerText;
-                            fila.Add(numCaso);
-                            valido = true;
+                            if (txtNroCaso == string.Empty)
+                            {
+                                valido = true;
+                                fila.Add(numCaso);
+                            }
+                            else if (txtNroCaso != string.Empty && txtNroCaso == numCaso)
+                            {
+                                valido = true;
+                                fila.Add(numCaso);
+                            }
                         }
                         
                         //OBTENER ESTADO DEL CASO
@@ -180,23 +188,10 @@ namespace WebSolicitudes.Controllers
 
 
                         // Agregar a lista FORMA CORRECTA
-                        if (valido)
+                        if(valido)
                             registros.Add(fila);
 
-                        //// Agregar a lista FORMA TRUCHA
-                        //if(txtNroCaso != null)
-                        //{
-                        //    if(txtNroCaso == numCaso)
-                        //    {
-                        //        registros.Add(fila);
-                        //        valido = true;
-                        //    }
-                        //    else
-                        //    {
-                        //        if(valido)
-                        //            registros.Add(fila);
-                        //    }
-                        //} 
+                        
                     }
                     datosJSON = JsonConvert.SerializeObject(registros);
                 }
