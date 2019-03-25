@@ -251,6 +251,9 @@ h2, h3 {
     text-align:center;
 }
 /*Fin estilos para vista TratarCaso*/
+tbody{
+    text-align:center;
+}
 /*FIN NUEVOS ESTILOS*/
 
 form {

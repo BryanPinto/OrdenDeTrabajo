@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace WebSolicitudes.Controllers
 {
@@ -16,6 +18,25 @@ namespace WebSolicitudes.Controllers
         public ActionResult ListarCasos()
         {
             return View();
+        }
+
+        public void escribirLog(string solicitud, string mensaje)
+        {
+            try
+            {
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "Solicitud " + solicitud + ": " +
+                          mensaje);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         [HttpPost]
@@ -41,16 +62,12 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                //// Turno
-                //int? caso = null;
-                //if (txtNroCaso != "0")
-                //    caso = int.Parse(txtNroCaso);
 
-                //// Estado
-                //int? estado = null;
-                //if (txtEstado != "0")
-                //    estado = int.Parse(txtEstado);
-
+                // Estado
+                int? estado = null;
+                if (Convert.ToInt32(txtEstado) != 0)
+                    estado = int.Parse(txtEstado);
+                
 
                 #endregion
 
@@ -61,61 +78,128 @@ namespace WebSolicitudes.Controllers
                 int cantidadCasos = 20;
                 string respuestaCasos = "";
 
+                //Crear XML de consulta de casos (id de proceso 26 = OrdendeTrabajoMedidor)
                 string queryCasos = @"
-            <BizAgiWSParam>
+                <BizAgiWSParam>
+	              <userName>admon</userName>
+	              <domain>domain</domain>
                   <QueryParams>
                       <Internals>
                           <Internal Name='ProcessState' Include='true'>Running</Internal>
                           <Internal Name='ProcessState' Include='true'>Completed</Internal>
-						  <Internal Name='ProcessState' Include='true'>Suspended</Internal>
-						  <Internal Name='ProcessState' Include='true'>NotInitiated</Internal>
+                          <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
                       <XPaths>
-                          <XPath Path='OrdendeTrabajoMedidor'></XPath>
+                          <XPath Path='OrdendeTrabajoMedidor.MotivosOTMedidor.Motivo' Include='true'>
+                          </XPath>
+                          <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>";
+                if (txtFechaDesde != null)
+                {
+                    queryCasos += @"<From>" + fechaInicio + @"</From>";
+                }
+                else
+                {
+                    queryCasos += @"<From>01/01/1900</From>";
+                }
+                if(txtFechaHasta != null)
+                {
+                    queryCasos += @"<To>" + fechaTermino + @"</To>";
+                }
+                else{}
+                      queryCasos += @"        
+                          </XPath>
                       </XPaths>
                   </QueryParams>
                   <Parameters>
-                      <Parameter Name='pag'>1</Parameter>                        
-                      <Parameter Name='PageSize'> "+ cantidadCasos+ @" </Parameter>    
-                      <Parameter Name='idEnt'>10135</Parameter>
-                  </Parameters>
-              </BizAgiWSParam>";
+                      <Parameter Name ='pag'>1</Parameter>
+                       <Parameter Name='PageSize'>"+cantidadCasos+@"</Parameter>
+                    </Parameters>
+                </BizAgiWSParam>";
 
                 respuestaCasos = servicioQuery.QueryCasesAsString(queryCasos);
-                //AHORA TRANSFORMAR RESPUESTACASOS A XML y LUEGO RECORRRER LA VARIABLE CONVERTIDA
+                respuestaCasos = respuestaCasos.Replace("\n", "");
+                respuestaCasos = respuestaCasos.Replace("\t", "");
+                respuestaCasos = respuestaCasos.Replace("\r", "");
+                //Transformas respuesta STRING de Bizagi a XML para poder recorrer los nodos
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(respuestaCasos);
+                XmlNodeList rows = doc.GetElementsByTagName("Row");
 
                 #endregion
 
                 //#region Crear JSON
                 List<List<string>> registros = new List<List<string>>();
-                //foreach (CabeceraDocumento item in Rows)//rows del xml
-                //{
-                //    List<string> fila = new List<string>();
-                //    // Fecha
-                //    fila.Add(item.Fecha.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture));
+                if (rows != null)
+                {
+                    foreach (XmlNode row in rows)
+                    {
+                        List<string> fila = new List<string>();
+                        bool valido = false;
+                        //OBTENER NUMERO DE CASO
+                        var numCaso = "";
+                        if (row.SelectNodes("Column[@Name='IDCASE']")[0] != null)
+                        {
+                            numCaso = row.SelectNodes("Column[@Name='IDCASE']")[0].InnerText;
+                            fila.Add(numCaso);
+                            valido = true;
+                        }
+                        
+                        //OBTENER ESTADO DEL CASO
+                        if (row.SelectNodes("Column[@Name='IDCASESTATE']")[0] != null)
+                        {
+                            var estadoCaso = row.SelectNodes("Column[@Name='IDCASESTATE']")[0].InnerText;
+                            var estadoTexto = "";
+                            if (Convert.ToUInt32(estadoCaso) == 2)
+                            {
+                                estadoTexto = "En proceso";
+                            }
+                            if (Convert.ToInt32(estadoCaso) == 5)
+                            {
+                                estadoTexto = "Completado";
+                            }
+                            fila.Add(estadoTexto);
+                        }
 
-                //    // Turno
-                //    if (item.ID_Turno != null)
-                //        fila.Add(item.Turnos.NombreTurno);
-                //    else
-                //        fila.Add(string.Empty);
+                        //OBTENER FECHA SOLICITUD
+                        if (row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0] != null)
+                        {
+                            var fechaSolicitud = row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText;
+                            DateTime fecha = Convert.ToDateTime(fechaSolicitud);
+                            var fechaFinal = fecha.ToString("dd-MM-yyyy");
+                            fila.Add(fechaFinal);
+                        }
 
-                //    // Operación
-                //    fila.Add(item.TipoDocumento.Area.Replace("Refineria", "Refinería"));
+                        //OBTENER MOTIVO OT MEDIDOR
+                        if (row.SelectNodes("Column[@Name='MOTIVOSOTMEDIDOR_MOTIVO']")[0] != null)
+                        {
+                            var motivoOT = row.SelectNodes("Column[@Name='MOTIVOSOTMEDIDOR_MOTIVO']")[0].InnerText;
+                            fila.Add(motivoOT);
+                        }
 
-                //    // Formulario
-                //    fila.Add(item.TipoDocumento.NombreVisual);
-
-                //    // Estado
-                //    fila.Add(item.Estados.Nombre);
-         
-                //    // Agregar a lista
-                //    registros.Add(fila);
-                //}
-                //datosJSON = JsonConvert.SerializeObject(registros);
-                //#endregion
+                        fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Tratar</a>");
 
 
+                        // Agregar a lista FORMA CORRECTA
+                        if (valido)
+                            registros.Add(fila);
+
+                        //// Agregar a lista FORMA TRUCHA
+                        //if(txtNroCaso != null)
+                        //{
+                        //    if(txtNroCaso == numCaso)
+                        //    {
+                        //        registros.Add(fila);
+                        //        valido = true;
+                        //    }
+                        //    else
+                        //    {
+                        //        if(valido)
+                        //            registros.Add(fila);
+                        //    }
+                        //} 
+                    }
+                    datosJSON = JsonConvert.SerializeObject(registros);
+                }
             }
             catch (Exception ex)
             {
