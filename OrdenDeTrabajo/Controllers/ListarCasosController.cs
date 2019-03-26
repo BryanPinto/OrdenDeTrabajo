@@ -148,7 +148,7 @@ namespace WebSolicitudes.Controllers
                         bool valido = false;
                         //OBTENER NUMERO DE CASO
                         var numCaso = "";
-                        if (row.SelectNodes("Column[@Name='IDCASE']")[0] != null)
+                        if (row.SelectNodes("Column[@Name='IDCASE']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText != string.Empty)
                         {
                             numCaso = row.SelectNodes("Column[@Name='IDCASE']")[0].InnerText;
                             if (txtNroCaso == string.Empty)
@@ -180,7 +180,7 @@ namespace WebSolicitudes.Controllers
                         }
 
                         //OBTENER FECHA SOLICITUD
-                        if (row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0] != null)
+                        if (row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText != string.Empty)
                         {
                             var fechaSolicitud = row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText;
                             DateTime fecha = Convert.ToDateTime(fechaSolicitud);
