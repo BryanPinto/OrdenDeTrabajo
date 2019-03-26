@@ -120,7 +120,18 @@ namespace WebSolicitudes.Controllers
                 respuestaCasos = respuestaCasos.Replace("\n", "");
                 respuestaCasos = respuestaCasos.Replace("\t", "");
                 respuestaCasos = respuestaCasos.Replace("\r", "");
-                //Transformas respuesta STRING de Bizagi a XML para poder recorrer los nodos
+
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "XML: " + queryCasos + "| " + "Respuesta Bizagi: " + respuestaCasos);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+
+                //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(respuestaCasos);
                 XmlNodeList rows = doc.GetElementsByTagName("Row");
@@ -194,11 +205,28 @@ namespace WebSolicitudes.Controllers
                         
                     }
                     datosJSON = JsonConvert.SerializeObject(registros);
+
+                    //Escribir log con el JSON serializado para enviar como filtro de busqueda y agregar los casos a la grilla
+                    rutaLog = HttpRuntime.AppDomainAppPath;
+                    sb = new StringBuilder();
+                    sb.Append(Environment.NewLine +
+                              DateTime.Now.ToShortDateString() + " " +
+                              DateTime.Now.ToShortTimeString() + ": " +
+                              "JSON: " + datosJSON);
+                    System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                    sb.Clear();
                 }
             }
             catch (Exception ex)
             {
-                //Helper.escribirLog(Helper.GetCurrentMethod(), ex.Message);
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "Error: " + ex.Message);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
             }
             return (datosJSON);
         }

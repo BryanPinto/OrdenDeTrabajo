@@ -44,7 +44,7 @@ header{
     color: #fff;
     padding: 10px 17px;
     padding-bottom: 14px;
-    margin: 11px 0px 0px 75px;
+    margin: 11px 0px 0px 20px;
     border-radius: 0;
     border: 1px solid #aeaeae;
     -webkit-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
@@ -53,6 +53,18 @@ header{
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
 }
+/*NUMERO PAGINACION*/
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #fcce01;
+    border-color: #aeaeae;
+    margin-top: 11px;
+    margin-left: 20px;
+    padding: 13px;
+}
+/*FIN NUMERO PAGINACION*/
 @media (max-width:450px) {
     .pagination > li:last-child > a, .pagination > li:last-child > span {
         margin-left: 35%;
