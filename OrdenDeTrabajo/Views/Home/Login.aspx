@@ -8,7 +8,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="card card-container">
-            <img id="profile-img" class="profile-img-card" src="<%: Url.Content("~/Styles/image/logo.png") %>" />
+            <img id="profile-img" class="profile-img-card" src="<%: Url.Content("https://www.lipigas.cl/wp-content/uploads/2018/06/logo-main.svg") %>" />
             <%--<p id="profile-name" class="profile-name-card">Inicie sesión con su usuario de Active Directory</p>--%>
             <form class="form-signin" method="post" action="<%: Url.Content("~/Home/Login") %>">
                 <span id="reauth-email" class="reauth-email"></span>
@@ -18,7 +18,8 @@
                 <fieldset class="has-error">
                     <span class="help-block"><%= ViewData["mensaje"] %></span>
                 </fieldset>
-                <button class="btn btn-md btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>
+                <%--<button class="btn btn-md btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>--%>
+                <input type="submit" id="btnIniciar" value="Iniciar sesión" class="btnIniciar">
                 <br />
             </form>
         </div>
