@@ -13,7 +13,7 @@
                 <input type="date" class="form-control caso" id="txtFechaSolicitud" name="txtFechaSolicitud" readonly <%--value="<%= ViewData["txtFechaSolicitud"] %>"--%>/>
             </fieldset>
             <fieldset class="form-group tratarcaso col-md-4">
-                <input type="date" class="form-control caso" id="txtFechaSolicitud2" name="txtFechaSolicitud2" readonly <%--value="<%= ViewData["txtFechaSolicitud2"] %>"--%>/>
+                <input type="text" class="form-control caso" id="txtEjecutivo" name="txtEjecutivo" placeholder="Ejecutivo" readonly <%--value="<%= ViewData["txtFechaSolicitud2"] %>"--%>/>
             </fieldset>
         </div>
         <div class="row">
@@ -120,10 +120,10 @@
         </div>
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
-                <input type="text" class="form-control caso" id="txtRegion" name="txtRegion" placeholder="Región" readonly v<%--alue="<%= ViewData["txtRegion"] %>"--%>/>
+                <input type="text" class="form-control caso" id="txtRegion" name="txtRegion" placeholder="Región" readonly <%--value="<%= ViewData["txtRegion"] %>"--%>/>
             </fieldset>
             <fieldset class="form-group tratarcaso col-md-4">
-                <input type="text" class="form-control caso" id="txtComunas" name="txtComunas" placeholder="Comunas" readonly<%-- value="<%= ViewData["txtComunas"] %>"--%>/>
+                <input type="text" class="form-control caso" id="txtComunas" name="txtComunas" placeholder="Comunas" readonly <%-- value="<%= ViewData["txtComunas"] %>"--%>/>
             </fieldset>
         </div>
     </div>
@@ -158,8 +158,7 @@
     <div class="botones">
         <div class="row">
             <fieldset class="form-group botones col-md-4">
-                <input type="button" id="btnCancelar" value="Cancelar" class="cancelar">
-                <%--<input type="button" id="btnGuardar" value="Guardar" class="guardar">--%>
+                <input type="button" id="btnGuardar" value="Guardar" class="guardar">
                 <input type="button" id="btnFinalizar" value="Finalizar" class="finalizar">
             </fieldset>
         </div>
