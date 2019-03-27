@@ -194,7 +194,7 @@ namespace WebSolicitudes.Controllers
                             var motivoOT = row.SelectNodes("Column[@Name='MOTIVOSOTMEDIDOR_MOTIVO']")[0].InnerText;
                             fila.Add(motivoOT);
                         }
-
+                        fila.Add("Sub motivo");
                         fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Tratar</a>");
 
 

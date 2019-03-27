@@ -18,10 +18,10 @@
         </div>
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
-                <input type="text" class="form-control caso" id="txtCorreo" name="txtCorreo" placeholder="Correo electronico" readonly <%--value="<%= ViewData["txtCorreo"] %>"--%>/>
+                <input type="text" class="form-control caso" id="txtNombreSolicitante" name="txtNombreSolicitante" placeholder="Nombre solicitante" readonly <%--value="<%= ViewData["txtNombreSolicitante"] %>"--%>/>
             </fieldset>
             <fieldset class="form-group tratarcaso col-md-4">
-                <input type="text" class="form-control caso" id="txtNombreSolicitante" name="txtNombreSolicitante" placeholder="Nombre solicitante" readonly <%--value="<%= ViewData["txtNombreSolicitante"] %>"--%>/>
+                <input type="text" class="form-control caso" id="txtCorreo" name="txtCorreo" placeholder="Correo electronico" readonly <%--value="<%= ViewData["txtCorreo"] %>"--%>/>
             </fieldset>
         </div>
     </div>
@@ -130,7 +130,7 @@
 
     <div class="datosSolicitante">
         <h3>Requirimiento</h3>
-        <h4>(*)Campos obligatorios</h4>
+        
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
                 <input type="text" class="form-control caso" id="txtContratistas" name="txtContratistas" placeholder="Contratistas OT Medidor" readonly <%--value="<%= ViewData["txtContratistas"] %>"--%>/>
@@ -145,12 +145,20 @@
             </fieldset>
             <fieldset class="form-group tratarcaso col-md-4">
                 <label for="txtArchivo">Archivo</label>
-                <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" <%--value="<%= ViewData["txtArchivo"] %>"--%>/>
+                <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled <%--value="<%= ViewData["txtArchivo"] %>"--%>/>
             </fieldset>
         </div>
+        <br />
         <div class="row">
-            <fieldset class="form-group tratarcaso col-md-4">
-                <textarea class="form-control caso" id="txtComentario" name="txtComentario" placeholder="Comentario solicitud*" required></textarea>
+            <h4>Campos obligatorios</h4>
+            <fieldset class="form-group tratarcaso modificable col-md-4">
+                <input type="date" class="form-control caso" id="txtFechaDeVisita" name="txtFechaDeVisita" required/>
+            </fieldset>
+            <fieldset class="form-group tratarcaso modificable col-md-4">
+                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required/>
+            </fieldset>
+            <fieldset class="form-group tratarcaso modificable col-md-4">
+                <textarea class="form-control caso" id="txtComentario" name="txtComentario" placeholder="Comentario solicitud" required></textarea>
             </fieldset>
         </div>
     </div>

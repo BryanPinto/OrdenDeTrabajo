@@ -73,7 +73,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 style="text-align:center;color:#AEAEAE">Estado de órdenes</h2><br />
+    <h2 style="text-align:center;color:#AEAEAE">Historico de casos</h2><br />
 
     <%--FILTROS--%>
     <form id="formBusqueda">
@@ -136,6 +136,7 @@
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
                     <th class="col-xs-1">Motivo</th>
+                    <th class="col-xs-1">Sub motivo</th> <%--MODIFICAR CONTROLADOR PARA QUE DESPUES AGREGUE EL SUBMOTIVO--%>
                     <th class="col-xs-1"></th>
                 </tr>
             </thead>

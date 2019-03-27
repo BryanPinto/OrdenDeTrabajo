@@ -10,7 +10,7 @@
         <div class="card card-container">
             <img id="profile-img" class="profile-img-card" src="<%: Url.Content("https://www.lipigas.cl/wp-content/uploads/2018/06/logo-main.svg") %>" />
             <%--<p id="profile-name" class="profile-name-card">Inicie sesión con su usuario de Active Directory</p>--%>
-            <form class="form-signin" method="post" action="<%: Url.Content("~/Home/Login") %>">
+            <form class="form-signin" method="post" action="<%: Url.Content("~/Home/Index") %>">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="text" id="inputEmail" name="txtUsuario" class="form-control" placeholder="Usuario" required autofocus>
                 <input type="password" id="inputPassword" name="txtPass" class="form-control" placeholder="Contraseña" required>
