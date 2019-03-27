@@ -32,7 +32,7 @@
             <fieldset class="form-group tratarcaso col-md-4">
                 <input type="text" class="form-control caso" id="txtNumTicketCRM" name="txtNumTicketCRM" placeholder="Número ticket CRM" readonly <%--value="<%= ViewData["txtNumTicketCRM"] %>"--%>/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso radio col-md-4">
                 <label class="radio-inline" style="font-size:17px">Sin cuenta contrato
                 </label>
                <%-- <% if (ViewData["txtSinCuenta"].ToString() == "True")
@@ -75,7 +75,7 @@
             <fieldset class="form-group tratarcaso col-md-4">
                 <input type="text" class="form-control caso" id="txtDireccion" name="txtDireccion" placeholder="Dirección" readonly <%--value="<%= ViewData["txtDireccion"] %>"--%>/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso radio col-md-4">
                 <label class="radio-inline" style="font-size:17px">Seleccionar cliente
                 </label>
                <%-- <% if (ViewData["txtSeleccionarCliente"].ToString() == "True")
@@ -143,7 +143,7 @@
             <fieldset class="form-group tratarcaso col-md-4">
                 <input type="text" class="form-control caso" id="txtMotivosOT" name="txtMotivosOT" placeholder="Motivos OT Medidor" readonly <%--value="<%= ViewData["txtMotivosOT"] %>"--%>/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso archivo col-md-4">
                 <label for="txtArchivo">Archivo</label>
                 <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled <%--value="<%= ViewData["txtArchivo"] %>"--%>/>
             </fieldset>
@@ -154,7 +154,7 @@
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <input type="date" class="form-control caso" id="txtFechaDeVisita" name="txtFechaDeVisita" required/>
             </fieldset>
-            <fieldset class="form-group tratarcaso modificable col-md-4">
+            <fieldset class="form-group tratarcaso archivo col-md-4">
                 <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">

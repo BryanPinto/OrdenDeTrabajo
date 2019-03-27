@@ -573,7 +573,25 @@ h4 {
     margin-left: 28%;
     width: 42%;
 }
+.form-group.tratarcaso.radio {
+        margin-bottom: 15px;
+        margin-left: 10%;
+        width: 42%;
+        inline-size: auto;
+}
 /*FIN INPUTS*/
+@media (max-width: 576px) {
+    .form-group.tratarcaso.archivo {
+        width: 342px;
+    }
+}
+@media (max-width: 576px) {
+    .form-group.tratarcaso.modificable {
+        width: 86%;
+        margin-bottom: 15px;
+        margin-left: 8%;
+    }
+}
 h2, h3 {
     font-size: 23px;
     color: #f6a704;
