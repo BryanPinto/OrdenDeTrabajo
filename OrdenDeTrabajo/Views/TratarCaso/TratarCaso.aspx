@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    <title>Tratar caso</title>
    
 </asp:Content>
 
@@ -10,9 +11,11 @@
         <h3>Datos solicitante</h3>
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
+                <label for="txtFecha" id="txtFecha">Fecha solicitud</label>
                 <input type="date" class="form-control caso" id="txtFechaSolicitud" name="txtFechaSolicitud" readonly <%--value="<%= ViewData["txtFechaSolicitud"] %>"--%>/>
             </fieldset>
             <fieldset class="form-group tratarcaso col-md-4">
+                <label for="txtEjecutivoLabel" id="txtEjecutivoLabel" style="color:#f9f9fb">Fecha solicitud</label>
                 <input type="text" class="form-control caso" id="txtEjecutivo" name="txtEjecutivo" placeholder="Ejecutivo" readonly <%--value="<%= ViewData["txtFechaSolicitud2"] %>"--%>/>
             </fieldset>
         </div>
@@ -144,21 +147,27 @@
                 <input type="text" class="form-control caso" id="txtMotivosOT" name="txtMotivosOT" placeholder="Motivos OT Medidor" readonly <%--value="<%= ViewData["txtMotivosOT"] %>"--%>/>
             </fieldset>
             <fieldset class="form-group tratarcaso archivo col-md-4">
-                <label for="txtArchivo">Archivo</label>
+                <%--<label for="txtArchivo">Archivo</label>--%>
                 <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled <%--value="<%= ViewData["txtArchivo"] %>"--%>/>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="form-group tratarcaso col-md-4">
+                <textarea class="form-control caso" id="txtComentario" name="txtComentario" placeholder="Comentario solicitud" disabled <%--value="<%= ViewData["txtComentario"] %>"--%>></textarea>
             </fieldset>
         </div>
         <br />
         <div class="row">
-            <h4>Campos obligatorios</h4>
+            <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <input type="date" class="form-control caso" id="txtFechaDeVisita" name="txtFechaDeVisita" required/>
+                <label for="txtFechaDeVisita">Fecha visita</label>
+                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required/>
             </fieldset>
-            <fieldset class="form-group tratarcaso archivo col-md-4">
+            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <textarea class="form-control caso" id="txtComentario" name="txtComentario" placeholder="Comentario solicitud" required></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud" required></textarea>
             </fieldset>
         </div>
     </div>

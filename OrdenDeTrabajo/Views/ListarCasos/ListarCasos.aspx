@@ -5,7 +5,7 @@
     <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
 
-    <title>Estado de órdenes</title>
+    <title>Histórico de casos</title>
     <script>
         $(document).ready(function () {
             // Datatable y propiedades
@@ -73,7 +73,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2 style="text-align:center;color:#AEAEAE">Historico de casos</h2><br />
+    <h2 style="text-align:center;color:#AEAEAE">Histórico de casos</h2><br />
 
     <%--FILTROS--%>
     <form id="formBusqueda">

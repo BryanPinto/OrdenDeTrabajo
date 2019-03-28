@@ -5,7 +5,7 @@
     <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
 
-    <title>Estado de solicitudes</title>
+    <title>Casos pendientes</title>
     <script>
         $(document).ready(function () {
             // Datatable y propiedades
