@@ -664,6 +664,12 @@ tbody {
     text-align: center;
 }
 @media (min-width:992px) and (max-width:1200px) {
+    .form-control.casoModificable {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+@media (min-width:992px) and (max-width:1200px) {
     .form-control.caso, .form-group.tratarcaso.radio {
         margin-left: 0;
         width: 100%;
@@ -734,10 +740,72 @@ tbody {
         width: 47%;
     }
 }
-@media (min-width:769px) and (max-width:991px) {
+@media (min-width:769px) and (max-width:870px) {
     .form-group.tratarcaso.archivo, .form-group.tratarcaso.archivoModificable {
         margin-left: 20%;
-        width: 73%;
+        width: 65%;
+    }
+}
+@media (min-width:871px) and (max-width:991px) {
+    .form-group.tratarcaso.archivo, .form-group.tratarcaso.archivoModificable {
+        margin-left: 20%;
+        width: 57%;
+    }
+}
+@media (min-width:871px) and (max-width:991px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 20%;
+        width: 57%;
+    }
+}
+@media (min-width:769px) and (max-width:870px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 20%;
+        width: 65%;
+    }
+}
+@media (min-width:590px) and (max-width:768px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 27%;
+        width: 47%;
+    }
+}
+@media (min-width:577px) and (max-width:589px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 21%;
+        width: 60%;
+    }
+}
+@media (min-width:471px) and (max-width:576px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 20%;
+        width: 60%;
+    }
+}
+@media (min-width:418px) and (max-width:470px) {
+    .form-group.tratarcaso.modificable {
+        margin-left: 12%;
+        width: 60%;
+    }
+}
+@media (min-width:418px) and (max-width:470px) {
+    .form-group.botones {
+        margin-left: 15%;
+    }
+}
+@media (min-width:471px) and (max-width:576px) {
+    .form-group.botones {
+        margin-left: 20%;
+    }
+}
+@media (min-width:577px) and (max-width:589px) {
+    .form-group.botones {
+        margin-left: 12%;
+    }
+}
+@media (min-width:590px) and (max-width:768px) {
+    .form-group.botones {
+        margin-left: 15%;
     }
 }
 /*FIN NUEVOS ESTILOS*/
