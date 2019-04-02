@@ -42,7 +42,7 @@
                 e.preventDefault();
                 // Buscar cabeceras
                 $.ajax({
-                    url: '<%: Url.Content("~/ListarCasos/BusquedaCasos/") %>',
+                    url: '<%: Url.Content("~/ListarCasos/CasosPendientes/") %>',
                     data: $("#formIndex").serialize(),
                     cache: false,
                     type: "POST",
@@ -80,8 +80,8 @@
             <div class="panel-heading">Filtros</div>
             <div class="panel-body">
                 <div class="row">
-                    <fieldset class="form-group col-md-1">
-                    </fieldset>
+                    <%--<fieldset class="form-group col-md-1">
+                    </fieldset>--%>
                     <fieldset class="form-group col-md-2">
                         <label for="txtFechaDesde">Fecha desde</label>
                         <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
@@ -94,23 +94,16 @@
                         <label for="txtNroCaso">Número de caso</label>
                         <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
                     </fieldset>
-                   <%-- <fieldset class="form-group col-md-3">
-                        <label for="txtProceso">Nombre proceso</label>
-                        <select name="txtProceso" id="txtProceso" class="form-control">
+                  <fieldset class="form-group col-md-2">
+                        <label for="txtMotivoSelect">Motivo</label>
+                        <select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
                             <option value="0">Todos</option>
-                            <option value="1">Proceso adquisiciones</option>
-                            <option value="2">Proceso fondos a rendir</option>
-                            <option value="3">Proceso reembolsos</option>
                         </select>
-                    </fieldset>--%>
-                    <fieldset class="form-group col-md-2">
-                        <label for="txtEstadoCaso">Estado del caso</label>
-                        <select name="txtEstadoCaso" id="txtEstadoCaso" class="form-control">
+                    </fieldset>
+                   <fieldset class="form-group col-md-2">
+                        <label for="txtSubMotivoSelect">Sub motivo</label>
+                        <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
                             <option value="0">Todos</option>
-                            <option value="1">Iniciado</option>
-                            <option value="2">Completado</option>
-                            <%--<option value="3">No iniciado</option>
-                            <option value="4">Suspendido</option>--%>
                         </select>
                     </fieldset>
                     <fieldset class="form-group col-md-2">
@@ -130,7 +123,7 @@
                 <tr>
                     <%--<th class="col-xs-2">Proceso</th>--%>
                     <th class="col-xs-1">Número de caso</th>
-                    <th class="col-xs-1">Estado del caso</th>
+                    <%--<th class="col-xs-1">Estado del caso</th>--%>
                     <th class="col-xs-1">Fecha de creación</th>
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
