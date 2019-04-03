@@ -22,6 +22,11 @@ namespace WebSolicitudes.Controllers
 
         public ActionResult Index()
         {
+            string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
+            ViewData["txtMotivoSelect1"] = listaMotivo;
+
+            string listaSubMotivo = UtilController.ListarParametrica("P_SubMotivoOT", "SubMotivo");
+            ViewData["txtSubMotivoSelect1"] = listaSubMotivo;
             return View();
         }
 

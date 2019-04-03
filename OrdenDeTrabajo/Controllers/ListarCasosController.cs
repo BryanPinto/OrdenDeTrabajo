@@ -20,24 +20,6 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
-        public void escribirLog(string solicitud, string mensaje)
-        {
-            try
-            {
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Solicitud " + solicitud + ": " +
-                          mensaje);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-            }
-            catch (Exception)
-            {
-            }
-        }
 
         [HttpPost]
         public string BusquedaCasos(FormCollection collection)
@@ -237,6 +219,7 @@ namespace WebSolicitudes.Controllers
             string datosJSON = string.Empty;
             try
             {
+                
                 #region Agregar filtros y buscar
                 // Variables
                 string txtFechaDesde = collection["txtFechaDesde"];
@@ -255,8 +238,16 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+                // Motivo
+                int? motivo = null;
+                if (Convert.ToInt32(txtMotivoSelect) != 0)
+                    motivo = int.Parse(txtMotivoSelect);
 
-              
+                // Sub Motivo
+                int? subMotivo = null;
+                if (Convert.ToInt32(txtSubMotivoSelect) != 0)
+                    subMotivo = int.Parse(txtSubMotivoSelect);
+
 
 
                 #endregion
@@ -278,9 +269,24 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='ProcessState' Include='true'>Running</Internal>
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
-                      <XPaths>
-                          <XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'></XPath>
-                           <XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'></XPath>
+                      <XPaths>";
+                if (txtMotivoSelect != null)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'>" + motivo + "@</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'></XPath>";
+                }
+                if (txtSubMotivoSelect != null)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'>" + subMotivo + "@</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'></XPath>";
+                }
+                queryCasos += @"                           
                            <XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>
                           <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>";
                 if (txtFechaDesde != null)

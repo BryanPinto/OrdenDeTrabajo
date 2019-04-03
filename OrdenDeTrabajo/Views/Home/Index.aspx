@@ -97,13 +97,15 @@
                   <fieldset class="form-group col-md-2">
                         <label for="txtMotivoSelect">Motivo</label>
                         <select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
-                            <option value="0">Todos</option>
+                            <option value="0">Seleccione opción</option>
+                            <%=ViewData["txtMotivoSelect1"]%>
                         </select>
                     </fieldset>
                    <fieldset class="form-group col-md-2">
                         <label for="txtSubMotivoSelect">Sub motivo</label>
                         <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
-                            <option value="0">Todos</option>
+                            <option value="0">Seleccione opción</option>
+                            <%=ViewData["txtSubMotivoSelect1"]%>
                         </select>
                     </fieldset>
                     <fieldset class="form-group col-md-2">
