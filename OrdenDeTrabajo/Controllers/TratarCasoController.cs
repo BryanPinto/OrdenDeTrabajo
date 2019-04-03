@@ -19,6 +19,11 @@ namespace WebSolicitudes.Controllers
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
+            //Obtener valores del xml respuesta de Bizagi del numero de caso enviado
+            string txtFechaSolicitud = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaSolicitud']").InnerText;
+            string txtEjecutivo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina']").InnerText;
+            string txtNombreSolicitante = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Nombre']").InnerText;
+
 
 
 
@@ -78,7 +83,7 @@ namespace WebSolicitudes.Controllers
                     </XPaths>
                     </BizAgiWSParam>";
 
-            respuestaBizagi = servicioQuery.getEntitiesAsString(queryObtenerCaso);
+            respuestaBizagi = servicioQuery.getCaseDataUsingXPathsAsString(queryObtenerCaso);
             respuestaBizagi = respuestaBizagi.Replace("\n", "");
             respuestaBizagi = respuestaBizagi.Replace("\t", "");
             respuestaBizagi = respuestaBizagi.Replace("\r", "");

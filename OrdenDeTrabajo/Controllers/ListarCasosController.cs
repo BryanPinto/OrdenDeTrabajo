@@ -219,7 +219,7 @@ namespace WebSolicitudes.Controllers
             string datosJSON = string.Empty;
             try
             {
-                
+
                 #region Agregar filtros y buscar
                 // Variables
                 string txtFechaDesde = collection["txtFechaDesde"];
@@ -270,7 +270,7 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
                       <XPaths>";
-                if (txtMotivoSelect != null)
+                if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'>" + motivo + "@</XPath>";
                 }
@@ -278,7 +278,7 @@ namespace WebSolicitudes.Controllers
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'></XPath>";
                 }
-                if (txtSubMotivoSelect != null)
+                if (Convert.ToInt32(txtSubMotivoSelect) != 0)
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'>" + subMotivo + "@</XPath>";
                 }
