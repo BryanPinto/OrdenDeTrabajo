@@ -38,6 +38,8 @@
             <fieldset class="form-group tratarcaso radio col-md-4">
                 <label class="radio-inline" style="font-size:17px">Sin cuenta contrato
                 </label>
+                <% if(ViewData["txtSinCuenta"] != null)
+                    {%>
                <% if (ViewData["txtSinCuenta"].ToString() == "True")
                         { %>
                 <label class="radio-inline">
@@ -55,7 +57,7 @@
                 <label class="radio-inline">
                     <input type="radio" name="txtSinCuenta" id="txtSinCuenta" disabled value="false" checked="checked"/>No
                 </label>
-                <%}%>
+                <%}%><%} %>
             </fieldset>
         </div>
         <div class="row">
@@ -81,6 +83,8 @@
             <fieldset class="form-group tratarcaso radio col-md-4">
                 <label class="radio-inline" style="font-size:17px">Seleccionar cliente
                 </label>
+                <% if(ViewData["txtSeleccionarCliente"] != null)
+                    {%>
                <% if (ViewData["txtSeleccionarCliente"].ToString() == "True")
                         { %>
                 <label class="radio-inline">
@@ -98,7 +102,7 @@
                 <label class="radio-inline">
                     <input type="radio" name="txtSeleccionarCliente" id="txtSeleccionarCliente" disabled value="false" checked="checked"/>No
                 </label>
-                <%}%>
+                <%}%><%} %>
             </fieldset>
         </div>
     </div>
@@ -146,14 +150,17 @@
             <fieldset class="form-group tratarcaso col-md-4">
                 <input type="text" class="form-control caso" id="txtMotivosOT" name="txtMotivosOT" placeholder="Motivos OT Medidor" readonly value="<%= ViewData["txtMotivosOT"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso archivo col-md-4">
-                <%--<label for="txtArchivo">Archivo</label>--%>
-                <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>
+            <fieldset class="form-group tratarcaso col-md-4">
+                <input type="text" class="form-control caso" id="txtSubMotivosOT" name="txtSubMotivosOT" placeholder="Sub Motivos OT Medidor" readonly value="<%= ViewData["txtSubMotivosOT"] %>"/>
             </fieldset>
         </div>
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
                 <textarea class="form-control caso" id="txtComentarioSolicitud" name="txtComentarioSolicitud" placeholder="Comentario solicitud" disabled ><%= ViewData["txtComentarioSolicitud"] %></textarea>
+            </fieldset>
+            <fieldset class="form-group tratarcaso archivo col-md-4">
+                <%--<label for="txtArchivo">Archivo</label>--%>
+                <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>
             </fieldset>
         </div>
         <br />
