@@ -160,7 +160,9 @@
             </fieldset>
             <fieldset class="form-group tratarcaso archivo col-md-4">
                 <%--<label for="txtArchivo">Archivo</label>--%>
-                <input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>
+                <% if(ViewData["txtArchivo"] != null)%>
+                            <%= ViewData["txtArchivo"] %>
+                <%--<input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>--%>
             </fieldset>
         </div>
         <br />

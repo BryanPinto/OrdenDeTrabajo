@@ -23,8 +23,8 @@ namespace WebSolicitudes.Controllers
 
             //DATOS SOLICITANTE
             string txtFechaSolicitud = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaSolicitud']").InnerText;
-            string txtEjecutivo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina']").InnerText;
-            string txtNombreSolicitante = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SolicitanteOTMedidor']").InnerText;
+            string txtEjecutivo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina.Nombre']").InnerText;
+            string txtNombreSolicitante = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SolicitanteOTMedidor.NombreSolicitante']").InnerText;
             string txtCorreoElectronico = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina.CorreoElectronico']").InnerText;
 
             //INFORMACION CLIENTE
@@ -42,23 +42,33 @@ namespace WebSolicitudes.Controllers
             string txtCorreoContacto = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.CorreoElectronico']").InnerText;
             string txtTelefonoFijo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.TelefonoFijo']").InnerText;
             string txtCelularContacto = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.Celular']").InnerText;
-            string txtRegion = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Region']").InnerText;
-            string txtComunas = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas']").InnerText;
+            string txtRegion = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Region.Nombre']").InnerText;
+            string txtComunas = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas.Comuna']").InnerText;
 
             //REQUERIMIENTO
-            string txtContratistasOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor']").InnerText;
+            string txtContratistasOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre']").InnerText;
             string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico']").InnerText;
-            string txtMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT']").InnerText;
-            string txtSubMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT']").InnerText;
+            string txtMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT.Motivo']").InnerText;
+            string txtSubMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT.Submotivo']").InnerText;
             string txtComentarioSolici = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioSolicitud']").InnerText;
-            string txtArchivoBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").InnerText;
-            string txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
+            //string txtArchivoBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").InnerText;
+            //string txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
+
+            string txtArchivoBase64 = string.Empty;
+            string txtArchivoNombre = string.Empty;
+            bool tieneArchivo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']") != null;
+
+            if (tieneArchivo)
+            {
+                txtArchivoBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").InnerText;
+                txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
+            }
 
             //FORMATEAR FECHA SOLICITUD
             if (txtFechaSolicitud != string.Empty)
             {
                 DateTime fechaInicio = DateTime.Parse(txtFechaSolicitud);
-                ViewData["txtFechaTermino"] = fechaInicio.ToString("yyyy-MM-dd");
+                ViewData["txtFechaSolicitud"] = fechaInicio.ToString("yyyy-MM-dd");
             }
 
             //ASIGNAR VALORES RESCATADOS DE XML A CAMPOS DEL FORMULARIO
@@ -86,13 +96,18 @@ namespace WebSolicitudes.Controllers
             ViewData["txtContratistas"] = txtContratistasOT;
             ViewData["txtCorreoContratista"] = txtCorreoContratista;
             ViewData["txtMotivosOT"] = txtMotivoOT;
-            ViewData["txtCelular"] = txtSubMotivoOT;
+            ViewData["txtSubMotivosOT"] = txtSubMotivoOT;
             ViewData["txtComentarioSolicitud"] = txtComentarioSolici;
-            ViewData["txtArchivo"] = @"
+
+            if (tieneArchivo)
+            {
+                ViewData["txtArchivo"] = @"
                     <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md'>
                         <span class='glyphicon glyphicon-save'></span> Descargar " + txtArchivoNombre + @"
                     </a>
                 ";
+            }
+            
 
             return View();
         }
@@ -123,9 +138,9 @@ namespace WebSolicitudes.Controllers
                     </CaseInfo>
                     <XPaths>
                         <XPath XPath=""OrdendeTrabajoMedidor.FechaSolicitud""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.SolicitanteOTMedidor""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.SolicitanteOTMedidor.NombreSolicitante""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.EjecutivoOficina.CorreoElectronico""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.EjecutivoOficina""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.EjecutivoOficina.Nombre""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.NumeroTicketCRM""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.SinCuentaContrato""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.CuentaContrato""/>
@@ -139,12 +154,12 @@ namespace WebSolicitudes.Controllers
                         <XPath XPath=""OrdendeTrabajoMedidor.Contacto.CorreoElectronico""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Contacto.TelefonoFijo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Contacto.Celular""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.Region""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.Comunas""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistasOTMedidor""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.Region.Nombre""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.Comunas.Comuna""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.MotivoOT""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.SubMotivoOT""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.MotivoOT.Motivo""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.SubMotivoOT.Submotivo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.ComentarioSolicitud""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Archivo""/>
                     </XPaths>
