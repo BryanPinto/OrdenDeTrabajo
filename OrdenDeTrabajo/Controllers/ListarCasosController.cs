@@ -17,6 +17,11 @@ namespace WebSolicitudes.Controllers
 
         public ActionResult ListarCasos()
         {
+            string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
+            ViewData["txtMotivoSelect1"] = listaMotivo;
+
+            string listaSubMotivo = UtilController.ListarParametrica("P_SubMotivoOT", "SubMotivo");
+            ViewData["txtSubMotivoSelect1"] = listaSubMotivo;
             return View();
         }
 
@@ -27,12 +32,13 @@ namespace WebSolicitudes.Controllers
             string datosJSON = string.Empty;
             try
             {
-                #region Agregar filtros y buscar
                 // Variables
                 string txtFechaDesde = collection["txtFechaDesde"];
                 string txtFechaHasta = collection["txtFechaHasta"];
                 string txtNroCaso = collection["txtNroCaso"];
-                string txtEstado = collection["txtEstado"];
+                string txtEstadoSelect = collection["txtEstadoSelect"];
+                string txtMotivoSelect = collection["txtMotivoSelect"];
+                string txtSubMotivoSelect = collection["txtSubMotivoSelect"];
 
                 // Fecha inicio
                 DateTime? fechaInicio = null;
@@ -44,16 +50,46 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+                // NumCaso
+                int caso;
+                int? numeroCaso;
+                bool conversionOK = Int32.TryParse(txtNroCaso, out caso);
+                if(conversionOK)
+                {
+                    numeroCaso = caso;
+                }
+                else
+                {
+                    numeroCaso = null;
+                }
+                
+
+                // Motivo
+                int? motivo = null;
+                if (Convert.ToInt32(txtMotivoSelect) != 0)
+                    motivo = int.Parse(txtMotivoSelect);
+
+                // Sub Motivo
+                int? subMotivo = null;
+                if (Convert.ToInt32(txtSubMotivoSelect) != 0)
+                    subMotivo = int.Parse(txtSubMotivoSelect);
 
                 // Estado
                 int? estado = null;
-                if (Convert.ToInt32(txtEstado) != 0)
-                    estado = int.Parse(txtEstado);
+                if (Convert.ToInt32(txtEstadoSelect) != 0)
+                    estado = int.Parse(txtEstadoSelect);
+
+                // Fecha inicio
+                DateTime? fechaInicioResumen = null;
+                if (txtFechaDesde != string.Empty)
+                    fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                // Fecha término
+                DateTime? fechaTerminoResumen = null;
+                if (txtFechaHasta != string.Empty)
+                    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                 
-
-                #endregion
-
-                #region Queries
+                
 
                 LipigasQuery.QueryFormSOASoapClient servicioQuery = new LipigasQuery.QueryFormSOASoapClient();
 
@@ -66,35 +102,85 @@ namespace WebSolicitudes.Controllers
 	              <userName>admon</userName>
 	              <domain>domain</domain>
                   <QueryParams>
-                      <Internals>
-                          <Internal Name='ProcessState' Include='true'>Running</Internal>
-                          <Internal Name='ProcessState' Include='true'>Completed</Internal>
+                      <Internals>";
+                //if (Convert.ToInt32(txtEstadoSelect) == 1)
+                //{
+                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Initiated</Internal>";
+                //}
+                if (Convert.ToInt32(txtEstadoSelect) == 2)
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Running</Internal>";
+                }
+                //if (Convert.ToInt32(txtEstadoSelect) == 3)
+                //{
+                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Suspended</Internal>";
+                //}
+                //if (Convert.ToInt32(txtEstadoSelect) == 4)
+                //{
+                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Aborted</Internal>";
+                //}
+                if (Convert.ToInt32(txtEstadoSelect) == 5)
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Completed</Internal>";
+                }
+                else
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Initiated</Internal>
+                                    <Internal Name='ProcessState' Include='true'>Running</Internal>
+                                    <Internal Name='ProcessState' Include='true'>Suspended</Internal>
+                                    <Internal Name='ProcessState' Include='true'>Aborted</Internal>
+                                    <Internal Name='ProcessState' Include='true'>Completed</Internal>";
+                }
+                queryCasos += @"
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
-                      <XPaths>
-                          <XPath Path='OrdendeTrabajoMedidor.MotivosOTMedidor.Motivo' Include='true'>
-                          </XPath>
+                      <XPaths>";
+                if (Convert.ToInt32(txtMotivoSelect) != 0)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'>" + motivo + "@</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'></XPath>";
+                }
+                if (Convert.ToInt32(txtSubMotivoSelect) != 0)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'>" + subMotivo + "@</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'></XPath>";
+                }
+                if(Convert.ToInt32(numeroCaso) != 0)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'>" + numeroCaso + "</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>";
+                }
+                queryCasos += @"
                           <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>";
                 if (txtFechaDesde != null)
                 {
-                    queryCasos += @"<From>" + fechaInicio + @"</From>";
+                    queryCasos += @"<From>" + fechaInicioResumen + @"</From>";
                 }
                 else
                 {
                     queryCasos += @"<From>01/01/1900</From>";
                 }
-                if(txtFechaHasta != null)
+                if (txtFechaHasta != null)
                 {
-                    queryCasos += @"<To>" + fechaTermino + @"</To>";
+                    queryCasos += @"<To>" + fechaTerminoResumen + @"</To>";
                 }
-                else{}
-                      queryCasos += @"        
+                else { }
+                queryCasos += @"        
                           </XPath>
                       </XPaths>
                   </QueryParams>
                   <Parameters>
                       <Parameter Name ='pag'>1</Parameter>
-                       <Parameter Name='PageSize'>"+cantidadCasos+@"</Parameter>
+                       <Parameter Name='PageSize'>" + cantidadCasos + @"</Parameter>
                     </Parameters>
                 </BizAgiWSParam>";
 
@@ -117,8 +203,7 @@ namespace WebSolicitudes.Controllers
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(respuestaCasos);
                 XmlNodeList rows = doc.GetElementsByTagName("Row");
-
-                #endregion
+                
 
                 //#region Crear JSON
                 List<List<string>> registros = new List<List<string>>();
@@ -150,10 +235,22 @@ namespace WebSolicitudes.Controllers
                         {
                             var estadoCaso = row.SelectNodes("Column[@Name='IDCASESTATE']")[0].InnerText;
                             var estadoTexto = "";
+                            //if (Convert.ToUInt32(estadoCaso) == 1)
+                            //{
+                            //    estadoTexto = "Iniciado";
+                            //}
                             if (Convert.ToUInt32(estadoCaso) == 2)
                             {
                                 estadoTexto = "En proceso";
                             }
+                            //if (Convert.ToUInt32(estadoCaso) == 3)
+                            //{
+                            //    estadoTexto = "Suspendido";
+                            //}
+                            //if (Convert.ToUInt32(estadoCaso) == 4)
+                            //{
+                            //    estadoTexto = "Abortado";
+                            //}
                             if (Convert.ToInt32(estadoCaso) == 5)
                             {
                                 estadoTexto = "Completado";
@@ -171,13 +268,19 @@ namespace WebSolicitudes.Controllers
                         }
 
                         //OBTENER MOTIVO OT MEDIDOR
-                        if (row.SelectNodes("Column[@Name='MOTIVOSOTMEDIDOR_MOTIVO']")[0] != null)
+                        if (row.SelectNodes("Column[@Name='MOTIVOOT_MOTIVO']")[0] != null && row.SelectNodes("Column[@Name='MOTIVOOT_MOTIVO']")[0].InnerText != string.Empty)
                         {
-                            var motivoOT = row.SelectNodes("Column[@Name='MOTIVOSOTMEDIDOR_MOTIVO']")[0].InnerText;
+                            var motivoOT = row.SelectNodes("Column[@Name='MOTIVOOT_MOTIVO']")[0].InnerText;
                             fila.Add(motivoOT);
                         }
-                        fila.Add("Sub motivo");
-                        fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Tratar</a>");
+
+                        //OBTENER SUB MOTIVO OT MEDIDOR
+                        if (row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0] != null && row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText != string.Empty)
+                        {
+                            var subMotivoOT = row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText;
+                            fila.Add(subMotivoOT);
+                        }
+                        fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Ver resumen</a>");
 
 
                         // Agregar a lista FORMA CORRECTA

@@ -64,6 +64,7 @@
                     }
                 });
             });
+            $("#formBusqueda").submit();
             
             // Validar números
             $("#txtNroCaso").numeric("{ negative : false , decimalPlaces : 0 , decimal : ',' }");
@@ -81,8 +82,8 @@
             <div class="panel-heading">Filtros</div>
             <div class="panel-body">
                 <div class="row">
-                    <fieldset class="form-group col-md-1">
-                    </fieldset>
+                    <%--<fieldset class="form-group col-md-1">
+                    </fieldset>--%>
                     <fieldset class="form-group col-md-2">
                         <label for="txtFechaDesde">Fecha desde</label>
                         <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
@@ -91,30 +92,36 @@
                         <label for="txtFechaHasta">Fecha hasta</label>
                         <input type="date" class="form-control" id="txtFechaHasta" name="txtFechaHasta" />
                     </fieldset>
-                    <fieldset class="form-group col-md-2">
+                    <fieldset class="form-group col-md-1">
                         <label for="txtNroCaso">Número de caso</label>
                         <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
                     </fieldset>
-                   <%-- <fieldset class="form-group col-md-3">
-                        <label for="txtProceso">Nombre proceso</label>
-                        <select name="txtProceso" id="txtProceso" class="form-control">
-                            <option value="0">Todos</option>
-                            <option value="1">Proceso adquisiciones</option>
-                            <option value="2">Proceso fondos a rendir</option>
-                            <option value="3">Proceso reembolsos</option>
-                        </select>
-                    </fieldset>--%>
                     <fieldset class="form-group col-md-2">
-                        <label for="txtEstadoCaso">Estado del caso</label>
-                        <select name="txtEstadoCaso" id="txtEstadoCaso" class="form-control">
-                            <option value="0">Todos</option>
-                            <option value="1">Iniciado</option>
-                            <option value="2">Completado</option>
-                            <%--<option value="3">No iniciado</option>
-                            <option value="4">Suspendido</option>--%>
+                        <label for="txtEstadoSelect">Estado caso</label>
+                        <select name="txtEstadoSelect" id="txtEstadoSelect" class="form-control">
+                            <option value="0">Seleccione opción</option>
+                            <%--<option value="1">Iniciado</option>--%>
+                            <option value="2">En proceso</option>
+                            <%--<option value="3">Suspendido</option>
+                            <option value="4">Abortado</option>--%>
+                            <option value="5">Completado</option>
                         </select>
                     </fieldset>
-                    <fieldset class="form-group col-md-2">
+                  <fieldset class="form-group col-md-2">
+                        <label for="txtMotivoSelect">Motivo</label>
+                        <select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
+                            <option value="0">Seleccione opción</option>
+                            <%=ViewData["txtMotivoSelect1"]%>
+                        </select>
+                    </fieldset>
+                   <fieldset class="form-group col-md-2">
+                        <label for="txtSubMotivoSelect">Sub motivo</label>
+                        <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
+                            <option value="0">Seleccione opción</option>
+                            <%=ViewData["txtSubMotivoSelect1"]%>
+                        </select>
+                    </fieldset>
+                    <fieldset class="form-group col-md-1">
                         <%--<div id="buscarListar">--%>
                             <input type="submit" id="btnBuscarListar" value="Buscar" class="buscar">
                         <%--</div>--%>
@@ -136,7 +143,7 @@
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
                     <th class="col-xs-1">Motivo</th>
-                    <th class="col-xs-1">Sub motivo</th> <%--MODIFICAR CONTROLADOR PARA QUE DESPUES AGREGUE EL SUBMOTIVO--%>
+                    <th class="col-xs-1">Sub motivo</th> 
                     <th class="col-xs-1"></th>
                 </tr>
             </thead>

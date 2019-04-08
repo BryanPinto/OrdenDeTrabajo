@@ -447,8 +447,12 @@ iframe {
     }
 }
 @media (max-width: 576px) {
-    #txtFecha {
-        width:100%;
+    #txtFecha, txtEjecutivoL, txtNomSolicitanteL, txtCorreoSolicitanteL, 
+    txtNumTicketL, txtCuentaContratoL, txtNumSerieL, txtNombreL, txtCiudadL,
+    txtDireccionL, txtNomContactoL, txtCorreoContactoL, txtTelFijoL, txtCelularL,
+    txtRegionL, txtComunaL, txtContratistaL, txtCorreoContratistaL, txtMotivoL, txtSubMotivoL,
+    txtComentarioSoliL, txtArchivo, txtFechaDeVisita, txtArchivoSoliL, txtComentarioCierreL {
+        width: 100%;
     }
 }
 @media (min-width: 577px) and (max-width:768px) {
@@ -458,8 +462,12 @@ iframe {
     }
 }
 @media (min-width:577px) and (max-width:768px) {
-   .form-control.caso, #txtFecha {
-        margin-left:42%;
+    .form-control.caso, #txtFecha, #txtEjecutivoL, #txtNomSolicitanteL, #txtCorreoSolicitanteL,
+    #txtNumTicketL, #txtCuentaContratoL, #txtNumSerieL, #txtNombreL, #txtCiudadL,
+    #txtDireccionL, #txtNomContactoL, #txtCorreoContactoL, #txtTelFijoL, #txtCelularL,
+    #txtRegionL, #txtComunaL, #txtContratistaL, #txtCorreoContratistaL, #txtMotivoL, #txtSubMotivoL,
+    #txtComentarioSoliL, #txtArchivo, #txtFechaDeVisita, #txtArchivoSoliL, #txtComentarioCierreL {
+        margin-left: 42%;
     }
 }
 @media (max-width:768px) {

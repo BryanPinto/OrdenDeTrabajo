@@ -64,6 +64,7 @@
                     }
                 });
             });
+            $("#formIndex").submit();
             
             // Validar números
             $("#txtNroCaso").numeric("{ negative : false , decimalPlaces : 0 , decimal : ',' }");
@@ -130,7 +131,7 @@
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
                     <th class="col-xs-1">Motivo</th>
-                    <th class="col-xs-1">Sub motivo</th> <%--MODIFICAR CONTROLADOR PARA QUE DESPUES AGREGUE EL SUBMOTIVO--%>
+                    <th class="col-xs-1">Sub motivo</th> 
                     <th class="col-xs-1"></th>
                 </tr>
             </thead>
