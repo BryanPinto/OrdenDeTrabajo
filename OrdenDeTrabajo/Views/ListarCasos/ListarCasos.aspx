@@ -82,17 +82,17 @@
             <div class="panel-heading">Filtros</div>
             <div class="panel-body">
                 <div class="row">
+                    <fieldset class="form-group col-md-1">
+                    </fieldset>
                     <%--<fieldset class="form-group col-md-1">
-                    </fieldset>--%>
-                    <fieldset class="form-group col-md-2">
                         <label for="txtFechaDesde">Fecha desde</label>
                         <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
                     </fieldset>
-                    <fieldset class="form-group col-md-2">
+                    <fieldset class="form-group col-md-1">
                         <label for="txtFechaHasta">Fecha hasta</label>
                         <input type="date" class="form-control" id="txtFechaHasta" name="txtFechaHasta" />
-                    </fieldset>
-                    <fieldset class="form-group col-md-1">
+                    </fieldset>--%>
+                    <fieldset class="form-group col-md-2">
                         <label for="txtNroCaso">Número de caso</label>
                         <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
                     </fieldset>

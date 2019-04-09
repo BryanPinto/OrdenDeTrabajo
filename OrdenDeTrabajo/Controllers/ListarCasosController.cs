@@ -33,22 +33,13 @@ namespace WebSolicitudes.Controllers
             try
             {
                 // Variables
-                string txtFechaDesde = collection["txtFechaDesde"];
-                string txtFechaHasta = collection["txtFechaHasta"];
+                //string txtFechaDesde = collection["txtFechaDesde"];
+                //string txtFechaHasta = collection["txtFechaHasta"];
                 string txtNroCaso = collection["txtNroCaso"];
                 string txtEstadoSelect = collection["txtEstadoSelect"];
                 string txtMotivoSelect = collection["txtMotivoSelect"];
                 string txtSubMotivoSelect = collection["txtSubMotivoSelect"];
-
-                // Fecha inicio
-                DateTime? fechaInicio = null;
-                if (txtFechaDesde != string.Empty)
-                    fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-                // Fecha término
-                DateTime? fechaTermino = null;
-                if (txtFechaHasta != string.Empty)
-                    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                
 
                 // NumCaso
                 int caso;
@@ -79,15 +70,15 @@ namespace WebSolicitudes.Controllers
                 if (Convert.ToInt32(txtEstadoSelect) != 0)
                     estado = int.Parse(txtEstadoSelect);
 
-                // Fecha inicio
-                DateTime? fechaInicioResumen = null;
-                if (txtFechaDesde != string.Empty)
-                    fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                //// Fecha inicio
+                //DateTime? fechaInicioResumen = null;
+                //if (txtFechaDesde != string.Empty)
+                //    fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                // Fecha término
-                DateTime? fechaTerminoResumen = null;
-                if (txtFechaHasta != string.Empty)
-                    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                //// Fecha término
+                //DateTime? fechaTerminoResumen = null;
+                //if (txtFechaHasta != string.Empty)
+                //    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                 
                 
 
@@ -137,7 +128,7 @@ namespace WebSolicitudes.Controllers
                       <XPaths>";
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'>" + motivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "</XPath>";
                 }
                 else
                 {
@@ -145,7 +136,7 @@ namespace WebSolicitudes.Controllers
                 }
                 if (Convert.ToInt32(txtSubMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'>" + subMotivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.Cod' Include='true'>" + subMotivo + "</XPath>";
                 }
                 else
                 {
@@ -160,21 +151,8 @@ namespace WebSolicitudes.Controllers
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>";
                 }
                 queryCasos += @"
-                          <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>";
-                if (txtFechaDesde != null)
-                {
-                    queryCasos += @"<From>" + fechaInicioResumen + @"</From>";
-                }
-                else
-                {
-                    queryCasos += @"<From>01/01/1900</From>";
-                }
-                if (txtFechaHasta != null)
-                {
-                    queryCasos += @"<To>" + fechaTerminoResumen + @"</To>";
-                }
-                else { }
-                queryCasos += @"        
+                          <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>
+                            <From>01/01/1900</From>        
                           </XPath>
                       </XPaths>
                   </QueryParams>
@@ -215,9 +193,9 @@ namespace WebSolicitudes.Controllers
                         bool valido = false;
                         //OBTENER NUMERO DE CASO
                         var numCaso = "";
-                        if (row.SelectNodes("Column[@Name='IDCASE']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText != string.Empty)
+                        if (row.SelectNodes("Column[@Name='ORDENDETRABAJOMEDI_NROCASO']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRABAJOMEDI_NROCASO']")[0].InnerText != string.Empty)
                         {
-                            numCaso = row.SelectNodes("Column[@Name='IDCASE']")[0].InnerText;
+                            numCaso = row.SelectNodes("Column[@Name='ORDENDETRABAJOMEDI_NROCASO']")[0].InnerText;
                             if (txtNroCaso == string.Empty)
                             {
                                 valido = true;
@@ -273,12 +251,25 @@ namespace WebSolicitudes.Controllers
                             var motivoOT = row.SelectNodes("Column[@Name='MOTIVOOT_MOTIVO']")[0].InnerText;
                             fila.Add(motivoOT);
                         }
-
+                        //OBTENER MOTIVO OT MEDIDOR FILTRADO POR CODIGO
+                        if (row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0] != null && row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0].InnerText != string.Empty)
+                        {
+                            string motivoFiltrado = UtilController.ObtenerAtributoParametricaByCod("MotivoOT", "Cod", row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0].InnerText,"Motivo");
+                            fila.Add(motivoFiltrado);
+                        }
+                        
                         //OBTENER SUB MOTIVO OT MEDIDOR
                         if (row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0] != null && row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText != string.Empty)
                         {
                             var subMotivoOT = row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText;
                             fila.Add(subMotivoOT);
+                        }
+
+                        //OBTENER SUB MOTIVO OT MEDIDOR POR CODIGO
+                        if (row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0] != null && row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0].InnerText != string.Empty)
+                        {
+                            string subMotivoFiltrado = UtilController.ObtenerAtributoParametricaByCod("P_SubMotivoOT", "Cod", row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0].InnerText, "SubMotivo");
+                            fila.Add(subMotivoFiltrado);
                         }
                         fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Ver resumen</a>");
 
@@ -375,7 +366,7 @@ namespace WebSolicitudes.Controllers
                       <XPaths>";
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Motivo' Include='true'>" + motivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "@</XPath>";
                 }
                 else
                 {
@@ -383,7 +374,7 @@ namespace WebSolicitudes.Controllers
                 }
                 if (Convert.ToInt32(txtSubMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'>" + subMotivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.Cod' Include='true'>" + subMotivo + "@</XPath>";
                 }
                 else
                 {
@@ -500,11 +491,25 @@ namespace WebSolicitudes.Controllers
                             var motivoOT = row.SelectNodes("Column[@Name='MOTIVOOT_MOTIVO']")[0].InnerText;
                             fila.Add(motivoOT);
                         }
+                        //OBTENER MOTIVO OT MEDIDOR FILTRADO POR CODIGO
+                        if (row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0] != null && row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0].InnerText != string.Empty)
+                        {
+                            string motivoFiltrado = UtilController.ObtenerAtributoParametricaByCod("MotivoOT", "Cod", row.SelectNodes("Column[@Name='MOTIVOOT_COD']")[0].InnerText, "Motivo");
+                            fila.Add(motivoFiltrado);
+                        }
+
                         //OBTENER SUB MOTIVO OT MEDIDOR
                         if (row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0] != null && row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText != string.Empty)
                         {
                             var subMotivoOT = row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_SUBMOTIVO']")[0].InnerText;
                             fila.Add(subMotivoOT);
+                        }
+
+                        //OBTENER SUB MOTIVO OT MEDIDOR POR CODIGO
+                        if (row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0] != null && row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0].InnerText != string.Empty)
+                        {
+                            string subMotivoFiltrado = UtilController.ObtenerAtributoParametricaByCod("P_SubMotivoOT", "Cod", row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0].InnerText, "SubMotivo");
+                            fila.Add(subMotivoFiltrado);
                         }
                         fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCasoXML }) + @"' class='btn btn-default btn-md center-block'>Tratar</a>");
 
