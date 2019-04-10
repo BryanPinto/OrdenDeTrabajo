@@ -107,31 +107,35 @@ namespace WebSolicitudes.Controllers
                     </a>
                 ";
             }
-            
+
 
             return View();
         }
 
         public string ObtenerCaso(int id)
         {
-            int numCasoXML = id;
-            LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+            string respuestaBizagi = string.Empty;
 
-            string respuestaBizagi = "";
+            try
+            {
+                int numCasoXML = id;
+                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
 
-            //Escribir log con el xml creado como consulta de casos
-            string rutaLog = HttpRuntime.AppDomainAppPath;
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Environment.NewLine +
-                      DateTime.Now.ToShortDateString() + " " +
-                      DateTime.Now.ToShortTimeString() + ": " +
-                      "Número caso solicitado: " + numCasoXML);
-            System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-            sb.Clear();
 
-            //Crear XML para obtener la información del caso seleccionado para trabajar
 
-            string queryObtenerCaso = @"
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "Número caso solicitado: " + numCasoXML);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+
+                //Crear XML para obtener la información del caso seleccionado para trabajar
+
+                string queryObtenerCaso = @"
                 <BizAgiWSParam>
                     <CaseInfo>
                         <CaseNumber>" + id + @"</CaseNumber>
@@ -165,22 +169,99 @@ namespace WebSolicitudes.Controllers
                     </XPaths>
                     </BizAgiWSParam>";
 
-            respuestaBizagi = servicioQuery.getCaseDataUsingXPathsAsString(queryObtenerCaso);
-            respuestaBizagi = respuestaBizagi.Replace("\n", "");
-            respuestaBizagi = respuestaBizagi.Replace("\t", "");
-            respuestaBizagi = respuestaBizagi.Replace("\r", "");
+                respuestaBizagi = servicioQuery.getCaseDataUsingXPathsAsString(queryObtenerCaso);
+                respuestaBizagi = respuestaBizagi.Replace("\n", "");
+                respuestaBizagi = respuestaBizagi.Replace("\t", "");
+                respuestaBizagi = respuestaBizagi.Replace("\r", "");
 
-            //Escribir log con el xml creado como consulta de casos
-            rutaLog = HttpRuntime.AppDomainAppPath;
-            sb = new StringBuilder();
-            sb.Append(Environment.NewLine +
-                      DateTime.Now.ToShortDateString() + " " +
-                      DateTime.Now.ToShortTimeString() + ": " +
-                      "queryObtenerCaso: " + queryObtenerCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
-            System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-            sb.Clear();
+                //Escribir log con el xml creado como consulta de casos
+                rutaLog = HttpRuntime.AppDomainAppPath;
+                sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "queryObtenerCaso: " + queryObtenerCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+            catch (Exception ex)
+            {
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "ERROR: " + ex.Message);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+            return (respuestaBizagi);
+        }
 
-            return (respuestaBizagi);//CAMBIAR
+        [HttpPost]
+        public string ActualizarCaso(FormCollection collection)
+        {
+            string respuestaBizagi = string.Empty;
+
+            try
+            {
+                int numCaso          = Convert.ToInt32(ViewData["txtNumCaso"]);
+                var fechaVisita      = ViewData["txtFechaVisita"];
+                var archivoSoli      = ViewData["txtArchivoSoli"];
+                var comentarioCierre = ViewData["txtComentarioCierre"];
+                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+              
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "Número caso: " + numCaso);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+
+                //XML PARA ACTUALIZAR VALORES DEL CASO
+                string queryActualizarCaso = @"<BizAgiWSParam>
+                                                    <Entities>
+                                                        <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
+                                                            <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
+                                                            <FechaDeVisita>"+fechaVisita+@"</FechaDeVisita>
+                                                            <RespaldoAtencion>"+archivoSoli+ @"</RespaldoAtencion>
+                                                        </OrdendeTrabajoMedidor>
+                                                    </Entities>
+                                               </BizAgiWSParam>";
+
+                respuestaBizagi = servicioQuery.saveEntityAsString(queryActualizarCaso);
+                respuestaBizagi = respuestaBizagi.Replace("\n", "");
+                respuestaBizagi = respuestaBizagi.Replace("\t", "");
+                respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log con el xml creado como consulta de casos
+                rutaLog = HttpRuntime.AppDomainAppPath;
+                sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "queryActualizarCaso: " + queryActualizarCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+            catch(Exception ex)
+            {
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "ERROR: " + ex.Message);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+
+            return (respuestaBizagi);
         }
 
     }

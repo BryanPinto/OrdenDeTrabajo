@@ -2,14 +2,71 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <title>Tratar caso</title>
-   
+   <script>
+       $(document).ready(function () {
+           $("#formActualizarCaso").submit(function (e) {
+               e.preventDefault();
+               console.log("1");
+               // Buscar cabeceras
+               $.ajax({
+                   url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
+                   data: $("#formActualizarCaso").serialize(),
+                   cache: false,
+                   type: "POST",
+                   success: function (data) {
+                       console.log("data");
+                       console.log(data);
+                       if (data != "error") {
+                           $('#tablaordenes').find('tbody').hide();
+                           table.clear();
+                           table.rows.add(JSON.parse(data));
+                           table.draw();
+                           $('#tablaordenes').find('tbody').fadeIn("slow");
+                       }
+                       else
+                           alert("Error al buscar");
+                   },
+                   error: function () {
+                       alert("Error al buscar");
+                   }
+               });
+           });
+           $("#formCerrarCaso").submit(function (e) {
+               e.preventDefault();
+               // Buscar cabeceras
+               $.ajax({
+                   url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
+                   data: $("#formCerrarCaso").serialize(),
+                   cache: false,
+                   type: "POST",
+                   success: function (data) {
+                       console.log("data");
+                       console.log(data);
+                       if (data != "error") {
+                           $('#tablaordenes').find('tbody').hide();
+                           table.clear();
+                           table.rows.add(JSON.parse(data));
+                           table.draw();
+                           $('#tablaordenes').find('tbody').fadeIn("slow");
+                       }
+                       else
+                           alert("Error al buscar");
+                   },
+                   error: function () {
+                       alert("Error al buscar");
+                   }
+               });
+           });
+       });
+</script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+    
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
-        <div class="row">
+        
+        <div class="row">            
             <fieldset class="form-group tratarcaso col-md-4">
                 <label for="txtFecha" id="txtFecha">Fecha solicitud</label>
                 <input type="date" class="form-control caso" id="txtFechaSolicitud" name="txtFechaSolicitud" readonly value="<%= ViewData["txtFechaSolicitud"] %>"/>
@@ -189,15 +246,15 @@
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtFechaDeVisita">Fecha visita</label>
-                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required/>
+                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required value="<%= ViewData["txtFechaVisita"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <label for="txtArchivoSoliL" id="txtArchivoSoliL"<%-- style="color:#f9f9fb"--%>>Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required/>
+                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required value="<%= ViewData["txtArchivoSoli"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud" required></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud" required><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>
@@ -205,10 +262,16 @@
     <div class="botones">
         <div class="row">
             <fieldset class="form-group botones col-md-4">
-                <input type="button" id="btnGuardar" value="Guardar" class="guardar">
-                <input type="button" id="btnFinalizar" value="Finalizar" class="finalizar">
+                <form id="formActualizarCaso">
+                    <input type="hidden" name="txtNumCaso" id="txtNumCaso" value="<%= Request.Url.Segments.LastOrDefault() %>"/>
+                <input type="submit" id="btnGuardar" value="Guardar" class="guardar">
+                </form>
+                <form id="formCerrarCaso">
+                <input type="submit" id="btnFinalizar" value="Finalizar" class="finalizar">
+                </form>
             </fieldset>
         </div>
     </div>
+        
 
 </asp:Content>
