@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -200,16 +201,57 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost]
-        public string ActualizarCaso(FormCollection collection)
+        public string ActualizarCaso(FormCollection collection, IEnumerable<HttpPostedFileBase> files)
         {
             string respuestaBizagi = string.Empty;
+            DateTime fechaDeVisita = DateTime.MinValue;
 
             try
             {
-                int numCaso          = Convert.ToInt32(ViewData["txtNumCaso"]);
-                var fechaVisita      = ViewData["txtFechaVisita"];
-                var archivoSoli      = ViewData["txtArchivoSoli"];
-                var comentarioCierre = ViewData["txtComentarioCierre"];
+                int numCaso          = Convert.ToInt32(collection["txtNumCaso"]);
+                var fechaVisita      = collection["txtFechaDeVisita"];
+                var archivoSoli      = collection["txtArchivoContratista"];
+                var comentarioCierre = collection["txtComentarioCierre"];
+
+                //FORMATEAR FECHA DE VISITA
+                if (fechaVisita != string.Empty)
+                {
+                    fechaDeVisita = DateTime.Parse(fechaVisita);
+                    ViewData["txtFechaDeVisita"] = fechaDeVisita.ToString("yyyy-MM-dd");
+                }
+
+                // Conversión de archivos
+                string archivosBase64 = string.Empty;
+                bool tieneArchivo = archivoSoli != null;
+                //foreach (string upload in Request.Files)
+                //{
+                //    if (Request.Files[upload].FileName != "")
+                //    {
+                //        //string path = AppDomain.CurrentDomain.BaseDirectory + "./";
+                //        string path = Path.GetTempPath();
+                //        string filename = "archivo_temporal";
+                //        string ext = Path.GetExtension(Request.Files[upload].FileName);
+                //        Request.Files[upload].SaveAs(Path.Combine(path, filename + ext));
+                //        string archivoConvertido = ConversorBase64.convertirABase64(path + filename + ext);
+                //        if (upload == "txtCV")
+                //        {
+                //            fileCV = archivoConvertido;
+                //            extCV = ext;
+                //        }
+                //        else if (upload == "txtCI")
+                //        {
+                //            fileCI = archivoConvertido;
+                //            extCI = ext;
+                //        }
+                //        else if (upload == "txtCertificadoTitulo")
+                //        {
+                //            fileCertificadoTitulo = archivoConvertido;
+                //            extCertificadoTitulo = ext;
+                //        }
+                //    }
+                //}
+                ////
+
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
               
                 //Escribir log con el xml creado como consulta de casos
@@ -227,7 +269,7 @@ namespace WebSolicitudes.Controllers
                                                     <Entities>
                                                         <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
                                                             <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
-                                                            <FechaDeVisita>"+fechaVisita+@"</FechaDeVisita>
+                                                            <FechaDeVisita>"+ fechaDeVisita + @"</FechaDeVisita>
                                                             <RespaldoAtencion>"+archivoSoli+ @"</RespaldoAtencion>
                                                         </OrdendeTrabajoMedidor>
                                                     </Entities>

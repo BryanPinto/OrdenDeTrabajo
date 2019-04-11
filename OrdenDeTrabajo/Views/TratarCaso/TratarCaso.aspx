@@ -4,13 +4,13 @@
     <title>Tratar caso</title>
    <script>
        $(document).ready(function () {
-           $("#formActualizarCaso").submit(function (e) {
+           $("#btnGuardar").click(function (e) {
                e.preventDefault();
-               console.log("1");
                // Buscar cabeceras
+               console.log($("#formTratarCaso").serialize());
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: $("#formActualizarCaso").serialize(),
+                   data: $("#formTratarCaso").serialize(),
                    cache: false,
                    type: "POST",
                    success: function (data) {
@@ -62,7 +62,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
+    <form id="formTratarCaso" enctype="multipart/form-data">
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
         
@@ -205,7 +205,7 @@
             </fieldset>
         </div>
     </div>
-
+    
     <div class="datosSolicitante">
         <h3>Requirimiento</h3>
         
@@ -246,15 +246,15 @@
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtFechaDeVisita">Fecha visita</label>
-                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required value="<%= ViewData["txtFechaVisita"] %>"/>
+                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaVisita"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <label for="txtArchivoSoliL" id="txtArchivoSoliL"<%-- style="color:#f9f9fb"--%>>Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" required value="<%= ViewData["txtArchivoSoli"] %>"/>
+                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoSoli"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud" required><%= ViewData["txtComentarioCierre"] %></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>
@@ -262,16 +262,12 @@
     <div class="botones">
         <div class="row">
             <fieldset class="form-group botones col-md-4">
-                <form id="formActualizarCaso">
-                    <input type="hidden" name="txtNumCaso" id="txtNumCaso" value="<%= Request.Url.Segments.LastOrDefault() %>"/>
+                <input type="hidden" name="txtNumCaso" id="txtNumCaso" value="<%= Request.Url.Segments.LastOrDefault() %>"/>
                 <input type="submit" id="btnGuardar" value="Guardar" class="guardar">
-                </form>
-                <form id="formCerrarCaso">
                 <input type="submit" id="btnFinalizar" value="Finalizar" class="finalizar">
-                </form>
             </fieldset>
         </div>
     </div>
-        
+        </form>
 
 </asp:Content>
