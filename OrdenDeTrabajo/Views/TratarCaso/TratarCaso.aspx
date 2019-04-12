@@ -1,11 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    <script src="<%: Url.Content("~/Styles/js/jquert-3.2.1.js") %>"></script>
     <title>Tratar caso</title>
    <script>
-       $(document).ready(function () {
+       $(document).ready(function () {           
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
+               console.log("1");
+               var archivos = new FormData();
+           jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) {
+               console.log("archivos: "+archivos);
+                archivos.append('file-'+i, file);
+               });
+               console.log(archivos);
                // Buscar cabeceras
                console.log($("#formTratarCaso").serialize());
                $.ajax({
@@ -246,11 +254,11 @@
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtFechaDeVisita">Fecha visita</label>
-                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaVisita"] %>"/>
+                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <label for="txtArchivoSoliL" id="txtArchivoSoliL"<%-- style="color:#f9f9fb"--%>>Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoSoli"] %>"/>
+                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>

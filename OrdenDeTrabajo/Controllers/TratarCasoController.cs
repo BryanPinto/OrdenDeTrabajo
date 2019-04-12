@@ -23,37 +23,41 @@ namespace WebSolicitudes.Controllers
             //Obtener valores del xml respuesta de Bizagi del numero de caso enviado
 
             //DATOS SOLICITANTE
-            string txtFechaSolicitud = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaSolicitud']").InnerText;
-            string txtEjecutivo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina.Nombre']").InnerText;
+            string txtFechaSolicitud    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaSolicitud']").InnerText;
+            string txtEjecutivo         = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina.Nombre']").InnerText;
             string txtNombreSolicitante = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SolicitanteOTMedidor.NombreSolicitante']").InnerText;
             string txtCorreoElectronico = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.EjecutivoOficina.CorreoElectronico']").InnerText;
 
             //INFORMACION CLIENTE
-            string txtNumTicketCRM = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.NumeroTicketCRM']").InnerText;
-            string txtSinCuentaContrato = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SinCuentaContrato']").InnerText;
-            string txtCuentaContrato = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.CuentaContrato']").InnerText;
-            string txtNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Nombre']").InnerText;
-            string txtNumSerieMedidor = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.NumeroSerieMedidor']").InnerText;
-            string txtCiudad = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Ciudad']").InnerText;
-            string txtDireccion = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Direccion']").InnerText;
+            string txtNumTicketCRM       = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.NumeroTicketCRM']").InnerText;
+            string txtSinCuentaContrato  = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SinCuentaContrato']").InnerText;
+            string txtCuentaContrato     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.CuentaContrato']").InnerText;
+            string txtNombre             = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Nombre']").InnerText;
+            string txtNumSerieMedidor    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.NumeroSerieMedidor']").InnerText;
+            string txtCiudad             = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Ciudad']").InnerText;
+            string txtDireccion          = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Direccion']").InnerText;
             string txtSeleccionarCliente = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SeleccionarCliente']").InnerText;
 
             //DATOS DE CONTACTO
-            string txtNombreContacto = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.NombreContacto']").InnerText;
-            string txtCorreoContacto = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.CorreoElectronico']").InnerText;
-            string txtTelefonoFijo = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.TelefonoFijo']").InnerText;
+            string txtNombreContacto  = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.NombreContacto']").InnerText;
+            string txtCorreoContacto  = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.CorreoElectronico']").InnerText;
+            string txtTelefonoFijo    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.TelefonoFijo']").InnerText;
             string txtCelularContacto = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Contacto.Celular']").InnerText;
-            string txtRegion = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Region.Nombre']").InnerText;
-            string txtComunas = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas.Comuna']").InnerText;
+            string txtRegion          = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Region.Nombre']").InnerText;
+            string txtComunas         = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas.Comuna']").InnerText;
 
             //REQUERIMIENTO
-            string txtContratistasOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre']").InnerText;
+            string txtContratistasOT    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre']").InnerText;
             string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico']").InnerText;
-            string txtMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT.Motivo']").InnerText;
-            string txtSubMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT.Submotivo']").InnerText;
-            string txtComentarioSolici = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioSolicitud']").InnerText;
+            string txtMotivoOT          = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT.Motivo']").InnerText;
+            string txtSubMotivoOT       = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT.Submotivo']").InnerText;
+            string txtComentarioSolici  = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioSolicitud']").InnerText;
             //string txtArchivoBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").InnerText;
             //string txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
+
+            //CAMPOS OBLIGATORIOS
+            string txtFechaDeVisita     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechadeVisita']").InnerText;
+            string txtComentarioCierre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioCierreSolicitud']").InnerText;
 
             string txtArchivoBase64 = string.Empty;
             string txtArchivoNombre = string.Empty;
@@ -70,6 +74,13 @@ namespace WebSolicitudes.Controllers
             {
                 DateTime fechaInicio = DateTime.Parse(txtFechaSolicitud);
                 ViewData["txtFechaSolicitud"] = fechaInicio.ToString("yyyy-MM-dd");
+            }
+
+            //FORMATEAR FECHA DE VISITA
+            if (txtFechaDeVisita != string.Empty)
+            {
+                DateTime fechaVisita = DateTime.Parse(txtFechaDeVisita);
+                ViewData["txtFechaDeVisita"] = fechaVisita.ToString("yyyy-MM-dd");
             }
 
             //ASIGNAR VALORES RESCATADOS DE XML A CAMPOS DEL FORMULARIO
@@ -99,6 +110,9 @@ namespace WebSolicitudes.Controllers
             ViewData["txtMotivosOT"] = txtMotivoOT;
             ViewData["txtSubMotivosOT"] = txtSubMotivoOT;
             ViewData["txtComentarioSolicitud"] = txtComentarioSolici;
+
+            //ViewData["txtFechaVisita"] = txtFechaDeVisita;
+            ViewData["txtComentarioCierre"] = txtComentarioCierre;
 
             if (tieneArchivo)
             {
@@ -167,6 +181,8 @@ namespace WebSolicitudes.Controllers
                         <XPath XPath=""OrdendeTrabajoMedidor.SubMotivoOT.Submotivo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.ComentarioSolicitud""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Archivo""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.FechadeVisita""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.ComentarioCierreSolicitud""/>
                     </XPaths>
                     </BizAgiWSParam>";
 
@@ -213,44 +229,29 @@ namespace WebSolicitudes.Controllers
                 var archivoSoli      = collection["txtArchivoContratista"];
                 var comentarioCierre = collection["txtComentarioCierre"];
 
-                //FORMATEAR FECHA DE VISITA
-                if (fechaVisita != string.Empty)
-                {
-                    fechaDeVisita = DateTime.Parse(fechaVisita);
-                    ViewData["txtFechaDeVisita"] = fechaDeVisita.ToString("yyyy-MM-dd");
-                }
+                fechaDeVisita = Convert.ToDateTime(fechaVisita);
+                fechaDeVisita.ToString("yyyy-MM-dd HH':'mm':'ss");
 
                 // Conversión de archivos
-                string archivosBase64 = string.Empty;
-                bool tieneArchivo = archivoSoli != null;
-                //foreach (string upload in Request.Files)
-                //{
-                //    if (Request.Files[upload].FileName != "")
-                //    {
-                //        //string path = AppDomain.CurrentDomain.BaseDirectory + "./";
-                //        string path = Path.GetTempPath();
-                //        string filename = "archivo_temporal";
-                //        string ext = Path.GetExtension(Request.Files[upload].FileName);
-                //        Request.Files[upload].SaveAs(Path.Combine(path, filename + ext));
-                //        string archivoConvertido = ConversorBase64.convertirABase64(path + filename + ext);
-                //        if (upload == "txtCV")
-                //        {
-                //            fileCV = archivoConvertido;
-                //            extCV = ext;
-                //        }
-                //        else if (upload == "txtCI")
-                //        {
-                //            fileCI = archivoConvertido;
-                //            extCI = ext;
-                //        }
-                //        else if (upload == "txtCertificadoTitulo")
-                //        {
-                //            fileCertificadoTitulo = archivoConvertido;
-                //            extCertificadoTitulo = ext;
-                //        }
-                //    }
-                //}
-                ////
+                string fileCV = string.Empty, fileCI = string.Empty, fileCertificadoTitulo = string.Empty, fileLicenciaMedica = string.Empty;
+                string extCV = string.Empty, extCI = string.Empty, extCertificadoTitulo = string.Empty;
+                foreach (string upload in Request.Files)
+                {
+                    if (Request.Files[upload].FileName != "")
+                    {
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "./";
+                        string path = Path.GetTempPath();
+                        string filename = "archivo_temporal";
+                        string ext = Path.GetExtension(Request.Files[upload].FileName);
+                        Request.Files[upload].SaveAs(Path.Combine(path, filename + ext));
+                        string archivoConvertido = ConversorBase64.convertirABase64(path + filename + ext);
+                        if (upload != null)
+                        {
+                            archivoSoli = archivoConvertido;
+                            extCV = ext;
+                        }
+                    }
+                }
 
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
               
@@ -269,8 +270,8 @@ namespace WebSolicitudes.Controllers
                                                     <Entities>
                                                         <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
                                                             <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
-                                                            <FechaDeVisita>"+ fechaDeVisita + @"</FechaDeVisita>
-                                                            <RespaldoAtencion>"+archivoSoli+ @"</RespaldoAtencion>
+                                                            <FechadeVisita>"+fechaVisita+@"</FechadeVisita>
+                                                            <RespaldoAtencion>"+archivoSoli+@"</RespaldoAtencion>
                                                         </OrdendeTrabajoMedidor>
                                                     </Entities>
                                                </BizAgiWSParam>";
