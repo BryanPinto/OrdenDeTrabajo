@@ -306,6 +306,68 @@ namespace WebSolicitudes.Controllers
 
             return (respuestaBizagi);
         }
+        
+        [HttpPost]
+        public string FinalizarCaso(FormCollection collection)
+        {
+            string respuestaBizagi = string.Empty;
+            try
+            {
+                int numCaso = Convert.ToInt32(collection["txtNumCaso"]);
 
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "Número caso: " + numCaso);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+
+                LipigasWorkflowEngine.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngine.WorkflowEngineSOASoapClient();
+
+                
+
+                //XML PARA ACTUALIZAR VALORES DEL CASO
+                string queryFinalizarCaso = @"<BizAgiWSParam>
+	                                                <domain>domain</domain>
+	                                                <userName>admon</userName>
+	                                                <ActivityData>
+		                                                <radNumber>" + numCaso + @"</radNumber>
+		                                                <taskName>Task4</taskName>
+	                                                </ActivityData>
+                                                </BizAgiWSParam>";
+
+                respuestaBizagi = servicioQuery.performActivityAsString(queryFinalizarCaso);
+                respuestaBizagi = respuestaBizagi.Replace("\n", "");
+                respuestaBizagi = respuestaBizagi.Replace("\t", "");
+                respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log con el xml creado como consulta de casos
+                rutaLog = HttpRuntime.AppDomainAppPath;
+                sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "queryFinalizarCaso: " + queryFinalizarCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+            catch (Exception ex)
+            {
+                //Escribir log con el xml creado como consulta de casos
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Environment.NewLine +
+                          DateTime.Now.ToShortDateString() + " " +
+                          DateTime.Now.ToShortTimeString() + ": " +
+                          "ERROR: " + ex.Message);
+                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
+                sb.Clear();
+            }
+
+            return (respuestaBizagi);
+        }
     }
 }

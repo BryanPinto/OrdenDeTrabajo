@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <script src="<%: Url.Content("~/Styles/js/jquert-3.2.1.js") %>"></script>
+    <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>
     <title>Tratar caso</title>
    <script>
        $(document).ready(function () {           
@@ -39,12 +39,13 @@
                    }
                });
            });
-           $("#formCerrarCaso").submit(function (e) {
+           $("#btnFinalizar").click(function (e) {
                e.preventDefault();
+               $("#btnGuardar").submit();
                // Buscar cabeceras
-               $.ajax({
-                   url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: $("#formCerrarCaso").serialize(),
+               $.ajax({                   
+                   url: '<%: Url.Content("~/TratarCaso/FinalizarCaso/") %>',
+                   data: $("#formTratarCaso").serialize(),
                    cache: false,
                    type: "POST",
                    success: function (data) {
