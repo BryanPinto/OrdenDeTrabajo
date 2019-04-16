@@ -267,6 +267,7 @@
     <Content Include="Views\Home\Login.aspx" />
     <Content Include="Views\Home\Test.aspx" />
     <Content Include="Views\ListarCasos\ListarCasos.aspx" />
+    <Content Include="Views\TratarCaso\ResumenTratarCaso.aspx" />
     <Content Include="Views\TratarCaso\TratarCaso.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

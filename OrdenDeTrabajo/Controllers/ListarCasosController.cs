@@ -271,7 +271,7 @@ namespace WebSolicitudes.Controllers
                             string subMotivoFiltrado = UtilController.ObtenerAtributoParametricaByCod("P_SubMotivoOT", "Cod", row.SelectNodes("Column[@Name='P_SUBMOTIVOOT_COD']")[0].InnerText, "SubMotivo");
                             fila.Add(subMotivoFiltrado);
                         }
-                        fila.Add(@"<a href='" + Url.Action("TratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Ver resumen</a>");
+                        fila.Add(@"<a href='" + Url.Action("ResumenTratarCaso", "TratarCaso", new { id = numCaso }) + @"' class='btn btn-default btn-md center-block'>Ver resumen</a>");
 
 
                         // Agregar a lista FORMA CORRECTA

@@ -66,6 +66,17 @@
                    }
                });
            });
+
+           if ("<%=ViewData["txtSinCuenta"]%>" != "") {
+               if ("<%=ViewData["txtSinCuenta"].ToString()%>" == "True") {
+                   $("#txtCuentaContrato").hide();
+                   $("#txtCuentaContratoL").hide();
+               }
+               else {
+                   $("#txtCuentaContrato").show();
+                   $("#txtCuentaContratoL").show();
+               }
+           }
        });
 </script>
 </asp:Content>
