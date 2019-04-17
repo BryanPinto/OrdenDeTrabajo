@@ -237,7 +237,6 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Styles\css\bootstrap-toggle.min.css" />
     <Content Include="Styles\css\jquery-ui.css" />
-    <Content Include="Styles\image\favicon.jpg" />
     <Content Include="Styles\js\bootstrap-combobox.js" />
     <Content Include="Styles\css\bootstrap-theme.css" />
     <Content Include="Styles\css\bootstrap-theme.min.css" />
