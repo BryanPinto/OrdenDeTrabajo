@@ -77,11 +77,82 @@
                    $("#txtCuentaContratoL").show();
                }
            }
+
+           var maxHeight = 400;
+
+$(function(){
+
+    $(".dropdown > li").hover(function() {
+    
+         var $container = $(this),
+             $list = $container.find("ul"),
+             $anchor = $container.find("a"),
+             height = $list.height() * 1.1,       // make sure there is enough room at the bottom
+             multiplier = height / maxHeight;     // needs to move faster if list is taller
+        
+        // need to save height here so it can revert on mouseout            
+        $container.data("origHeight", $container.height());
+        
+        // so it can retain it's rollover color all the while the dropdown is open
+        $anchor.addClass("hover");
+        
+        // make sure dropdown appears directly below parent list item    
+        $list
+            .show()
+            .css({
+                paddingTop: $container.data("origHeight")
+            });
+        
+        // don't do any animation if list shorter than max
+        if (multiplier > 1) {
+            $container
+                .css({
+                    height: maxHeight,
+                    overflow: "hidden"
+                })
+                .mousemove(function(e) {
+                    var offset = $container.offset();
+                    var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
+                    if (relativeY > $container.data("origHeight")) {
+                        $list.css("top", -relativeY + $container.data("origHeight"));
+                    };
+                });
+        }
+        
+    }, function() {
+    
+        var $el = $(this);
+        
+        // put things back to normal
+        $el
+            .height($(this).data("origHeight"))
+            .find("ul")
+            .css({ top: 0 })
+            .hide()
+            .end()
+            .find("a")
+            .removeClass("hover");
+    
+    });  
+    
+});
        });
 </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<nav>
+<ul class="dropdown">
+        	<li class="drop"><a href="#">Solicitudes</a>
+        		<ul class="sub_menu">
+        			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
+					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
+        		</ul>
+        	</li>
+        	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
+        	</li>
+        </ul>
+</nav><br /><br />
     <form id="formTratarCaso" enctype="multipart/form-data">
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
@@ -141,31 +212,27 @@
             </fieldset>
         </div>
         <div class="row">
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso col-md-6" id="txtCuentaContrato">
                 <label for="txtCuentaContratoL" id="txtCuentaContratoL"<%-- style="color:#f9f9fb"--%>>Cuenta contrato</label>
-                <input type="text" class="form-control caso" id="txtCuentaContrato" name="txtCuentaContrato" placeholder="Cuenta contrato" readonly value="<%= ViewData["txtCuentaContrato"] %>"/>
+                <input type="text" class="form-control caso" name="txtCuentaContrato" placeholder="Cuenta contrato" readonly value="<%= ViewData["txtCuentaContrato"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso col-md-6">
                 <label for="txtNumSerieL" id="txtNumSerieL"<%-- style="color:#f9f9fb"--%>>Número serie medidor</label>
                 <input type="text" class="form-control caso" id="txtNumSerieMedidor" name="txtNumSerieMedidor" placeholder="Número serie medidor" readonly value="<%= ViewData["txtNumSerieMedidor"] %>"/>
             </fieldset>
-        </div>
-        <div class="row">
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso col-md-6">
                 <label for="txtNombreL" id="txtNombreL"<%-- style="color:#f9f9fb"--%>>Nombre</label>
                 <input type="text" class="form-control caso" id="txtNombre" name="txtNombre" placeholder="Nombre" readonly value="<%= ViewData["txtNombre"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso col-md-6">
                 <label for="txtCiudadL" id="txtCiudadL"<%-- style="color:#f9f9fb"--%>>Ciudad</label>
                 <input type="text" class="form-control caso" id="txtCiudad" name="txtCiudad" placeholder="Ciudad" readonly value="<%= ViewData["txtCiudad"] %>"/>
             </fieldset>
-        </div>
-        <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">
                 <label for="txtDireccionL" id="txtDireccionL"<%-- style="color:#f9f9fb"--%>>Dirección</label>
                 <input type="text" class="form-control caso" id="txtDireccion" name="txtDireccion" placeholder="Dirección" readonly value="<%= ViewData["txtDireccion"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso radio col-md-4">
+            <%--<fieldset class="form-group tratarcaso radio col-md-4">
                 <label class="radio-inline" style="font-size:17px">Seleccionar cliente
                 </label>
                 <% if(ViewData["txtSeleccionarCliente"] != null)
@@ -188,7 +255,7 @@
                     <input type="radio" name="txtSeleccionarCliente" id="txtSeleccionarCliente" disabled value="false" checked="checked"/>No
                 </label>
                 <%}%><%} %>
-            </fieldset>
+            </fieldset>--%>
         </div>
     </div>
 
