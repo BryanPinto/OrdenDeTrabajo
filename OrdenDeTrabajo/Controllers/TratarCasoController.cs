@@ -339,29 +339,30 @@ namespace WebSolicitudes.Controllers
             {
                 int numCaso          = Convert.ToInt32(collection["txtNumCaso"]);
                 var fechaVisita      = collection["txtFechaDeVisita"];
-                var archivoSoli      = collection["txtArchivoContratista"];
+                //var archivoSoli      = collection["txtArchivoContratista"];
                 var comentarioCierre = collection["txtComentarioCierre"];
 
                 fechaDeVisita = Convert.ToDateTime(fechaVisita);
                 fechaDeVisita.ToString("yyyy-MM-dd HH':'mm':'ss");
 
                 // Conversión de archivos
-                string fileCV = string.Empty, fileCI = string.Empty, fileCertificadoTitulo = string.Empty, fileLicenciaMedica = string.Empty;
-                string extCV = string.Empty, extCI = string.Empty, extCertificadoTitulo = string.Empty;
+                string archivosBase64 = "";
+                string archivosNombres = "";
+                string archivosRespaldos = "";
                 foreach (string upload in Request.Files)
                 {
                     if (Request.Files[upload].FileName != "")
                     {
                         //string path = AppDomain.CurrentDomain.BaseDirectory + "./";
                         string path = Path.GetTempPath();
-                        string filename = "archivo_temporal";
-                        string ext = Path.GetExtension(Request.Files[upload].FileName);
-                        Request.Files[upload].SaveAs(Path.Combine(path, filename + ext));
-                        string archivoConvertido = ConversorBase64.convertirABase64(path + filename + ext);
+                        string filename = Request.Files[upload].FileName;
+                        Request.Files[upload].SaveAs(Path.Combine(path, filename));
+                        string archivoConvertido = ConversorBase64.convertirABase64(path + filename);
                         if (upload != null)
                         {
-                            archivoSoli = archivoConvertido;
-                            extCV = ext;
+                            archivosBase64 = archivoConvertido;
+                            archivosNombres = archivoConvertido;
+                            archivosRespaldos += @"<File fileName='" + filename + @"'>" + archivoConvertido + @"</File>";
                         }
                     }
                 }
@@ -384,7 +385,7 @@ namespace WebSolicitudes.Controllers
                                                         <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
                                                             <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
                                                             <FechadeVisita>"+fechaVisita+@"</FechadeVisita>
-                                                            <RespaldoAtencion>"+archivoSoli+@"</RespaldoAtencion>
+                                                            <RespaldoAtencion>"+archivosRespaldos+@"</RespaldoAtencion>
                                                         </OrdendeTrabajoMedidor>
                                                     </Entities>
                                                </BizAgiWSParam>";

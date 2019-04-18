@@ -151,7 +151,7 @@ namespace WebSolicitudes.Controllers
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>";
                 }
                 queryCasos += @"
-                          <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>
+                          <XPath Path='OrdendeTrabajoMedidor.Fechaasignacion' Include='true'>
                             <From>01/01/1900</From>        
                           </XPath>
                       </XPaths>
@@ -236,11 +236,11 @@ namespace WebSolicitudes.Controllers
                             fila.Add(estadoTexto);
                         }
 
-                        //OBTENER FECHA SOLICITUD
-                        if (row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText != string.Empty)
+                        //OBTENER FECHA ASIGNACION
+                        if (row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0].InnerText != string.Empty)
                         {
-                            var fechaSolicitud = row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText;
-                            DateTime fecha = Convert.ToDateTime(fechaSolicitud);
+                            var fechaAsignacion = row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0].InnerText;
+                            DateTime fecha = Convert.ToDateTime(fechaAsignacion);
                             var fechaFinal = fecha.ToString("dd-MM-yyyy");
                             fila.Add(fechaFinal);
                         }
@@ -382,7 +382,7 @@ namespace WebSolicitudes.Controllers
                 }
                 queryCasos += @"                           
                            <XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>
-                          <XPath Path='OrdendeTrabajoMedidor.FechaSolicitud' Include='true'>";
+                          <XPath Path='OrdendeTrabajoMedidor.Fechaasignacion' Include='true'>";
                 if (txtFechaDesde != null)
                 {
                     queryCasos += @"<From>" + fechaInicio + @"</From>";
@@ -476,11 +476,11 @@ namespace WebSolicitudes.Controllers
                         //    fila.Add(estadoTexto);
                         //}
 
-                        //OBTENER FECHA SOLICITUD
-                        if (row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText != string.Empty)
+                        //OBTENER FECHA ASIGNACION
+                        if (row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0] != null && row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0].InnerText != string.Empty)
                         {
-                            var fechaSolicitud = row.SelectNodes("Column[@Name='ORDENDETRAB_FECHASOLICITUD']")[0].InnerText;
-                            DateTime fecha = Convert.ToDateTime(fechaSolicitud);
+                            var fechaAsignacion = row.SelectNodes("Column[@Name='ORDENDETRA_FECHAASIGNACION']")[0].InnerText;
+                            DateTime fecha = Convert.ToDateTime(fechaAsignacion);
                             var fechaFinal = fecha.ToString("dd-MM-yyyy");
                             fila.Add(fechaFinal);
                         }
