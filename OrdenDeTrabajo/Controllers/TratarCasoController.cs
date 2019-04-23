@@ -56,7 +56,7 @@ namespace WebSolicitudes.Controllers
             //string txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
 
             //CAMPOS OBLIGATORIOS
-            string txtFechaDeVisita     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechadeVisita']").InnerText;
+            //string txtFechaDeVisita     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaDeVisita']").InnerText;
             string txtComentarioCierre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioCierreSolicitud']").InnerText;
 
             string txtArchivoBase64 = string.Empty;
@@ -76,12 +76,12 @@ namespace WebSolicitudes.Controllers
                 ViewData["txtFechaSolicitud"] = fechaInicio.ToString("yyyy-MM-dd");
             }
 
-            //FORMATEAR FECHA DE VISITA
-            if (txtFechaDeVisita != string.Empty)
-            {
-                DateTime fechaVisita = DateTime.Parse(txtFechaDeVisita);
-                ViewData["txtFechaDeVisita"] = fechaVisita.ToString("yyyy-MM-dd");
-            }
+            ////FORMATEAR FECHA DE VISITA
+            //if (txtFechaDeVisita != string.Empty)
+            //{
+            //    DateTime fechaVisita = DateTime.Parse(txtFechaDeVisita);
+            //    ViewData["txtFechaDeVisita"] = fechaVisita.ToString("yyyy-MM-dd");
+            //}
 
             //ASIGNAR VALORES RESCATADOS DE XML A CAMPOS DEL FORMULARIO
             //ViewData["txtFechaSolicitud"] = txtFechaSolicitud;
@@ -384,7 +384,7 @@ namespace WebSolicitudes.Controllers
                                                     <Entities>
                                                         <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
                                                             <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
-                                                            <FechadeVisita>"+fechaVisita+@"</FechadeVisita>
+                                                            <FechaDeVisita>"+fechaVisita+@"</FechaDeVisita>
                                                             <RespaldoAtencion>"+archivosRespaldos+@"</RespaldoAtencion>
                                                         </OrdendeTrabajoMedidor>
                                                     </Entities>

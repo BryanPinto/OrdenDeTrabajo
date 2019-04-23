@@ -8,7 +8,7 @@
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
                console.log("1");
-               var formulario = $("#formTratarCaso").serialize();
+               var formulario = $("#formTratarCaso")[0];
                var archivos = new FormData(formulario);    
                console.log(archivos);
                jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
@@ -22,7 +22,7 @@
                console.log("5");
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: archivos,
+                   data: $("#formTratarCaso").serialize(), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
                    cache: false,
                    type: "POST",
                    processData: false,
