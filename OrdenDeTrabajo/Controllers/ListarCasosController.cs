@@ -27,9 +27,11 @@ namespace WebSolicitudes.Controllers
 
 
         [HttpPost]
-        public string BusquedaCasos(FormCollection collection, int idUsuario)
+        public string BusquedaCasos(FormCollection collection, int IDUsuario)
         {
             string datosJSON = string.Empty;
+            string usuario = Convert.ToString(IDUsuario);
+            usuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString(); //Obtener usuario logueado por variable session, definida en el método CasosPendientes
             try
             {
                 // Variables
@@ -125,7 +127,8 @@ namespace WebSolicitudes.Controllers
                 queryCasos += @"
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
-                      <XPaths>";
+                      <XPaths>
+                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + usuario + "</XPath>";//ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "</XPath>";
@@ -162,10 +165,18 @@ namespace WebSolicitudes.Controllers
                     </Parameters>
                 </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Listar casos historicos", "BusquedaCasos", queryCasos);
+                //Fin CSV
+
                 respuestaCasos = servicioQuery.QueryCasesAsString(queryCasos);
                 respuestaCasos = respuestaCasos.Replace("\n", "");
                 respuestaCasos = respuestaCasos.Replace("\t", "");
                 respuestaCasos = respuestaCasos.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "BusquedaCasos", respuestaCasos);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
@@ -282,6 +293,10 @@ namespace WebSolicitudes.Controllers
                     }
                     datosJSON = JsonConvert.SerializeObject(registros);
 
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Caso rescatado", "BusquedaCasos", datosJSON);
+                    //Fin CSV
+
                     //Escribir log con el JSON serializado para enviar como filtro de busqueda y agregar los casos a la grilla
                     rutaLog = HttpRuntime.AppDomainAppPath;
                     sb = new StringBuilder();
@@ -295,6 +310,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "BusquedaCasos", ex.Message);
+                //Fin CSV
+
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(Environment.NewLine +
@@ -311,6 +330,8 @@ namespace WebSolicitudes.Controllers
         public string CasosPendientes(FormCollection collection, int IDUsuario, int? estado)
         {
             string datosJSON = string.Empty;
+            string txtVacio = collection["txtVacio"];
+            System.Web.HttpContext.Current.Session["IDUsuario"] = IDUsuario;
             try
             {
                 if (estado == 1)
@@ -339,6 +360,11 @@ namespace WebSolicitudes.Controllers
                 DateTime? fechaTermino = null;
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                // Número caso
+                int? numCaso = null;
+                if (Convert.ToInt32(txtNroCaso) != 0)
+                    numCaso = int.Parse(txtNroCaso);
 
                 // Motivo
                 int? motivo = null;
@@ -371,10 +397,11 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='ProcessState' Include='true'>Running</Internal>
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
-                      <XPaths>";
+                      <XPaths>
+                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + UsuarioLogueado + "</XPath>";//ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "</XPath>";
                 }
                 else
                 {
@@ -382,18 +409,25 @@ namespace WebSolicitudes.Controllers
                 }
                 if (Convert.ToInt32(txtSubMotivoSelect) != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.Cod' Include='true'>" + subMotivo + "@</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.Cod' Include='true'>" + subMotivo + "</XPath>";
                 }
                 else
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'></XPath>";
                 }
-                queryCasos += @"                           
-                           <XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>
+                if (Convert.ToInt32(txtNroCaso) != 0)
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'>"+ numCaso + "</XPath>";
+                }
+                else
+                {
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'></XPath>";
+                }
+                queryCasos += @"                    
                           <XPath Path='OrdendeTrabajoMedidor.Fechaasignacion' Include='true'>";
                 if (txtFechaDesde != null)
                 {
-                    queryCasos += @"<From>" + fechaInicio + @"</From>";
+                    queryCasos += @"<From>" + fechaInicio + "</From>";
                 }
                 else
                 {
@@ -401,7 +435,7 @@ namespace WebSolicitudes.Controllers
                 }
                 if (txtFechaHasta != null)
                 {
-                    queryCasos += @"<To>" + fechaTermino + @"</To>";
+                    queryCasos += @"<To>" + fechaTermino + "</To>";
                 }
                 else { }
                 queryCasos += @"        
@@ -414,10 +448,18 @@ namespace WebSolicitudes.Controllers
                     </Parameters>
                 </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Listar casos pendientes", "CasosPendientes", queryCasos);
+                //Fin CSV
+
                 respuestaCasos = servicioQuery.QueryCasesAsString(queryCasos);
                 respuestaCasos = respuestaCasos.Replace("\n", "");
                 respuestaCasos = respuestaCasos.Replace("\t", "");
                 respuestaCasos = respuestaCasos.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "CasosPendientes", respuestaCasos);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
@@ -530,6 +572,10 @@ namespace WebSolicitudes.Controllers
                     }
                     datosJSON = JsonConvert.SerializeObject(registros);
 
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Caso rescatado", "CasosPendientes", datosJSON);
+                    //Fin CSV
+
                     //Escribir log con el JSON serializado para enviar como filtro de busqueda y agregar los casos a la grilla
                     rutaLog = HttpRuntime.AppDomainAppPath;
                     sb = new StringBuilder();
@@ -543,6 +589,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "CasosPendientes", ex.Message);
+                //Fin CSV
+
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
                 sb.Append(Environment.NewLine +

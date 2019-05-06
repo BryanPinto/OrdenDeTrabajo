@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
+using System.IO;
 
 namespace WebSolicitudes.Controllers
 {
@@ -41,6 +42,10 @@ namespace WebSolicitudes.Controllers
                         </EntityData>
                     </BizAgiWSParam>
                 ";
+                //Escribir log CSV
+                EscribirLog("Listar motivo/submotivo", "ListarParametrica", xmlGetEntities);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -55,6 +60,10 @@ namespace WebSolicitudes.Controllers
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
+
+                //Escribir log CSV
+                EscribirLog("Respuesta", "ListarParametrica", respuesta);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -81,6 +90,10 @@ namespace WebSolicitudes.Controllers
                         lista += "<option value='" + id + @"'>" + campo + @"</option>";
                     }
 
+                //Escribir log CSV
+                EscribirLog("Lista opciones generada", "ListarParametrica", lista);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
                 sb = new StringBuilder();
@@ -94,6 +107,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                EscribirLog("ERROR", "ListarParametrica", ex.Message);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -134,6 +151,11 @@ namespace WebSolicitudes.Controllers
                         </EntityData>
                     </BizAgiWSParam>
                 ";
+
+                //Escribir log CSV
+                EscribirLog("Obtener atributos de parametricas", "ObtenerAtributoParametricaByCod", xmlGetEntities);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -148,6 +170,10 @@ namespace WebSolicitudes.Controllers
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
+
+                //Escribir log CSV
+                EscribirLog("Respuesta", "ObtenerAtributoParametricaByCod", respuesta);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -166,6 +192,9 @@ namespace WebSolicitudes.Controllers
                 
                 campo = doc.SelectSingleNode("/BizAgiWSResponse/Entities/" + tabla + "/"+ valorObtenido).InnerText;
 
+                //Escribir log CSV
+                EscribirLog("Atributo rescatado", "ObtenerAtributoParametricaByCod", campo);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -180,6 +209,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                EscribirLog("ERROR", "ObtenerAtributoParametricaByCod", ex.Message);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -191,6 +224,64 @@ namespace WebSolicitudes.Controllers
                 sb.Clear();
             }
             return campo;
+        }
+
+        /// <summary>
+        /// Método para escribir un log
+        /// Se guardar dentro de un CSV con nombre LogPortal.CSV dentro de la carpeta del proyecto
+        /// </summary>
+        /// <param name="proceso">Nombre del proceso</param>
+        /// <param name="metodo">Método actual</param>
+        /// <param name="mensaje">Mensaje que se va a guardar</param>
+        public static void EscribirLog(string proceso, string metodo, string mensaje)
+        {
+            try
+            {
+                // Crear CSV
+                string rutaLog = HttpRuntime.AppDomainAppPath;
+                //string nombreArchivo = "LogPortal.csv";
+                string rutaCompleta = rutaLog + "LogPortal.csv";
+                var csv = new StringBuilder();
+
+                // Revisar si tiene cabecera
+                string primeraLinea = string.Empty;
+                bool existeArchivo = System.IO.File.Exists(rutaCompleta);
+                if (existeArchivo)
+                    primeraLinea = System.IO.File.ReadLines(rutaCompleta).FirstOrDefault();
+                //Si cabecera no existe, crear con las siguientes columnas
+                if (!existeArchivo || (existeArchivo && (primeraLinea == null || primeraLinea == string.Empty)))
+                {
+                    string cabecera =
+                        string.Format("{0};{1};{2};{3};{4}"
+                        , "Fecha"
+                        , "Hora"
+                        , "Proceso"
+                        , "Metodo"
+                        , "Mensaje"
+                        );
+                    csv.Append(cabecera);
+                    System.IO.File.AppendAllText(rutaCompleta, csv.ToString());
+                    csv.Clear();
+                }
+
+                // Si existe cabecera, escribir linea
+                string nuevaLinea = Environment.NewLine +
+                    string.Format("{0};{1};{2};{3};{4}"
+                    , "\"" + DateTime.Now.ToShortDateString() + "\""
+                    , "\"" + DateTime.Now.ToShortTimeString() + "\""
+                    , "\"" + proceso + "\""
+                    , "\"" + metodo + "\""
+                    , "\"" + mensaje + "\""
+                    );
+
+                // Agregar a archivo
+                csv.Append(nuevaLinea);
+                System.IO.File.AppendAllText(rutaCompleta, csv.ToString());
+                csv.Clear();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

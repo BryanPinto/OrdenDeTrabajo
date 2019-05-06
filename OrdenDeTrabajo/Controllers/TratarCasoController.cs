@@ -249,7 +249,9 @@ namespace WebSolicitudes.Controllers
                 int numCasoXML = id;
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
 
-
+                //Escribir log CSV
+                UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
@@ -299,10 +301,18 @@ namespace WebSolicitudes.Controllers
                     </XPaths>
                     </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Campos solicitados", "ObtenerCaso", queryObtenerCaso);
+                //Fin CSV
+
                 respuestaBizagi = servicioQuery.getCaseDataUsingXPathsAsString(queryObtenerCaso);
                 respuestaBizagi = respuestaBizagi.Replace("\n", "");
                 respuestaBizagi = respuestaBizagi.Replace("\t", "");
                 respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "ObtenerCaso", respuestaBizagi);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -316,6 +326,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "ObtenerCaso", ex.Message);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -368,7 +382,11 @@ namespace WebSolicitudes.Controllers
                 }
 
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
-              
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -390,10 +408,18 @@ namespace WebSolicitudes.Controllers
                                                     </Entities>
                                                </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Datos a actualizar", "ActualizarCaso", queryActualizarCaso);
+                //Fin CSV
+
                 respuestaBizagi = servicioQuery.saveEntityAsString(queryActualizarCaso);
                 respuestaBizagi = respuestaBizagi.Replace("\n", "");
                 respuestaBizagi = respuestaBizagi.Replace("\t", "");
                 respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "ActualizarCaso", respuestaBizagi);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -407,6 +433,10 @@ namespace WebSolicitudes.Controllers
             }
             catch(Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "ActualizarCaso", ex.Message);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -428,6 +458,10 @@ namespace WebSolicitudes.Controllers
             try
             {
                 int numCaso = Convert.ToInt32(collection["txtNumCaso"]);
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Caso a finalizar", "FinalizarCaso", Convert.ToString(numCaso));
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
@@ -453,10 +487,18 @@ namespace WebSolicitudes.Controllers
 	                                                </ActivityData>
                                                 </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Avanzar para finalizar", "FinalizarCaso", queryFinalizarCaso);
+                //Fin CSV
+
                 respuestaBizagi = servicioQuery.performActivityAsString(queryFinalizarCaso);
                 respuestaBizagi = respuestaBizagi.Replace("\n", "");
                 respuestaBizagi = respuestaBizagi.Replace("\t", "");
                 respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "FinalizarCaso", respuestaBizagi);
+                //Fin CSV
 
                 //Escribir log con el xml creado como consulta de casos
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -470,6 +512,10 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "FinalizarCaso", ex.Message);
+                //Fin CSV
+
                 //Escribir log con el xml creado como consulta de casos
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();

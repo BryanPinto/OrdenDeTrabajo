@@ -61,6 +61,10 @@ namespace WebSolicitudes.Controllers
                 string txtPass = collection["txtPass"];
                 txtVacio = collection["txtVacio"];
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Credenciales ingresadas", "Login", "Correo: "+txtCorreo+", Clave: "+txtPass);
+                //Fin CSV
+
                 //Escribir log con datos ingresados en login
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
@@ -81,6 +85,10 @@ namespace WebSolicitudes.Controllers
 	                                    </EntityData>
                                     </BizAgiWSParam>";
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Consultar credenciales", "Login", queryLogin);
+                //Fin CSV
+
                 //Escribir log con datos ingresados en login
                 rutaLog = HttpRuntime.AppDomainAppPath;
                 sb = new StringBuilder();
@@ -97,6 +105,10 @@ namespace WebSolicitudes.Controllers
                 respuestaCasos = respuestaCasos.Replace("\n", "");
                 respuestaCasos = respuestaCasos.Replace("\t", "");
                 respuestaCasos = respuestaCasos.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "Login", respuestaCasos);
+                //Fin CSV
 
                 //Escribir respuesta bizagi
                 rutaLog = HttpRuntime.AppDomainAppPath;
@@ -116,6 +128,9 @@ namespace WebSolicitudes.Controllers
                 string correo = doc.SelectNodes("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").ToString();
                 string password = doc.SelectNodes("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").ToString();
 
+                //Escribir log CSV
+                UtilController.EscribirLog("Credenciales rescatadas", "Login", "Correo: " + correo + ", Clave: " + password);
+                //Fin CSV
 
                 if (txtCorreo == correo && txtPass == password)
                 {
@@ -131,6 +146,10 @@ namespace WebSolicitudes.Controllers
             }
             catch(Exception ex)
             {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "Login", ex.Message);
+                //Fin CSV
+
                 //Escribir log con datos ingresados en login
                 string rutaLog = HttpRuntime.AppDomainAppPath;
                 StringBuilder sb = new StringBuilder();
