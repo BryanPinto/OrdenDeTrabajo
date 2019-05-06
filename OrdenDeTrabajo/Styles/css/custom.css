@@ -963,4 +963,7 @@ ul {
         margin-left: 12%;
     }
 }
+#txtArchivo{
+    max-width: 300px;
+}
 /*FIN NUEVOS ESTILOS*/

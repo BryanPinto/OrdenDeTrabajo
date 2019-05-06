@@ -198,7 +198,7 @@ $(function(){
                     <%--<th class="col-xs-2">Proceso</th>--%>
                     <th class="col-xs-1">Número de caso</th>
                     <%--<th class="col-xs-1">Estado del caso</th>--%>
-                    <th class="col-xs-1">Fecha de creación</th>
+                    <th class="col-xs-1">Fecha de asignación</th>
                     <%--<th class="col-xs-1">Fecha de solución</th>--%>
                     <%--<th class="col-xs-4">Actividad actual</th>--%>
                     <th class="col-xs-1">Motivo</th>

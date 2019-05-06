@@ -8,22 +8,28 @@
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
                console.log("1");
-               var archivos = new FormData();
-           jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) {
-               console.log("archivos: "+archivos);
-                archivos.append('file-'+i, file);
-               });
+               var formulario = $("#formTratarCaso")[0];
+               var archivos = new FormData(formulario);    
                console.log(archivos);
+               jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
+               archivos.append('txtArchivoContratista' + i, file);
+               //formulario.append('txtArchivoContratista', file);
+               console.log(file);
+               });               
                // Buscar cabeceras
-               console.log($("#formTratarCaso").serialize());
+               console.log("2");
+               console.log("formulario: " + formulario);
+               console.log("5");
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: $("#formTratarCaso").serialize(),
+                   data: $("#formTratarCaso").serialize(), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
                    cache: false,
                    type: "POST",
+                   processData: false,
+                   enctype: "multipart/form-data",
                    success: function (data) {
-                       console.log("data");
-                       console.log(data);
+                       //console.log("data");
+                       //console.log(data);
                        if (data != "error") {
                            $('#tablaordenes').find('tbody').hide();
                            table.clear();

@@ -2,34 +2,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Tratar caso</title>
    <script>
        $(document).ready(function () {           
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
                console.log("1");
-               var formulario = $("#formTratarCaso")[0];
-               var archivos = new FormData(formulario);    
+               //var formulario = $("#formTratarCaso").serialize(); ESTO ESTABA ANTES
+               //var archivos = new FormData(formulario);    ESTO ESTABA ANTES
+               var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
+               var archivos = new FormData();   //ESTO HAY QUE PROBARLO
                console.log(archivos);
                jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
                archivos.append('txtArchivoContratista' + i, file);
                //formulario.append('txtArchivoContratista', file);
                console.log(file);
                });               
-               // Buscar cabeceras
-               console.log("2");
-               console.log("formulario: " + formulario);
-               console.log("5");
+               var datos = $(formulario, archivos).serialize(); //se envia como data
+               // Buscar cabeceras               
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: $("#formTratarCaso").serialize(), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
+                   //data: formulario.extends(archivos), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
+                   data: datos, //ESTO HAY QUE PROBARLO
                    cache: false,
+                   /*async: false,*/ //ESTO DEBO PROBARLO 
                    type: "POST",
                    processData: false,
                    enctype: "multipart/form-data",
                    success: function (data) {
-                       //console.log("data");
-                       //console.log(data);
+                       console.log("data");
+                       console.log(data);
+                       swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");
                        if (data != "error") {
                            $('#tablaordenes').find('tbody').hide();
                            table.clear();
@@ -38,10 +42,10 @@
                            $('#tablaordenes').find('tbody').fadeIn("slow");
                        }
                        else
-                           alert("Error al buscar");
+                        swal("Modificación sin éxito", "Contacte a un administrador", "error");
                    },
                    error: function () {
-                       alert("Error al buscar");
+                       swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
                    }
                });
            });
@@ -57,6 +61,7 @@
                    success: function (data) {
                        console.log("data");
                        console.log(data);
+                       swal("Caso finalizado exitosamente", "Puedes ver el resumen de este caso en la pestaña de casos históricos", "success");
                        if (data != "error") {
                            $('#tablaordenes').find('tbody').hide();
                            table.clear();
@@ -65,10 +70,10 @@
                            $('#tablaordenes').find('tbody').fadeIn("slow");
                        }
                        else
-                           alert("Error al buscar");
+                           swal("Error al finalizar el caso", "Contacte a un administrador", "error");
                    },
                    error: function () {
-                       alert("Error al buscar");
+                       swal("Se produjo un error", "Contacte a un administrador", "warning");
                    }
                });
            });
@@ -83,6 +88,12 @@
                    $("#txtCuentaContratoL").show();
                }
            }
+
+           // Mostrar mensaje de creación o error
+           if ("<%= ViewData["estado"] %>" == "correcto")
+               swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
+           else if ("<%= ViewData["estado"] %>" == "error")
+               swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
 
            var maxHeight = 400;
 

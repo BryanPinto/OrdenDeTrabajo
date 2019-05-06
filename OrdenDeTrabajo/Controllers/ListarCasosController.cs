@@ -27,7 +27,7 @@ namespace WebSolicitudes.Controllers
 
 
         [HttpPost]
-        public string BusquedaCasos(FormCollection collection)
+        public string BusquedaCasos(FormCollection collection, int idUsuario)
         {
             string datosJSON = string.Empty;
             try
@@ -308,11 +308,19 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost]
-        public string CasosPendientes(FormCollection collection)
+        public string CasosPendientes(FormCollection collection, int IDUsuario, int? estado)
         {
             string datosJSON = string.Empty;
             try
             {
+                if (estado == 1)
+                    ViewData["estado"] = "1";
+                else if (estado == 0)
+                {
+                    ViewData["estado"] = "0";
+                }
+
+                int UsuarioLogueado = IDUsuario;
 
                 #region Agregar filtros y buscar
                 // Variables

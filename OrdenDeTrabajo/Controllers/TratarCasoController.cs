@@ -117,7 +117,7 @@ namespace WebSolicitudes.Controllers
             if (tieneArchivo)
             {
                 ViewData["txtArchivo"] = @"
-                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md'>
+                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
                         <span class='glyphicon glyphicon-save'></span> Descargar " + txtArchivoNombre + @"
                     </a>
                 ";
@@ -230,7 +230,7 @@ namespace WebSolicitudes.Controllers
             if (tieneArchivo)
             {
                 ViewData["txtArchivo"] = @"
-                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md'>
+                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
                         <span class='glyphicon glyphicon-save'></span> Descargar " + txtArchivoNombre + @"
                     </a>
                 ";
