@@ -25,7 +25,7 @@ namespace WebSolicitudes.Controllers
             string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
             ViewData["txtMotivoSelect1"] = listaMotivo;
 
-            string listaSubMotivo = UtilController.ListarParametrica("P_SubMotivoOT", "SubMotivo");
+            string listaSubMotivo = UtilController.ListarParametricaConPadre("P_SubMotivoOT", "SubMotivo","Motivo");//El 3er parametro corresponde a la relacion con la tabla Motivo
             ViewData["txtSubMotivoSelect1"] = listaSubMotivo;
             return View();
         }
@@ -65,16 +65,6 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Credenciales ingresadas", "Login", "Correo: "+txtCorreo+", Clave: "+txtPass);
                 //Fin CSV
 
-                //Escribir log con datos ingresados en login
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Correo: " + txtCorreo + "| " + "Pass: " + txtPass);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 //Consultar a tabla si correo y password coinciden
                 string queryLogin = @"<BizAgiWSParam>
 	                                    <EntityData>
@@ -88,16 +78,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Consultar credenciales", "Login", queryLogin);
                 //Fin CSV
-
-                //Escribir log con datos ingresados en login
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "XML a bizagi: " + queryLogin);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
                 
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
                               
@@ -109,16 +89,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Respuesta", "Login", respuestaCasos);
                 //Fin CSV
-
-                //Escribir respuesta bizagi
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Respuesta bizagi: " + respuestaCasos);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
 
                 //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
                 XmlDocument doc = new XmlDocument();
@@ -148,17 +118,7 @@ namespace WebSolicitudes.Controllers
             {
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "Login", ex.Message);
-                //Fin CSV
-
-                //Escribir log con datos ingresados en login
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Error: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();                
+                //Fin CSV                
 
                 return RedirectToAction("Login","Home", new { estado = 0 });
             }

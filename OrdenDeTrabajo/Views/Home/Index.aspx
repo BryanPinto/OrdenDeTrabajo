@@ -38,6 +38,23 @@
                 }
             });
 
+            
+            //$(function filterCity(){
+            //     var province = $("#province").find('option:selected').text(); // stores province
+            //     $("#option-container").children().appendTo("#city"); // moves <option> contained in #option-container back to their <select>
+            //     var toMove = $("#city").children("[data-province!='"+province+"']"); // selects city elements to move out
+            //     toMove.appendTo("#option-container"); // moves city elements in #option-container
+            //     $("#city").removeAttr("disabled"); // enables select
+            //});
+
+            $("#province").change(function () {
+                var province = $("#province").find('option:selected').text(); // stores province
+                 $("#option-container").children().appendTo("#city"); // moves <option> contained in #option-container back to their <select>
+                 var toMove = $("#city").children("[data-province!='"+province+"']"); // selects city elements to move out
+                 toMove.appendTo("#option-container"); // moves city elements in #option-container
+                 $("#city").removeAttr("disabled"); // enables select
+            });
+
             $("#formIndex").submit(function (e) {
                 e.preventDefault();
                 // Buscar cabeceras
@@ -128,6 +145,8 @@ $(function(){
     
 });
         });
+
+        
     </script>
 </asp:Content>
 
@@ -168,20 +187,31 @@ $(function(){
                     </fieldset>
                   <fieldset class="form-group col-md-2">
                         <label for="txtMotivoSelect">Motivo</label>
-                        <select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
+                        <%--<select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
                             <option value="0">Seleccione opción</option>
                             <%=ViewData["txtMotivoSelect1"]%>
+                        </select>--%>
+                      <select class="select" id="province">
+                          <option value="1">RM</option>
+                          <option value="2">FI</option>
                         </select>
                     </fieldset>
                    <fieldset class="form-group col-md-2">
                         <label for="txtSubMotivoSelect">Sub motivo</label>
-                        <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
+                        <%--<select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
                             <option value="0">Seleccione opción</option>
                             <%=ViewData["txtSubMotivoSelect1"]%>
+                        </select>--%>
+                       <select class="select" id="city">
+                          <option data-province="RM" value="1">ROMA</option>
+                          <option data-province="RM" value="2">ANGUILLARA SABAZIA</option>
+                          <option data-province="FI" value="3">FIRENZE</option>
+                          <option data-province="FI" value="4">PONTASSIEVE</option>
                         </select>
                     </fieldset>
                     <fieldset class="form-group col-md-2">
                         <%--<div id="buscarListar">--%>
+                        <span id="option-container" style="visibility: hidden; position:absolute;"></span>
                             <input type="submit" id="btnBuscarListar" value="Buscar" class="buscar">
                         <%--</div>--%>
                     </fieldset>

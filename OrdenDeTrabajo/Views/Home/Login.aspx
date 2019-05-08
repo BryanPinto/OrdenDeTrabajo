@@ -6,6 +6,7 @@
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Login</title>
+    <meta charset="utf-8">
     <script>
         $(document).ready(function () {
             $("#form-signin").submit(function (e) {

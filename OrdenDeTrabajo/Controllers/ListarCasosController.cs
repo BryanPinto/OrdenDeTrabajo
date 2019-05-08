@@ -20,7 +20,7 @@ namespace WebSolicitudes.Controllers
             string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
             ViewData["txtMotivoSelect1"] = listaMotivo;
 
-            string listaSubMotivo = UtilController.ListarParametrica("P_SubMotivoOT", "SubMotivo");
+            string listaSubMotivo = UtilController.ListarParametricaConPadre("P_SubMotivoOT", "SubMotivo", "Motivo");//El 3er parametro corresponde a la relacion con la tabla Motivo
             ViewData["txtSubMotivoSelect1"] = listaSubMotivo;
             return View();
         }
@@ -178,16 +178,6 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Respuesta", "BusquedaCasos", respuestaCasos);
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "XML: " + queryCasos + "| " + "Respuesta Bizagi: " + respuestaCasos);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(respuestaCasos);
@@ -296,16 +286,6 @@ namespace WebSolicitudes.Controllers
                     //Escribir log CSV
                     UtilController.EscribirLog("Caso rescatado", "BusquedaCasos", datosJSON);
                     //Fin CSV
-
-                    //Escribir log con el JSON serializado para enviar como filtro de busqueda y agregar los casos a la grilla
-                    rutaLog = HttpRuntime.AppDomainAppPath;
-                    sb = new StringBuilder();
-                    sb.Append(Environment.NewLine +
-                              DateTime.Now.ToShortDateString() + " " +
-                              DateTime.Now.ToShortTimeString() + ": " +
-                              "JSON: " + datosJSON);
-                    System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                    sb.Clear();
                 }
             }
             catch (Exception ex)
@@ -313,15 +293,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "BusquedaCasos", ex.Message);
                 //Fin CSV
-
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Error: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             return (datosJSON);
         }
@@ -461,16 +432,6 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Respuesta", "CasosPendientes", respuestaCasos);
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "XML: " + queryCasos + "| " + "Respuesta Bizagi: " + respuestaCasos);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(respuestaCasos);
@@ -575,16 +536,6 @@ namespace WebSolicitudes.Controllers
                     //Escribir log CSV
                     UtilController.EscribirLog("Caso rescatado", "CasosPendientes", datosJSON);
                     //Fin CSV
-
-                    //Escribir log con el JSON serializado para enviar como filtro de busqueda y agregar los casos a la grilla
-                    rutaLog = HttpRuntime.AppDomainAppPath;
-                    sb = new StringBuilder();
-                    sb.Append(Environment.NewLine +
-                              DateTime.Now.ToShortDateString() + " " +
-                              DateTime.Now.ToShortTimeString() + ": " +
-                              "JSON: " + datosJSON);
-                    System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                    sb.Clear();
                 }
             }
             catch (Exception ex)
@@ -592,15 +543,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "CasosPendientes", ex.Message);
                 //Fin CSV
-
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Error: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             return (datosJSON);
         }

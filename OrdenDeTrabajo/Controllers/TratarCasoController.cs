@@ -253,16 +253,6 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Número caso solicitado: " + numCasoXML);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 //Crear XML para obtener la información del caso seleccionado para trabajar
 
                 string queryObtenerCaso = @"
@@ -313,32 +303,12 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Respuesta", "ObtenerCaso", respuestaBizagi);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "queryObtenerCaso: " + queryObtenerCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             catch (Exception ex)
             {
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "ObtenerCaso", ex.Message);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "ERROR: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             return (respuestaBizagi);
         }
@@ -387,16 +357,6 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Número caso: " + numCaso);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 //XML PARA ACTUALIZAR VALORES DEL CASO
                 string queryActualizarCaso = @"<BizAgiWSParam>
                                                     <Entities>
@@ -420,32 +380,12 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Respuesta", "ActualizarCaso", respuestaBizagi);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "queryActualizarCaso: " + queryActualizarCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             catch(Exception ex)
             {
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "ActualizarCaso", ex.Message);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "ERROR: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
 
             return (respuestaBizagi);
@@ -462,16 +402,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a finalizar", "FinalizarCaso", Convert.ToString(numCaso));
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Número caso: " + numCaso);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
 
                 LipigasWorkflowEngine.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngine.WorkflowEngineSOASoapClient();
 
@@ -499,32 +429,12 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 UtilController.EscribirLog("Respuesta", "FinalizarCaso", respuestaBizagi);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "queryFinalizarCaso: " + queryFinalizarCaso + "| " + "Respuesta Bizagi: " + respuestaBizagi);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             catch (Exception ex)
             {
                 //Escribir log CSV
                 UtilController.EscribirLog("ERROR", "FinalizarCaso", ex.Message);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "ERROR: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
 
             return (respuestaBizagi);

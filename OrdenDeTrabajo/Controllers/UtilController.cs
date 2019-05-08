@@ -46,16 +46,6 @@ namespace WebSolicitudes.Controllers
                 EscribirLog("Listar motivo/submotivo", "ListarParametrica", xmlGetEntities);
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "tabla: " + tabla + "| " + "campoVisual: " + campoVisual + "| " + "XML a Bizagi: " + xmlGetEntities);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 // Abrir conexión a servicio web
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
@@ -64,16 +54,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 EscribirLog("Respuesta", "ListarParametrica", respuesta);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Respuesta Bizagi: " + respuesta);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
 
                 // Convertir a XML
                 XmlDocument doc = new XmlDocument();
@@ -94,15 +74,72 @@ namespace WebSolicitudes.Controllers
                 EscribirLog("Lista opciones generada", "ListarParametrica", lista);
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Lista de opciones: " + lista);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
+            }
+            catch (Exception ex)
+            {
+                //Escribir log CSV
+                EscribirLog("ERROR", "ListarParametrica", ex.Message);
+                //Fin CSV
+            }
+
+            return (lista);
+        }
+
+        /// <summary>
+        /// Método para crear listas desplegables desde una paramétrica de Bizagi
+        /// </summary>
+        /// <param name="tabla">Nombre de tabla paramétrica</param>
+        /// <param name="campoVisual">Campo que se va a mostrar como opción</param>
+        /// <returns></returns>
+        public static string ListarParametricaConPadre(string tabla, string campoVisual, string padre)
+        {
+            string lista = string.Empty;
+
+            try
+            {
+                // XML Búsqueda
+                string xmlGetEntities = @"
+                    <BizAgiWSParam>
+                        <EntityData>
+                            <EntityName>" + tabla + @"</EntityName>
+                            <Filters>
+                                <![CDATA[dsbl" + tabla + @" = " + false + @"]]>
+                            </Filters>
+                        </EntityData>
+                    </BizAgiWSParam>
+                ";
+                //Escribir log CSV
+                EscribirLog("Listar motivo/submotivo", "ListarParametricaConPadre", xmlGetEntities);
+                //Fin CSV
+
+                // Abrir conexión a servicio web
+                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                // Buscar en Bizagi
+                string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
+
+                //Escribir log CSV
+                EscribirLog("Respuesta", "ListarParametricaConPadre", respuesta);
+                //Fin CSV
+
+                // Convertir a XML
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(respuesta);
+
+                // Recorrer los resultados
+                foreach (XmlNode item in doc.SelectNodes("/BizAgiWSResponse/Entities/" + tabla))
+                {
+                    // Obtener campos
+                    string id = item.Attributes["key"].Value;
+                    string campo = item.SelectSingleNode(campoVisual).InnerText;
+                    string campoPadre = item.SelectSingleNode(padre).InnerText;
+
+                    // Crear opción
+                    lista += "<option data-father='" + campoPadre + @"' value='" + id + @"'>" + campo + @"</option>";
+                }
+
+                //Escribir log CSV
+                EscribirLog("Lista opciones generada", "ListarParametricaConPadre", lista);
+                //Fin CSV
 
             }
             catch (Exception ex)
@@ -110,16 +147,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 EscribirLog("ERROR", "ListarParametrica", ex.Message);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                          DateTime.Now.ToShortDateString() + " " +
-                          DateTime.Now.ToShortTimeString() + ": " +
-                          "Error: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
 
             return (lista);
@@ -133,7 +160,7 @@ namespace WebSolicitudes.Controllers
         /// <param name="valorEnviado">Valor enviado al atributo filtrado</param>
         /// <param name="valorObtenido">Valor obtenido de un atributo a elección</param>
         /// <returns></returns>
-    public static string ObtenerAtributoParametricaByCod(string tabla, string nomAtributoTabla, string valorEnviado, string valorObtenido)
+        public static string ObtenerAtributoParametricaByCod(string tabla, string nomAtributoTabla, string valorEnviado, string valorObtenido)
         {
             string lista = string.Empty;
             string campo = string.Empty;
@@ -156,16 +183,6 @@ namespace WebSolicitudes.Controllers
                 EscribirLog("Obtener atributos de parametricas", "ObtenerAtributoParametricaByCod", xmlGetEntities);
                 //Fin CSV
 
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                DateTime.Now.ToShortDateString() + " " +
-                DateTime.Now.ToShortTimeString() + ": " +
-                "tabla: " + tabla + "| " + "nomAtributoTabla: " + nomAtributoTabla + "| " + "valorEnviado: " + valorEnviado + "| " + "XML a Bizagi: " + xmlGetEntities);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
-
                 // Abrir conexión a servicio web
                 LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
@@ -174,16 +191,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 EscribirLog("Respuesta", "ObtenerAtributoParametricaByCod", respuesta);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                DateTime.Now.ToShortDateString() + " " +
-                DateTime.Now.ToShortTimeString() + ": " +
-                "Respuesta Bizagi: " + respuesta);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
 
                 // Convertir a XML
                 XmlDocument doc = new XmlDocument();
@@ -195,16 +202,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 EscribirLog("Atributo rescatado", "ObtenerAtributoParametricaByCod", campo);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                rutaLog = HttpRuntime.AppDomainAppPath;
-                sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                DateTime.Now.ToShortDateString() + " " +
-                DateTime.Now.ToShortTimeString() + ": " +
-                "Lista de opciones: " + lista);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
                 
             }
             catch (Exception ex)
@@ -212,16 +209,6 @@ namespace WebSolicitudes.Controllers
                 //Escribir log CSV
                 EscribirLog("ERROR", "ObtenerAtributoParametricaByCod", ex.Message);
                 //Fin CSV
-
-                //Escribir log con el xml creado como consulta de casos
-                string rutaLog = HttpRuntime.AppDomainAppPath;
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Environment.NewLine +
-                DateTime.Now.ToShortDateString() + " " +
-                DateTime.Now.ToShortTimeString() + ": " +
-                "Error: " + ex.Message);
-                System.IO.File.AppendAllText(rutaLog + "Log-Errores.txt", sb.ToString());
-                sb.Clear();
             }
             return campo;
         }
