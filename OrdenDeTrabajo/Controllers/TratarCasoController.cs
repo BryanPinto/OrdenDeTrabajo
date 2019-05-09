@@ -247,7 +247,7 @@ namespace WebSolicitudes.Controllers
             try
             {
                 int numCasoXML = id;
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
@@ -351,7 +351,7 @@ namespace WebSolicitudes.Controllers
                     }
                 }
 
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
@@ -403,7 +403,7 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Caso a finalizar", "FinalizarCaso", Convert.ToString(numCaso));
                 //Fin CSV
 
-                LipigasWorkflowEngine.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngine.WorkflowEngineSOASoapClient();
+                LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient();
 
                 
 

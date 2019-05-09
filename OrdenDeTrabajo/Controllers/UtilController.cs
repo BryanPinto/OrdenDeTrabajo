@@ -47,7 +47,7 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 // Abrir conexión a servicio web
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 
@@ -113,7 +113,7 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 // Abrir conexión a servicio web
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 
@@ -185,7 +185,7 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 // Abrir conexión a servicio web
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 

@@ -79,7 +79,7 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Consultar credenciales", "Login", queryLogin);
                 //Fin CSV
                 
-                LipigasEntityManager.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManager.EntityManagerSOASoapClient();
+                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                               
                 respuestaCasos = servicioQuery.getEntitiesAsString(queryLogin);
                 respuestaCasos = respuestaCasos.Replace("\n", "");
