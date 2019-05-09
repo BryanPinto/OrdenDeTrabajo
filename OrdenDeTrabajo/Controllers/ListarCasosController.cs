@@ -298,21 +298,21 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost]
-        public string CasosPendientes(FormCollection collection, int IDUsuario, int? estado)
+        public string CasosPendientes(FormCollection collection)
         {
             string datosJSON = string.Empty;
-            string txtVacio = collection["txtVacio"];
-            System.Web.HttpContext.Current.Session["IDUsuario"] = IDUsuario;
+            //string txtVacio = collection["txtVacio"];
+            string IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
             try
             {
-                if (estado == 1)
-                    ViewData["estado"] = "1";
-                else if (estado == 0)
-                {
-                    ViewData["estado"] = "0";
-                }
+                //if (estado == 1)
+                //    ViewData["estado"] = "1";
+                //else if (estado == 0)
+                //{
+                //    ViewData["estado"] = "0";
+                //}
 
-                int UsuarioLogueado = IDUsuario;
+                int UsuarioLogueado = Convert.ToInt32(IDUsuario);
 
                 #region Agregar filtros y buscar
                 // Variables
@@ -332,10 +332,23 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                // Número caso
-                int? numCaso = null;
-                if (Convert.ToInt32(txtNroCaso) != 0)
-                    numCaso = int.Parse(txtNroCaso);
+                //// Número caso
+                //int? numCaso = null;
+                //if (Convert.ToInt32(txtNroCaso) != 0)
+                //    numCaso = int.Parse(txtNroCaso);
+
+                // NumCaso
+                int caso;
+                int? numeroCaso;
+                bool conversionOK = Int32.TryParse(txtNroCaso, out caso);
+                if (conversionOK)
+                {
+                    numeroCaso = caso;
+                }
+                else
+                {
+                    numeroCaso = null;
+                }
 
                 // Motivo
                 int? motivo = null;
@@ -386,9 +399,9 @@ namespace WebSolicitudes.Controllers
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.SubMotivoOT.SubMotivo' Include='true'></XPath>";
                 }
-                if (Convert.ToInt32(txtNroCaso) != 0)
+                if (numeroCaso != 0)
                 {
-                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'>"+ numCaso + "</XPath>";
+                    queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.NroCaso' Include='true'>"+ numeroCaso + "</XPath>";
                 }
                 else
                 {
