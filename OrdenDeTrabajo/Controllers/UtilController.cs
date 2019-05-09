@@ -153,7 +153,8 @@ namespace WebSolicitudes.Controllers
         }
 
         /// <summary>
-        /// Método para rescatar el valor de un atributo, dado un atributo y valor por el cual se filtrará el registro
+        /// Método para rescatar el valor de un atributo, dado un atributo y valor por el cual se filtrará el registro.
+        /// ESTOS CAMPOS VIENEN DESDE EL CONTROLADOR LISTARCASOS, EN LOS METODOS CASOSPENDIENTES Y BUSQUEDADECASOS, ANTES DE AÑADIR LA FILA DE MOTIVO FILTRADO POR CODIGO
         /// </summary>
         /// <param name="tabla">Nombre de tabla a consultar</param>
         /// <param name="nomAtributoTabla">Atributo por el cual filtrar</param>
