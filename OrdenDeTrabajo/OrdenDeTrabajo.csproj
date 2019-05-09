@@ -176,12 +176,27 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\LipigasEntityManagerSoa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LipigasEntityManager\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\LipigasQuerySoa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LipigasQuery\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\LipigasWorkflowEngineSoa\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -205,8 +220,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <None Include="Connected Services\LipigasEntityManagerSoa\entitymanagersoa.wsdl" />
     <None Include="Connected Services\LipigasEntityManager\entitymanagersoa.wsdl" />
+    <None Include="Connected Services\LipigasQuerySoa\querysoa.wsdl" />
     <None Include="Connected Services\LipigasQuery\querysoa.wsdl" />
+    <None Include="Connected Services\LipigasWorkflowEngineSoa\workflowenginesoa.wsdl" />
     <None Include="Connected Services\LipigasWorkflowEngine\configuration91.svcinfo" />
     <None Include="Connected Services\LipigasWorkflowEngine\configuration.svcinfo" />
     <None Include="Connected Services\LipigasWorkflowEngine\Reference.svcmap">
@@ -222,6 +240,24 @@
     <None Include="Connected Services\LipigasQuery\configuration91.svcinfo" />
     <None Include="Connected Services\LipigasQuery\configuration.svcinfo" />
     <None Include="Connected Services\LipigasQuery\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\LipigasEntityManagerSoa\configuration91.svcinfo" />
+    <None Include="Connected Services\LipigasEntityManagerSoa\configuration.svcinfo" />
+    <None Include="Connected Services\LipigasEntityManagerSoa\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\LipigasWorkflowEngineSoa\configuration91.svcinfo" />
+    <None Include="Connected Services\LipigasWorkflowEngineSoa\configuration.svcinfo" />
+    <None Include="Connected Services\LipigasWorkflowEngineSoa\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\LipigasQuerySoa\configuration91.svcinfo" />
+    <None Include="Connected Services\LipigasQuerySoa\configuration.svcinfo" />
+    <None Include="Connected Services\LipigasQuerySoa\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -312,8 +348,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\LipigasEntityManagerSoa\" />
     <WCFMetadataStorage Include="Connected Services\LipigasEntityManager\" />
+    <WCFMetadataStorage Include="Connected Services\LipigasQuerySoa\" />
     <WCFMetadataStorage Include="Connected Services\LipigasQuery\" />
+    <WCFMetadataStorage Include="Connected Services\LipigasWorkflowEngineSoa\" />
     <WCFMetadataStorage Include="Connected Services\LipigasWorkflowEngine\" />
   </ItemGroup>
   <PropertyGroup>

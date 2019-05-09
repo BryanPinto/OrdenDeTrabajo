@@ -170,10 +170,10 @@ $(function(){
                         <label for="txtEstadoSelect">Estado caso</label>
                         <select name="txtEstadoSelect" id="txtEstadoSelect" class="form-control">
                             <option value="0">Seleccione opción</option>
-                            <%--<option value="1">Iniciado</option>--%>
+                            <option value="1">Iniciado</option>
                             <option value="2">En proceso</option>
-                            <%--<option value="3">Suspendido</option>
-                            <option value="4">Abortado</option>--%>
+                            <option value="3">Suspendido</option>
+                            <option value="4">Abortado</option>
                             <option value="5">Completado</option>
                         </select>
                     </fieldset>

@@ -96,22 +96,22 @@ namespace WebSolicitudes.Controllers
 	              <domain>domain</domain>
                   <QueryParams>
                       <Internals>";
-                //if (Convert.ToInt32(txtEstadoSelect) == 1)
-                //{
-                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Initiated</Internal>";
-                //}
+                if (Convert.ToInt32(txtEstadoSelect) == 1)
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Initiated</Internal>";
+                }
                 if (Convert.ToInt32(txtEstadoSelect) == 2)
                 {
                     queryCasos += @"<Internal Name='ProcessState' Include='true'>Running</Internal>";
                 }
-                //if (Convert.ToInt32(txtEstadoSelect) == 3)
-                //{
-                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Suspended</Internal>";
-                //}
-                //if (Convert.ToInt32(txtEstadoSelect) == 4)
-                //{
-                //    queryCasos += @"<Internal Name='ProcessState' Include='true'>Aborted</Internal>";
-                //}
+                if (Convert.ToInt32(txtEstadoSelect) == 3)
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Suspended</Internal>";
+                }
+                if (Convert.ToInt32(txtEstadoSelect) == 4)
+                {
+                    queryCasos += @"<Internal Name='ProcessState' Include='true'>Aborted</Internal>";
+                }
                 if (Convert.ToInt32(txtEstadoSelect) == 5)
                 {
                     queryCasos += @"<Internal Name='ProcessState' Include='true'>Completed</Internal>";
@@ -214,22 +214,22 @@ namespace WebSolicitudes.Controllers
                         {
                             var estadoCaso = row.SelectNodes("Column[@Name='IDCASESTATE']")[0].InnerText;
                             var estadoTexto = "";
-                            //if (Convert.ToUInt32(estadoCaso) == 1)
-                            //{
-                            //    estadoTexto = "Iniciado";
-                            //}
+                            if (Convert.ToUInt32(estadoCaso) == 1)
+                            {
+                                estadoTexto = "Iniciado";
+                            }
                             if (Convert.ToUInt32(estadoCaso) == 2)
                             {
                                 estadoTexto = "En proceso";
                             }
-                            //if (Convert.ToUInt32(estadoCaso) == 3)
-                            //{
-                            //    estadoTexto = "Suspendido";
-                            //}
-                            //if (Convert.ToUInt32(estadoCaso) == 4)
-                            //{
-                            //    estadoTexto = "Abortado";
-                            //}
+                            if (Convert.ToUInt32(estadoCaso) == 3)
+                            {
+                                estadoTexto = "Suspendido";
+                            }
+                            if (Convert.ToUInt32(estadoCaso) == 4)
+                            {
+                                estadoTexto = "Abortado";
+                            }
                             if (Convert.ToInt32(estadoCaso) == 5)
                             {
                                 estadoTexto = "Completado";

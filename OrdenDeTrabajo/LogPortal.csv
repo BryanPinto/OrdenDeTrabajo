@@ -460,3 +460,25 @@ Fecha;Hora;Proceso;Metodo;Mensaje
 	                                    </EntityData>
                                     </BizAgiWSParam>"
 "08-05-2019";"16:42";"ERROR";"Login";"No había ningún extremo escuchando en http://192.168.2.17:81/Sol_Dcto/webservices/entitymanagersoa.asmx que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información."
+"09-05-2019";"11:04";"Listar motivo/submotivo";"ListarParametrica";"
+                    <BizAgiWSParam>
+                        <EntityData>
+                            <EntityName>MotivoOT</EntityName>
+                            <Filters>
+                                <![CDATA[dsblMotivoOT = False]]>
+                            </Filters>
+                        </EntityData>
+                    </BizAgiWSParam>
+                "
+"09-05-2019";"11:05";"ERROR";"ListarParametrica";"No había ningún extremo escuchando en http://192.168.2.17:81/Sol_Dcto/webservices/entitymanagersoa.asmx que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información."
+"09-05-2019";"11:05";"Listar motivo/submotivo";"ListarParametricaConPadre";"
+                    <BizAgiWSParam>
+                        <EntityData>
+                            <EntityName>P_SubMotivoOT</EntityName>
+                            <Filters>
+                                <![CDATA[dsblP_SubMotivoOT = False]]>
+                            </Filters>
+                        </EntityData>
+                    </BizAgiWSParam>
+                "
+"09-05-2019";"11:05";"ERROR";"ListarParametrica";"No había ningún extremo escuchando en http://192.168.2.17:81/Sol_Dcto/webservices/entitymanagersoa.asmx que pudiera aceptar el mensaje. La causa suele ser una dirección o una acción SOAP incorrecta. Consulte InnerException, si está presente, para obtener más información."
