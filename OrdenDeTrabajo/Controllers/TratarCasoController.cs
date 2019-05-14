@@ -417,6 +417,7 @@ namespace WebSolicitudes.Controllers
 	                                                <ActivityData>
 		                                                <radNumber>" + numCaso + @"</radNumber>
 		                                                <taskName>Task4</taskName>
+                                                        <taskId>2447</taskId>
 	                                                </ActivityData>
                                                 </BizAgiWSParam>";
 

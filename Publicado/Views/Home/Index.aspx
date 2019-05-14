@@ -146,7 +146,12 @@ $(function(){
 });
         });
 
-        
+        // Mostrar mensaje de creación o error
+            if ("<%= ViewData["estado"] %>" == "1")
+                swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
+            else if ("<%= ViewData["estado"] %>" == "0")
+                swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
+        //}));
     </script>
 </asp:Content>
 

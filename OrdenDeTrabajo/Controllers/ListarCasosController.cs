@@ -27,10 +27,11 @@ namespace WebSolicitudes.Controllers
 
 
         [HttpPost]
-        public string BusquedaCasos(FormCollection collection, int IDUsuario)
+        public string BusquedaCasos(FormCollection collection/*, int IDUsuario*/)
         {
             string datosJSON = string.Empty;
-            string usuario = Convert.ToString(IDUsuario);
+            //string usuario = Convert.ToString(IDUsuario);
+            string usuario = "";
             usuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString(); //Obtener usuario logueado por variable session, definida en el método CasosPendientes
             try
             {
