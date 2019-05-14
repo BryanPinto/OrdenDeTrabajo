@@ -4,68 +4,7 @@
     <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>
     <title>Tratar caso</title>
    <script>
-       $(document).ready(function () {           
-           $("#btnGuardar").click(function (e) {
-               e.preventDefault();
-               console.log("1");
-               var archivos = new FormData();
-           jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) {
-               console.log("archivos: "+archivos);
-                archivos.append('file-'+i, file);
-               });
-               console.log(archivos);
-               // Buscar cabeceras
-               console.log($("#formTratarCaso").serialize());
-               $.ajax({
-                   url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   data: $("#formTratarCaso").serialize(),
-                   cache: false,
-                   type: "POST",
-                   success: function (data) {
-                       console.log("data");
-                       console.log(data);
-                       if (data != "error") {
-                           $('#tablaordenes').find('tbody').hide();
-                           table.clear();
-                           table.rows.add(JSON.parse(data));
-                           table.draw();
-                           $('#tablaordenes').find('tbody').fadeIn("slow");
-                       }
-                       else
-                           alert("Error al buscar");
-                   },
-                   error: function () {
-                       alert("Error al buscar");
-                   }
-               });
-           });
-           $("#btnFinalizar").click(function (e) {
-               e.preventDefault();
-               $("#btnGuardar").submit();
-               // Buscar cabeceras
-               $.ajax({                   
-                   url: '<%: Url.Content("~/TratarCaso/FinalizarCaso/") %>',
-                   data: $("#formTratarCaso").serialize(),
-                   cache: false,
-                   type: "POST",
-                   success: function (data) {
-                       console.log("data");
-                       console.log(data);
-                       if (data != "error") {
-                           $('#tablaordenes').find('tbody').hide();
-                           table.clear();
-                           table.rows.add(JSON.parse(data));
-                           table.draw();
-                           $('#tablaordenes').find('tbody').fadeIn("slow");
-                       }
-                       else
-                           alert("Error al buscar");
-                   },
-                   error: function () {
-                       alert("Error al buscar");
-                   }
-               });
-           });
+       $(document).ready(function () {                      
            if ("<%=ViewData["txtSinCuenta"]%>" != "") {
                if ("<%=ViewData["txtSinCuenta"].ToString()%>" == "True") {
                    $("#txtCuentaContrato").hide();

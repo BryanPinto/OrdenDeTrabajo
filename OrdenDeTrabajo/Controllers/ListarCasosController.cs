@@ -84,7 +84,8 @@ namespace WebSolicitudes.Controllers
                 
                 
 
-                LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
+                //LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
+                DemoLipiQuery.QueryFormSOASoapClient servicioQuery = new DemoLipiQuery.QueryFormSOASoapClient();
 
                 int cantidadCasos = 20;
                 string respuestaCasos = "";
@@ -366,7 +367,8 @@ namespace WebSolicitudes.Controllers
 
                 #region Queries
 
-                LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
+                //LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
+                DemoLipiQuery.QueryFormSOASoapClient servicioQuery = new DemoLipiQuery.QueryFormSOASoapClient();
 
                 int cantidadCasos = 20;
                 string respuestaCasos = "";

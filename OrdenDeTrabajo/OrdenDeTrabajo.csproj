@@ -176,6 +176,21 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\DemoLipiEntity\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DemoLipiQuery\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\DemoLipiWorkflow\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LipigasEntityManagerSoa\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +220,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <None Include="Connected Services\DemoLipiEntity\entitymanagersoa.wsdl" />
+    <None Include="Connected Services\DemoLipiQuery\querysoa.wsdl" />
+    <None Include="Connected Services\DemoLipiWorkflow\workflowenginesoa.wsdl" />
     <None Include="Connected Services\LipigasEntityManagerSoa\entitymanagersoa.wsdl" />
     <None Include="Connected Services\LipigasQuerySoa\querysoa.wsdl" />
     <None Include="Connected Services\LipigasWorkflowEngineSoa\workflowenginesoa.wsdl" />
@@ -223,6 +241,24 @@
     <None Include="Connected Services\LipigasQuerySoa\configuration91.svcinfo" />
     <None Include="Connected Services\LipigasQuerySoa\configuration.svcinfo" />
     <None Include="Connected Services\LipigasQuerySoa\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\DemoLipiWorkflow\configuration91.svcinfo" />
+    <None Include="Connected Services\DemoLipiWorkflow\configuration.svcinfo" />
+    <None Include="Connected Services\DemoLipiWorkflow\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\DemoLipiEntity\configuration91.svcinfo" />
+    <None Include="Connected Services\DemoLipiEntity\configuration.svcinfo" />
+    <None Include="Connected Services\DemoLipiEntity\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\DemoLipiQuery\configuration91.svcinfo" />
+    <None Include="Connected Services\DemoLipiQuery\configuration.svcinfo" />
+    <None Include="Connected Services\DemoLipiQuery\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -312,6 +348,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DemoLipiEntity\" />
+    <WCFMetadataStorage Include="Connected Services\DemoLipiQuery\" />
+    <WCFMetadataStorage Include="Connected Services\DemoLipiWorkflow\" />
     <WCFMetadataStorage Include="Connected Services\LipigasEntityManagerSoa\" />
     <WCFMetadataStorage Include="Connected Services\LipigasQuerySoa\" />
     <WCFMetadataStorage Include="Connected Services\LipigasWorkflowEngineSoa\" />

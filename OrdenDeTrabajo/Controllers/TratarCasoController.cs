@@ -247,7 +247,8 @@ namespace WebSolicitudes.Controllers
             try
             {
                 int numCasoXML = id;
-                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
@@ -351,7 +352,8 @@ namespace WebSolicitudes.Controllers
                     }
                 }
 
-                LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
@@ -403,9 +405,10 @@ namespace WebSolicitudes.Controllers
                 UtilController.EscribirLog("Caso a finalizar", "FinalizarCaso", Convert.ToString(numCaso));
                 //Fin CSV
 
-                LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient();
+                //LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient();
+                DemoLipiWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DemoLipiWorkflow.WorkflowEngineSOASoapClient();
 
-                
+
 
                 //XML PARA ACTUALIZAR VALORES DEL CASO
                 string queryFinalizarCaso = @"<BizAgiWSParam>
