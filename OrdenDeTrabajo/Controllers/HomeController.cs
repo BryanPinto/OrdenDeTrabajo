@@ -90,7 +90,8 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
 
                 respuestaCasos = servicioQuery.getEntitiesAsString(queryLogin);
                 respuestaCasos = respuestaCasos.Replace("\n", "");

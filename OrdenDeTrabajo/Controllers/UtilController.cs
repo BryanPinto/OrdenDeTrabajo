@@ -48,7 +48,9 @@ namespace WebSolicitudes.Controllers
 
                 // Abrir conexión a servicio web
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 
@@ -115,7 +117,9 @@ namespace WebSolicitudes.Controllers
 
                 // Abrir conexión a servicio web
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 
@@ -188,7 +192,9 @@ namespace WebSolicitudes.Controllers
 
                 // Abrir conexión a servicio web
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+
                 // Buscar en Bizagi
                 string respuesta = servicioQuery.getEntitiesAsString(xmlGetEntities);
 

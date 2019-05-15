@@ -248,7 +248,8 @@ namespace WebSolicitudes.Controllers
             {
                 int numCasoXML = id;
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
@@ -353,7 +354,8 @@ namespace WebSolicitudes.Controllers
                 }
 
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
@@ -406,7 +408,8 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 //LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient();
-                DemoLipiWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DemoLipiWorkflow.WorkflowEngineSOASoapClient();
+                //DemoLipiWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DemoLipiWorkflow.WorkflowEngineSOASoapClient();
+                DesWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DesWorkflow.WorkflowEngineSOASoapClient();
 
 
 
