@@ -4,7 +4,7 @@
     <script src="<%: Url.Content("~/Styles/js/moment.js") %>"></script>
     <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Casos pendientes</title>
     <script>
         $(document).ready(function () {
