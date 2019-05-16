@@ -154,6 +154,8 @@ $(function(){
                 <div class="row">
                     <fieldset class="form-group col-md-1">
                     </fieldset>
+                    <fieldset class="form-group col-md-1">
+                    </fieldset>
                     <%--<fieldset class="form-group col-md-1">
                         <label for="txtFechaDesde">Fecha desde</label>
                         <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
@@ -166,7 +168,7 @@ $(function(){
                         <label for="txtNroCaso">Número de caso</label>
                         <input type="text" class="form-control" id="txtNroCaso" name="txtNroCaso" placeholder="Número de caso" />
                     </fieldset>
-                    <fieldset class="form-group col-md-2">
+                    <%--<fieldset class="form-group col-md-2">
                         <label for="txtEstadoSelect">Estado caso</label>
                         <select name="txtEstadoSelect" id="txtEstadoSelect" class="form-control">
                             <option value="0">Seleccione opción</option>
@@ -176,7 +178,7 @@ $(function(){
                             <option value="4">Abortado</option>
                             <option value="5">Completado</option>
                         </select>
-                    </fieldset>
+                    </fieldset>--%>
                   <fieldset class="form-group col-md-2">
                         <label for="txtMotivoSelect">Motivo</label>
                         <select name="txtMotivoSelect" id="txtMotivoSelect" class="form-control">
@@ -190,6 +192,8 @@ $(function(){
                             <option value="0">Seleccione opción</option>
                             <%=ViewData["txtSubMotivoSelect1"]%>
                         </select>
+                    </fieldset>
+                    <fieldset class="form-group col-md-1">
                     </fieldset>
                     <fieldset class="form-group col-md-1">
                         <%--<div id="buscarListar">--%>

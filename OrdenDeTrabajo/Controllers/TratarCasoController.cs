@@ -69,6 +69,17 @@ namespace WebSolicitudes.Controllers
                 txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
             }
 
+            ////Archivo cargado por contratista
+            //string txtContratistaBase64 = string.Empty;
+            //string txtArchivoContratista = string.Empty;
+            //bool tieneArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']") != null;
+
+            //if (tieneArchivoContratista)
+            //{
+            //    txtContratistaBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").InnerText;
+            //    txtArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").Attributes["FileName"].InnerText;
+            //}
+
             //FORMATEAR FECHA SOLICITUD
             if (txtFechaSolicitud != string.Empty)
             {
@@ -121,6 +132,14 @@ namespace WebSolicitudes.Controllers
                     </a>
                 ";
             }
+            //if (tieneArchivoContratista)
+            //{
+            //    ViewData["txtArchivo"] = @"
+            //        <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
+            //            <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
+            //        </a>
+            //    ";
+            //}
 
 
             return View();
@@ -288,6 +307,7 @@ namespace WebSolicitudes.Controllers
                         <XPath XPath=""OrdendeTrabajoMedidor.Archivo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.FechadeVisita""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.ComentarioCierreSolicitud""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.RespaldoAtencion""/>
                     </XPaths>
                     </BizAgiWSParam>";
 
