@@ -33,7 +33,14 @@
                    success: function (data) {
                        console.log("data");
                        console.log(data);
-                       swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");
+                       //swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");
+                       swal({
+                           title: 'Modificación exitosa',
+                           text: 'La información del caso ha sido actualizada',
+                           icon: 'success'
+                       }).then(function () {
+                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                       });
                        if (data != "error") {
                            $('#tablaordenes').find('tbody').hide();
                            table.clear();
@@ -61,7 +68,14 @@
                    success: function (data) {
                        console.log("data");
                        console.log(data);
-                       swal("Caso finalizado exitosamente", "Puedes ver el resumen de este caso en la pestaña de casos históricos", "success");
+                       //swal("Caso finalizado exitosamente", "Puedes ver el resumen de este caso en la pestaña de casos históricos", "success");
+                       swal({
+                           title: 'Caso finalizado exitosamente',
+                           text: 'Puedes ver el resumen de este caso en la pestaña de casos históricos',
+                           icon: 'success'
+                       }).then(function () {
+                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                       });
                        if (data != "error") {
                            $('#tablaordenes').find('tbody').hide();
                            table.clear();

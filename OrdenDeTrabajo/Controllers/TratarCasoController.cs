@@ -56,7 +56,7 @@ namespace WebSolicitudes.Controllers
             //string txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
 
             //CAMPOS OBLIGATORIOS
-            //string txtFechaDeVisita     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechaDeVisita']").InnerText;
+            string txtFechaDeVisita     = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.FechadeVisita']").InnerText;
             string txtComentarioCierre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioCierreSolicitud']").InnerText;
 
             string txtArchivoBase64 = string.Empty;
@@ -76,15 +76,15 @@ namespace WebSolicitudes.Controllers
                 ViewData["txtFechaSolicitud"] = fechaInicio.ToString("yyyy-MM-dd");
             }
 
-            ////FORMATEAR FECHA DE VISITA
-            //if (txtFechaDeVisita != string.Empty)
-            //{
-            //    DateTime fechaVisita = DateTime.Parse(txtFechaDeVisita);
-            //    ViewData["txtFechaDeVisita"] = fechaVisita.ToString("yyyy-MM-dd");
-            //}
+            //FORMATEAR FECHA DE VISITA
+            if (txtFechaDeVisita != string.Empty)
+            {
+                DateTime fechaVisita = DateTime.Parse(txtFechaDeVisita);
+                ViewData["txtFechaDeVisita"] = fechaVisita.ToString("yyyy-MM-dd");
+            }
 
             //ASIGNAR VALORES RESCATADOS DE XML A CAMPOS DEL FORMULARIO
-            //ViewData["txtFechaSolicitud"] = txtFechaSolicitud;
+            ViewData["txtFechaSolicitud"] = txtFechaSolicitud;
             ViewData["txtEjecutivo"] = txtEjecutivo;
             ViewData["txtNombreSolicitante"] = txtNombreSolicitante;
             ViewData["txtCorreo"] = txtCorreoElectronico;
@@ -110,15 +110,14 @@ namespace WebSolicitudes.Controllers
             ViewData["txtMotivosOT"] = txtMotivoOT;
             ViewData["txtSubMotivosOT"] = txtSubMotivoOT;
             ViewData["txtComentarioSolicitud"] = txtComentarioSolici;
-
-            //ViewData["txtFechaVisita"] = txtFechaDeVisita;
+            
             ViewData["txtComentarioCierre"] = txtComentarioCierre;
 
             if (tieneArchivo)
             {
                 ViewData["txtArchivo"] = @"
                     <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
-                        <span class='glyphicon glyphicon-save'></span> Descargar " + txtArchivoNombre + @"
+                        <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
                     </a>
                 ";
             }
@@ -224,14 +223,13 @@ namespace WebSolicitudes.Controllers
             ViewData["txtSubMotivosOT"] = txtSubMotivoOT;
             ViewData["txtComentarioSolicitud"] = txtComentarioSolici;
 
-            //ViewData["txtFechaVisita"] = txtFechaDeVisita;
             ViewData["txtComentarioCierre"] = txtComentarioCierre;
 
             if (tieneArchivo)
             {
                 ViewData["txtArchivo"] = @"
                     <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
-                        <span class='glyphicon glyphicon-save'></span> Descargar " + txtArchivoNombre + @"
+                        <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
                     </a>
                 ";
             }
@@ -366,7 +364,7 @@ namespace WebSolicitudes.Controllers
                                                     <Entities>
                                                         <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
                                                             <ComentarioCierreSolicitud>"+comentarioCierre+@"</ComentarioCierreSolicitud>
-                                                            <FechaDeVisita>"+fechaVisita+@"</FechaDeVisita>
+                                                            <FechadeVisita>"+fechaVisita+@"</FechadeVisita>
                                                             <RespaldoAtencion>"+archivosRespaldos+@"</RespaldoAtencion>
                                                         </OrdendeTrabajoMedidor>
                                                     </Entities>

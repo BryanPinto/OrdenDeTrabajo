@@ -24,7 +24,8 @@
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
                    //data: formulario.extends(archivos), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
-                   data: datos, //ESTO HAY QUE PROBARLO
+                   //data: datos, //ESTO HAY QUE PROBARLO
+                   data: $("#formTratarCaso").serialize(),
                    cache: false,
                    /*async: false,*/ //ESTO DEBO PROBARLO 
                    type: "POST",
