@@ -424,7 +424,7 @@ namespace WebSolicitudes.Controllers
                           <XPath Path='OrdendeTrabajoMedidor.Fechaasignacion' Include='true'>";
                 if (fechaInicio != DateTime.MinValue)
                 {
-                    queryCasos += @"<From>" + fechaInicio.ToShortDateString() + "</From>";
+                    queryCasos += @"<From>" + fechaInicio.Day + '/' + fechaInicio.Month + '/' + fechaInicio.Year + "</From>";
                 }
                 else
                 {
@@ -432,7 +432,7 @@ namespace WebSolicitudes.Controllers
                 }
                 if (fechaTermino != DateTime.MinValue)
                 {
-                    queryCasos += @"<To>" + fechaTermino.ToShortDateString() + "</To>";
+                    queryCasos += @"<To>" + fechaTermino.Day + '/' + fechaTermino.Month + '/' + fechaTermino.Year + "</To>";
                 }
                 else { }
                 queryCasos += @"        
