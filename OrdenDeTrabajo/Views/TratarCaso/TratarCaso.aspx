@@ -36,7 +36,7 @@
                            text: 'La información del caso ha sido actualizada',
                            icon: 'success'
                        }).then(function () {
-                           //window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
                        });
                        if (data != "error") {
                        }

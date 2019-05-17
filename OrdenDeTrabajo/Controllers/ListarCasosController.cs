@@ -332,21 +332,15 @@ namespace WebSolicitudes.Controllers
                 string txtSubMotivoSelect = collection["txtSubMotivoSelect"];
 
                 // Fecha inicio
-                DateTime? fechaInicio = null;
+                DateTime fechaInicio = DateTime.MinValue;
                 if (txtFechaDesde != string.Empty)
-                    fechaInicio = Convert.ToDateTime(txtFechaDesde);
-                if(fechaInicio.HasValue)
-                    fechaInicio.Value.ToString("dd-MM-yyyy HH':'mm':'ss");
+                    DateTime.TryParse(collection["txtFechaDesde"], out fechaInicio);
                 //fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-
-
                 // Fecha término
-                DateTime? fechaTermino = null;
+                DateTime fechaTermino = DateTime.MinValue;
                 if (txtFechaHasta != string.Empty)
-                    fechaTermino = Convert.ToDateTime(txtFechaHasta);
-                if (fechaTermino.HasValue)
-                    fechaTermino.Value.ToString("dd-MM-yyyy HH':'mm':'ss");
+                    DateTime.TryParse(collection["txtFechaHasta"], out fechaTermino);
                 //fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
                 //// Número caso
@@ -428,17 +422,17 @@ namespace WebSolicitudes.Controllers
                 }
                 queryCasos += @"                    
                           <XPath Path='OrdendeTrabajoMedidor.Fechaasignacion' Include='true'>";
-                if (txtFechaDesde != null)
+                if (fechaInicio != DateTime.MinValue)
                 {
-                    queryCasos += @"<From>" + fechaInicio + "</From>";
+                    queryCasos += @"<From>" + fechaInicio.ToShortDateString() + "</From>";
                 }
                 else
                 {
                     queryCasos += @"<From>01/01/1900</From>";
                 }
-                if (txtFechaHasta != null)
+                if (fechaTermino != DateTime.MinValue)
                 {
-                    queryCasos += @"<To>" + fechaTermino + "</To>";
+                    queryCasos += @"<To>" + fechaTermino.ToShortDateString() + "</To>";
                 }
                 else { }
                 queryCasos += @"        
