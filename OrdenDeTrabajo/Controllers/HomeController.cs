@@ -22,7 +22,15 @@ namespace WebSolicitudes.Controllers
 
         public ActionResult Index(int? IDUsuario, int? estado)
         {
-            System.Web.HttpContext.Current.Session["IDUsuario"] = IDUsuario;
+            string usuario = "";
+            if (IDUsuario.HasValue)
+            {
+                System.Web.HttpContext.Current.Session["IDUsuario"] = IDUsuario;
+            }
+            else
+            {
+                usuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+            }
 
             string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
             ViewData["txtMotivoSelect1"] = listaMotivo;
@@ -70,6 +78,14 @@ namespace WebSolicitudes.Controllers
                 string txtCorreo = collection["txtCorreo"];
                 string txtPass = collection["txtPass"];
 
+                if(txtCorreo != null)
+                {
+                    txtCorreo.Trim();
+                }
+                if (txtPass != null)
+                {
+                    txtPass.Trim();
+                }
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Credenciales ingresadas", "Login", "Correo: " + txtCorreo + ", Clave: " + txtPass);

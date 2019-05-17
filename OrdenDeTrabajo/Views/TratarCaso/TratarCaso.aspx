@@ -9,10 +9,10 @@
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
                console.log("1");
-               //var formulario = $("#formTratarCaso").serialize(); ESTO ESTABA ANTES
-               //var archivos = new FormData(formulario);    ESTO ESTABA ANTES
-               var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
-               var archivos = new FormData();   //ESTO HAY QUE PROBARLO
+               var formulario = $("#formTratarCaso").serialize(); //ESTO ESTABA ANTES
+               var archivos = new FormData(formulario);    //ESTO ESTABA ANTES
+               //var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
+               //var archivos = new FormData();   //ESTO HAY QUE PROBARLO
                console.log(archivos);
                jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
                archivos.append('txtArchivoContratista' + i, file);
@@ -34,7 +34,7 @@
                    success: function (data) {
                        console.log("data");
                        console.log(data);
-                       //swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");
+                       <%--//swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");--%>
                        swal({
                            title: 'Modificación exitosa',
                            text: 'La información del caso ha sido actualizada',
@@ -56,6 +56,39 @@
                        swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
                    }
                });
+               <%--$.ajax({
+                   url: '<%: Url.Content("~/TratarCaso/ActualizarCasoArchivos/") %>',
+                   data: archivos,
+                   cache: false,
+                   dataType: "json",
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   enctype: "multipart/form-data",
+                   success: function (data) {
+                       console.log("data");
+                       console.log(data);
+                       swal({
+                           title: 'Modificación exitosa',
+                           text: 'La información del caso ha sido actualizada',
+                           icon: 'success'
+                       }).then(function () {
+                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                       });
+                       if (data != "error") {
+                           $('#tablaordenes').find('tbody').hide();
+                           table.clear();
+                           table.rows.add(JSON.parse(data));
+                           table.draw();
+                           $('#tablaordenes').find('tbody').fadeIn("slow");
+                       }
+                       else
+                        swal("Modificación sin éxito", "Contacte a un administrador", "error");
+                   },
+                   error: function () {
+                       swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
+                   }
+               });--%>
            });
            $("#btnFinalizar").click(function (e) {
                e.preventDefault();
@@ -181,7 +214,7 @@ $(function(){
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
         	</li>
-        	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
+        	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
 </nav><br /><br />

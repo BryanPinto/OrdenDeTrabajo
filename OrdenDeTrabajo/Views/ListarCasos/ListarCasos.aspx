@@ -140,7 +140,7 @@ $(function(){
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
         	</li>
-        	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
+        	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
 </nav><br /><br />

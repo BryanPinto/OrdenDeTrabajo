@@ -27,14 +27,18 @@ namespace WebSolicitudes.Controllers
 
 
         [HttpPost]
-        public string BusquedaCasos(FormCollection collection/*, int IDUsuario*/)
+        public string BusquedaCasos(FormCollection collection)
         {
             string datosJSON = string.Empty;
             //string usuario = Convert.ToString(IDUsuario);
-            string usuario = "";
-            usuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString(); //Obtener usuario logueado por variable session, definida en el método CasosPendientes
+            string IDUsuario = "";
+            
             try
             {
+                IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                int UsuarioLogueado = Convert.ToInt32(IDUsuario);
+                ViewData["IDUsuario"] = UsuarioLogueado;
+                //usuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString(); //Obtener usuario logueado por variable session, definida en el método CasosPendientes
                 // Variables
                 //string txtFechaDesde = collection["txtFechaDesde"];
                 //string txtFechaHasta = collection["txtFechaHasta"];
@@ -128,7 +132,7 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
                       <XPaths>
-                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + usuario + "</XPath>";
+                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + UsuarioLogueado + "</XPath>";
                 //ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
@@ -303,9 +307,13 @@ namespace WebSolicitudes.Controllers
         {
             string datosJSON = string.Empty;
             //string txtVacio = collection["txtVacio"];
-            string IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+            string IDUsuario = "";
             try
             {
+                IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                int UsuarioLogueado = Convert.ToInt32(IDUsuario);
+                ViewData["IDUsuario"] = UsuarioLogueado;
+                //string IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
                 //if (estado == 1)
                 //    ViewData["estado"] = "1";
                 //else if (estado == 0)
@@ -313,7 +321,7 @@ namespace WebSolicitudes.Controllers
                 //    ViewData["estado"] = "0";
                 //}
 
-                int UsuarioLogueado = Convert.ToInt32(IDUsuario);
+                
 
                 #region Agregar filtros y buscar
                 // Variables
@@ -326,12 +334,20 @@ namespace WebSolicitudes.Controllers
                 // Fecha inicio
                 DateTime? fechaInicio = null;
                 if (txtFechaDesde != string.Empty)
-                    fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    fechaInicio = Convert.ToDateTime(txtFechaDesde);
+                if(fechaInicio.HasValue)
+                    fechaInicio.Value.ToString("yyyy-MM-dd HH':'mm':'ss");
+                //fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+
 
                 // Fecha término
                 DateTime? fechaTermino = null;
                 if (txtFechaHasta != string.Empty)
-                    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    fechaTermino = Convert.ToDateTime(txtFechaHasta);
+                if (fechaTermino.HasValue)
+                    fechaTermino.Value.ToString("yyyy-MM-dd HH':'mm':'ss");
+                //fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
                 //// Número caso
                 //int? numCaso = null;

@@ -143,14 +143,15 @@ $(function(){
     
     });  
     
-});
-        });
-
-        // Mostrar mensaje de creación o error
+            });
+            // Mostrar mensaje de creación o error
             if ("<%= ViewData["estado"] %>" == "1")
                 swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
             else if ("<%= ViewData["estado"] %>" == "0")
                 swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
+        });
+
+        
         //}));
     </script>
 </asp:Content>
@@ -164,7 +165,7 @@ $(function(){
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
         	</li>
-        	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
+        	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
 </nav><br /><br />

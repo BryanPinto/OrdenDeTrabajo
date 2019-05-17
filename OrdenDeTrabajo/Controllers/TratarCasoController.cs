@@ -69,16 +69,16 @@ namespace WebSolicitudes.Controllers
                 txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
             }
 
-            ////Archivo cargado por contratista
-            //string txtContratistaBase64 = string.Empty;
-            //string txtArchivoContratista = string.Empty;
-            //bool tieneArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']") != null;
+            //Archivo cargado por contratista
+            string txtContratistaBase64 = string.Empty;
+            string txtArchivoContratista = string.Empty;
+            bool tieneArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']") != null;
 
-            //if (tieneArchivoContratista)
-            //{
-            //    txtContratistaBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").InnerText;
-            //    txtArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").Attributes["FileName"].InnerText;
-            //}
+            if (tieneArchivoContratista)
+            {
+                txtContratistaBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").InnerText;
+                txtArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").Attributes["FileName"].InnerText;
+            }
 
             //FORMATEAR FECHA SOLICITUD
             if (txtFechaSolicitud != string.Empty)
@@ -95,7 +95,7 @@ namespace WebSolicitudes.Controllers
             }
 
             //ASIGNAR VALORES RESCATADOS DE XML A CAMPOS DEL FORMULARIO
-            ViewData["txtFechaSolicitud"] = txtFechaSolicitud;
+            //ViewData["txtFechaSolicitud"] = txtFechaSolicitud;
             ViewData["txtEjecutivo"] = txtEjecutivo;
             ViewData["txtNombreSolicitante"] = txtNombreSolicitante;
             ViewData["txtCorreo"] = txtCorreoElectronico;
@@ -132,14 +132,14 @@ namespace WebSolicitudes.Controllers
                     </a>
                 ";
             }
-            //if (tieneArchivoContratista)
-            //{
-            //    ViewData["txtArchivo"] = @"
-            //        <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
-            //            <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
-            //        </a>
-            //    ";
-            //}
+            if (tieneArchivoContratista)
+            {
+                ViewData["txtArchivo"] = @"
+                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
+                        <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
+                    </a>
+                ";
+            }
 
 
             return View();
@@ -200,6 +200,17 @@ namespace WebSolicitudes.Controllers
                 txtArchivoNombre = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Archivo']/Items/Item").Attributes["FileName"].InnerText;
             }
 
+            //Archivo cargado por contratista
+            string txtContratistaBase64 = string.Empty;
+            string txtArchivoContratista = string.Empty;
+            bool tieneArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']") != null;
+
+            if (tieneArchivoContratista)
+            {
+                txtContratistaBase64 = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").InnerText;
+                txtArchivoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.RespaldoAtencion']/Items/Item").Attributes["FileName"].InnerText;
+            }
+
             //FORMATEAR FECHA SOLICITUD
             if (txtFechaSolicitud != string.Empty)
             {
@@ -252,7 +263,14 @@ namespace WebSolicitudes.Controllers
                     </a>
                 ";
             }
-
+            if (tieneArchivoContratista)
+            {
+                ViewData["txtArchivo"] = @"
+                    <a download='" + txtArchivoNombre + @"' href='data:application/octet-stream;charset=utf-16le;base64," + txtArchivoBase64 + @"' class='btn btn-primary btn-md' style='max-width:280px'>
+                        <span class='glyphicon glyphicon-save'></span>" + txtArchivoNombre + @"
+                    </a>
+                ";
+            }
 
             return View();
         }
@@ -338,12 +356,15 @@ namespace WebSolicitudes.Controllers
         {
             string respuestaBizagi = string.Empty;
             DateTime fechaDeVisita = DateTime.MinValue;
-
+            string IDUsuario = "";
             try
             {
+                IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                Convert.ToInt32(IDUsuario);
+                ViewData["IDUsuario"] = IDUsuario;
                 int numCaso          = Convert.ToInt32(collection["txtNumCaso"]);
                 var fechaVisita      = collection["txtFechaDeVisita"];
-                //var archivoSoli      = collection["txtArchivoContratista"];
+                var archivoSoli      = collection["txtArchivoContratista"];
                 var comentarioCierre = collection["txtComentarioCierre"];
 
                 fechaDeVisita = Convert.ToDateTime(fechaVisita);
@@ -412,13 +433,89 @@ namespace WebSolicitudes.Controllers
 
             return (respuestaBizagi);
         }
-        
+
+        [HttpPost]
+        public string ActualizarCasoArchivos(FormCollection collection, IEnumerable<HttpPostedFileBase> files)
+        {
+            string IDUsuario = "";
+            string respuestaBizagi = "";
+            try
+            {
+                IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                Convert.ToInt32(IDUsuario);
+                ViewData["IDUsuario"] = IDUsuario;
+                int numCaso = Convert.ToInt32(collection["txtNumCaso"]);
+                var archivoSoli = collection["txtArchivoContratista"];                
+
+                // Conversión de archivos
+                string archivosBase64 = "";
+                string archivosNombres = "";
+                string archivosRespaldos = "";
+                foreach (string upload in Request.Files)
+                {
+                    if (Request.Files[upload].FileName != "")
+                    {
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "./";
+                        string path = Path.GetTempPath();
+                        string filename = Request.Files[upload].FileName;
+                        Request.Files[upload].SaveAs(Path.Combine(path, filename));
+                        string archivoConvertido = ConversorBase64.convertirABase64(path + filename);
+                        if (upload != null)
+                        {
+                            archivosBase64 = archivoConvertido;
+                            archivosNombres = archivoConvertido;
+                            archivosRespaldos += @"<File fileName='" + filename + @"'>" + archivoConvertido + @"</File>";
+                        }
+                    }
+                }
+
+                //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Caso a actualizar", "ActualizarCasoArchivos", Convert.ToString(numCaso));
+                //Fin CSV
+
+                //XML PARA ACTUALIZAR VALORES DEL CASO
+                string queryActualizarCaso = @"<BizAgiWSParam>
+                                                    <Entities>
+                                                        <OrdendeTrabajoMedidor businessKey=""NroCaso='" + numCaso + @"'"">
+                                                            <RespaldoAtencion>" + archivosRespaldos + @"</RespaldoAtencion>
+                                                        </OrdendeTrabajoMedidor>
+                                                    </Entities>
+                                               </BizAgiWSParam>";
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Datos a actualizar", "ActualizarCasoArchivos", queryActualizarCaso);
+                //Fin CSV
+
+                respuestaBizagi = servicioQuery.saveEntityAsString(queryActualizarCaso);
+                respuestaBizagi = respuestaBizagi.Replace("\n", "");
+                respuestaBizagi = respuestaBizagi.Replace("\t", "");
+                respuestaBizagi = respuestaBizagi.Replace("\r", "");
+
+                //Escribir log CSV
+                UtilController.EscribirLog("Respuesta", "ActualizarCasoArchivos", respuestaBizagi);
+                //Fin CSV
+            }
+            catch (Exception ex)
+            {
+                //Escribir log CSV
+                UtilController.EscribirLog("ERROR", "ActualizarCasoArchivos", ex.Message);
+                //Fin CSV
+            }
+
+            return (respuestaBizagi);
+        }
+
         [HttpPost]
         public string FinalizarCaso(FormCollection collection)
         {
             string respuestaBizagi = string.Empty;
             try
             {
+                string IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
                 int numCaso = Convert.ToInt32(collection["txtNumCaso"]);
 
                 //Escribir log CSV
