@@ -13,12 +13,7 @@
                var archivos = new FormData(formulario);    //ESTO ESTABA ANTES
                //var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
                //var archivos = new FormData();   //ESTO HAY QUE PROBARLO
-               console.log(archivos);
-               jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
-               archivos.append('txtArchivoContratista' + i, file);
-               //formulario.append('txtArchivoContratista', file);
-               console.log(file);
-               });               
+                             
                var datos = $(formulario, archivos).serialize(); //se envia como data
 
 
@@ -56,7 +51,14 @@
 
                console.log("-----------ARCHIVOS------------");
                console.log(archivos);
-               $.ajax({
+               <%--
+                console.log(archivos);
+               jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
+                   archivos.append('txtArchivoContratista' + i, file);
+                   //formulario.append('txtArchivoContratista', file);
+                   console.log(file);
+               }); 
+                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCasoArchivos/") %>',
                    data: archivos,
                    cache: false,
@@ -83,7 +85,7 @@
                    error: function () {
                        swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
                    }
-               });
+               });--%>
            });
 
            $("#btnFinalizar").click(function (e) {
@@ -391,10 +393,10 @@ $(function(){
                 <label for="txtFechaDeVisita">Fecha visita</label>
                 <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
-                <label for="txtArchivoSoliL" id="txtArchivoSoliL"<%-- style="color:#f9f9fb"--%>>Archivo</label>
+            <%--<fieldset class="form-group tratarcaso archivoModificable col-md-4">
+                <label for="txtArchivoSoliL" id="txtArchivoSoliL">Archivo</label>
                 <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
-            </fieldset>
+            </fieldset>--%>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
                 <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
