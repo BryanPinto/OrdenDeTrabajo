@@ -20,7 +20,9 @@
                console.log(file);
                });               
                var datos = $(formulario, archivos).serialize(); //se envia como data
-               // Buscar cabeceras               
+
+
+               // Buscar cabeceras
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
                    //data: formulario.extends(archivos), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
@@ -34,20 +36,14 @@
                    success: function (data) {
                        console.log("data");
                        console.log(data);
-                       <%--//swal("Modificación exitosa", "La información del caso ha sido actualizada", "success");--%>
                        swal({
                            title: 'Modificación exitosa',
                            text: 'La información del caso ha sido actualizada',
                            icon: 'success'
                        }).then(function () {
-                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                           //window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
                        });
                        if (data != "error") {
-                           $('#tablaordenes').find('tbody').hide();
-                           table.clear();
-                           table.rows.add(JSON.parse(data));
-                           table.draw();
-                           $('#tablaordenes').find('tbody').fadeIn("slow");
                        }
                        else
                         swal("Modificación sin éxito", "Contacte a un administrador", "error");
@@ -56,7 +52,11 @@
                        swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
                    }
                });
-               <%--$.ajax({
+
+
+               console.log("-----------ARCHIVOS------------");
+               console.log(archivos);
+               $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCasoArchivos/") %>',
                    data: archivos,
                    cache: false,
@@ -66,7 +66,7 @@
                    processData: false,
                    enctype: "multipart/form-data",
                    success: function (data) {
-                       console.log("data");
+                       console.log("data formulario");
                        console.log(data);
                        swal({
                            title: 'Modificación exitosa',
@@ -76,11 +76,6 @@
                            window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
                        });
                        if (data != "error") {
-                           $('#tablaordenes').find('tbody').hide();
-                           table.clear();
-                           table.rows.add(JSON.parse(data));
-                           table.draw();
-                           $('#tablaordenes').find('tbody').fadeIn("slow");
                        }
                        else
                         swal("Modificación sin éxito", "Contacte a un administrador", "error");
@@ -88,8 +83,9 @@
                    error: function () {
                        swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
                    }
-               });--%>
+               });
            });
+
            $("#btnFinalizar").click(function (e) {
                e.preventDefault();
                $("#btnGuardar").submit();
@@ -111,11 +107,6 @@
                            window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
                        });
                        if (data != "error") {
-                           $('#tablaordenes').find('tbody').hide();
-                           table.clear();
-                           table.rows.add(JSON.parse(data));
-                           table.draw();
-                           $('#tablaordenes').find('tbody').fadeIn("slow");
                        }
                        else
                            swal("Error al finalizar el caso", "Contacte a un administrador", "error");
@@ -416,7 +407,7 @@ $(function(){
             <fieldset class="form-group botones col-md-4">
                 <input type="hidden" name="txtNumCaso" id="txtNumCaso" value="<%= Request.Url.Segments.LastOrDefault() %>"/>
                 <input type="submit" id="btnGuardar" value="Guardar" class="guardar">
-                <input type="submit" id="btnFinalizar" value="Finalizar" class="finalizar">
+                <input type="button" id="btnFinalizar" value="Finalizar" class="finalizar">
             </fieldset>
         </div>
     </div>
