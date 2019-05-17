@@ -336,7 +336,7 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaDesde != string.Empty)
                     fechaInicio = Convert.ToDateTime(txtFechaDesde);
                 if(fechaInicio.HasValue)
-                    fechaInicio.Value.ToString("yyyy-MM-dd HH':'mm':'ss");
+                    fechaInicio.Value.ToString("dd-MM-yyyy HH':'mm':'ss");
                 //fechaInicio = DateTime.ParseExact(txtFechaDesde, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
 
@@ -346,7 +346,7 @@ namespace WebSolicitudes.Controllers
                 if (txtFechaHasta != string.Empty)
                     fechaTermino = Convert.ToDateTime(txtFechaHasta);
                 if (fechaTermino.HasValue)
-                    fechaTermino.Value.ToString("yyyy-MM-dd HH':'mm':'ss");
+                    fechaTermino.Value.ToString("dd-MM-yyyy HH':'mm':'ss");
                 //fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
                 //// Número caso

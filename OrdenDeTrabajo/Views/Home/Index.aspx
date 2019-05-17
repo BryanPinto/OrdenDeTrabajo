@@ -38,14 +38,14 @@
                 }
             });
 
-            //HABILITAR UNA VEZ SE TENGA ACCESO AL SERVIDOR
-            $("#txtMotivoSelect").change(function () {
-                var motivo = $("#txtMotivoSelect").find('option:selected').val(); // guardar valor de motivo seleccionado
-                 $("#option-container").children().appendTo("#txtSubMotivoSelect"); // mueve <option> contenida en #option-container de vuelta a su <select>
-                 var toMove = $("#txtSubMotivoSelect").children("[data-father!='"+motivo+"']"); // mover submotivos filtrados por motivo distinto al seleccionado
-                 toMove.appendTo("#option-container"); // mover valores de submotivo a #option-container
-                 $("#txtSubMotivoSelect").removeAttr("disabled"); // 
-            });
+            ////HABILITAR UNA VEZ SE TENGA ACCESO AL SERVIDOR
+            //$("#txtMotivoSelect").change(function () {
+            //    var motivo = $("#txtMotivoSelect").find('option:selected').val(); // guardar valor de motivo seleccionado
+            //     $("#option-container").children().appendTo("#txtSubMotivoSelect"); // mueve <option> contenida en #option-container de vuelta a su <select>
+            //     var toMove = $("#txtSubMotivoSelect").children("[data-father!='"+motivo+"']"); // mover submotivos filtrados por motivo distinto al seleccionado
+            //     toMove.appendTo("#option-container"); // mover valores de submotivo a #option-container
+            //     $("#txtSubMotivoSelect").removeAttr("disabled"); // 
+            //});
 
             //$("#province").change(function () {
             //    var province = $("#province").find('option:selected').text(); // stores province
