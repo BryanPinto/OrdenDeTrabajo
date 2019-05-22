@@ -19,7 +19,6 @@ namespace WebSolicitudes.Controllers
     {
         //
         // GET: /Home/
-
         public ActionResult Index(int? IDUsuario, int? estado)
         {
             string usuario = "";
@@ -35,7 +34,7 @@ namespace WebSolicitudes.Controllers
             string listaMotivo = UtilController.ListarParametrica("MotivoOT", "Motivo");
             ViewData["txtMotivoSelect1"] = listaMotivo;
 
-            string listaSubMotivo = UtilController.ListarParametrica("P_SubMotivoOT", "SubMotivo");//El 3er parametro corresponde a la relacion con la tabla Motivo
+            string listaSubMotivo = UtilController.ListarParametricaConPadre("P_SubMotivoOT", "SubMotivo","Motivo");//El 3er parametro corresponde a la relacion con la tabla Motivo
             ViewData["txtSubMotivoSelect1"] = listaSubMotivo;
 
             if (estado == 1)

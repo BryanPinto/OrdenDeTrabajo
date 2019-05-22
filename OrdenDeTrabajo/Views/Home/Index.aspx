@@ -38,14 +38,20 @@
                 }
             });
 
-            ////HABILITAR UNA VEZ SE TENGA ACCESO AL SERVIDOR
-            //$("#txtMotivoSelect").change(function () {
-            //    var motivo = $("#txtMotivoSelect").find('option:selected').val(); // guardar valor de motivo seleccionado
-            //     $("#option-container").children().appendTo("#txtSubMotivoSelect"); // mueve <option> contenida en #option-container de vuelta a su <select>
-            //     var toMove = $("#txtSubMotivoSelect").children("[data-father!='"+motivo+"']"); // mover submotivos filtrados por motivo distinto al seleccionado
-            //     toMove.appendTo("#option-container"); // mover valores de submotivo a #option-container
-            //     $("#txtSubMotivoSelect").removeAttr("disabled"); // 
-            //});
+            //Filtrar la lista de submotivos una vez seleccionado un motivo
+            //var motivoSel = $("#txtMotivoSelect").val();
+            $("#txtMotivoSelect").change(function () {
+                var motivo = $("#txtMotivoSelect").find('option:selected').text(); // guardar valor de motivo seleccionado
+                if (motivo != "Seleccione opción") {
+                    $("#option-container").children().appendTo("#txtSubMotivoSelect"); // mueve <option> contenida en #option-container de vuelta a su <select>
+                    var toMove = $("#txtSubMotivoSelect").children("[data-father!='" + motivo + "']"); // mover submotivos filtrados por motivo distinto al seleccionado
+                    toMove.appendTo("#option-container"); // mover valores de submotivo a #option-container
+                    $("#txtSubMotivoSelect").removeAttr("disabled"); // 
+                }
+            });
+
+            
+            
 
             //$("#province").change(function () {
             //    var province = $("#province").find('option:selected').text(); // stores province
@@ -157,6 +163,7 @@ $(function(){
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="float:right">
 <nav>
 <ul class="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
@@ -168,7 +175,7 @@ $(function(){
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
-</nav><br /><br />
+</nav></div><br /><br />
     <h2 style="text-align:center;color:#AEAEAE">Casos pendientes</h2><br />
 
     <%--FILTROS--%>
@@ -205,7 +212,7 @@ $(function(){
                    <fieldset class="form-group col-md-2">
                         <label for="txtSubMotivoSelect">Sub motivo</label>
                         <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
-                            <option value="0">Seleccione opción</option>
+                            <option data-father="null" value="0">Seleccione opción</option>
                             <%=ViewData["txtSubMotivoSelect1"]%>
                         </select>
                        <%--<select class="select" id="city">
