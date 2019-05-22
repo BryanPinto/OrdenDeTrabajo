@@ -139,8 +139,10 @@ namespace WebSolicitudes.Controllers
                     string campo = item.SelectSingleNode(campoVisual).InnerText;
                     string campoPadre = item.SelectSingleNode(padre).InnerText;
 
+                    string motivoRelacion = campoPadre.Substring(0, campoPadre.Length-1);
+
                     // Crear opción
-                    lista += "<option data-father='" + campoPadre + @"' value='" + id + @"'>" + campo + @"</option>";
+                    lista += "<option data-father='" + motivoRelacion + @"' value='" + id + @"'>" + campo + @"</option>";
                 }
 
                 //Escribir log CSV

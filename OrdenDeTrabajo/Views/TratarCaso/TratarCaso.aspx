@@ -14,7 +14,7 @@
                //var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
                //var archivos = new FormData();   //ESTO HAY QUE PROBARLO
                              
-               var datos = $(formulario, archivos).serialize(); //se envia como data
+               //var datos = $(formulario, archivos).serialize(); //se envia como data
 
 
                // Buscar cabeceras
@@ -24,20 +24,20 @@
                    //data: datos, //ESTO HAY QUE PROBARLO
                    data: $("#formTratarCaso").serialize(),
                    cache: false,
-                   /*async: false,*/ //ESTO DEBO PROBARLO 
+                   async: false, //ESTO DEBO PROBARLO 
                    type: "POST",
                    processData: false,
                    enctype: "multipart/form-data",
                    success: function (data) {
                        console.log("data");
                        console.log(data);
-                       swal({
+                       <%--swal({
                            title: 'Modificación exitosa',
                            text: 'La información del caso ha sido actualizada',
                            icon: 'success'
                        }).then(function () {
                            window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                       });
+                       });--%>
                        if (data != "error") {
                        }
                        else
@@ -51,8 +51,7 @@
 
                console.log("-----------ARCHIVOS------------");
                console.log(archivos);
-               <%--
-                console.log(archivos);
+               console.log(archivos);
                jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
                    archivos.append('txtArchivoContratista' + i, file);
                    //formulario.append('txtArchivoContratista', file);
@@ -83,9 +82,15 @@
                         swal("Modificación sin éxito", "Contacte a un administrador", "error");
                    },
                    error: function () {
-                       swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
+                       swal({
+                           title: 'Modificación exitosa',
+                           text: 'La información del caso ha sido actualizada',
+                           icon: 'success'
+                       }).then(function () {
+                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                       });
                    }
-               });--%>
+               });
            });
 
            $("#btnFinalizar").click(function (e) {
@@ -199,6 +204,7 @@ $(function(){
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="float:right">
 <nav>
 <ul class="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
@@ -210,7 +216,7 @@ $(function(){
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
-</nav><br /><br />
+</nav></div><br /><br />
     <form id="formTratarCaso" enctype="multipart/form-data">
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
@@ -380,9 +386,12 @@ $(function(){
                 <textarea class="form-control caso" id="txtComentarioSolicitud" name="txtComentarioSolicitud" placeholder="Comentario solicitud" disabled ><%= ViewData["txtComentarioSolicitud"] %></textarea>
             </fieldset>
             <fieldset class="form-group tratarcaso archivo col-md-4">
+                <% if(ViewData["txtArchivo"] != null)
+                    {%>
                 <label for="txtArchivo">Archivo</label>
                 <% if(ViewData["txtArchivo"] != null)%>
                             <%= ViewData["txtArchivo"] %>
+                <%}%>
                 <%--<input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>--%>
             </fieldset>
         </div>
@@ -390,13 +399,22 @@ $(function(){
         <div class="row">
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <label for="txtFechaDeVisita">Fecha visita</label>
+                <label for="txtFechaDeVisitaL">Fecha visita</label>
                 <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
-            <%--<fieldset class="form-group tratarcaso archivoModificable col-md-4">
+            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <label for="txtArchivoSoliL" id="txtArchivoSoliL">Archivo</label>
                 <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
-            </fieldset>--%>
+            </fieldset>
+            <fieldset class="form-group tratarcaso modificable col-md-4">
+                <% if(ViewData["txtArchivosCargados"] != null)
+                    {%>
+                <label for="txtArchivoCargados" id="txtArchivoCargados">Archivo cargados</label>
+                <% if(ViewData["txtArchivosCargados"] != null)%>
+                    <%= ViewData["txtArchivosCargados"] %>
+                <%--<input type="file" class="form-control" id="txtArchivoCargados1" name="txtArchivoCargados1" multiple value="<%= ViewData["txtArchivosCargados"] %>"/>--%>
+                 <%}%>
+            </fieldset>               
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
                 <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
