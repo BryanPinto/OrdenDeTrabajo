@@ -132,6 +132,7 @@ $(function(){
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="float:right">
     <nav>
 <ul class="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
@@ -143,7 +144,7 @@ $(function(){
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
-</nav><br /><br />
+</nav></div><br /><br />
     <h2 style="text-align:center;color:#AEAEAE">Histórico de casos</h2><br />
 
     <%--FILTROS--%>
