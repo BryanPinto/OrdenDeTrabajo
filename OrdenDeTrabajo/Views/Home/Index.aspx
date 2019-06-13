@@ -70,8 +70,6 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        console.log("data");
-                        console.log(data);
                         if (data != "error") {
                             $('#formIndex').find('tbody').hide();
                             table.clear();

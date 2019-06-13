@@ -169,47 +169,17 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\DemoLipiEntity\Reference.cs">
+    <Compile Include="Connected Services\BPMSEntity\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\DemoLipiQuery\Reference.cs">
+    <Compile Include="Connected Services\BPMSQuery\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\DemoLipiWorkflow\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\DesEntity\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\DesQuery\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\DesWorkflow\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\LipigasEntityManagerSoa\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\LipigasQuerySoa\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\LipigasWorkflowEngineSoa\Reference.cs">
+    <Compile Include="Connected Services\BPMSWorkflow\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -228,66 +198,24 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <None Include="Connected Services\DemoLipiEntity\entitymanagersoa.wsdl" />
-    <None Include="Connected Services\DemoLipiQuery\querysoa.wsdl" />
-    <None Include="Connected Services\DemoLipiWorkflow\workflowenginesoa.wsdl" />
-    <None Include="Connected Services\DesEntity\entitymanagersoa.wsdl" />
-    <None Include="Connected Services\DesQuery\querysoa.wsdl" />
-    <None Include="Connected Services\DesWorkflow\workflowenginesoa.wsdl" />
-    <None Include="Connected Services\LipigasEntityManagerSoa\entitymanagersoa.wsdl" />
-    <None Include="Connected Services\LipigasQuerySoa\querysoa.wsdl" />
-    <None Include="Connected Services\LipigasWorkflowEngineSoa\workflowenginesoa.wsdl" />
-    <None Include="Connected Services\LipigasEntityManagerSoa\configuration91.svcinfo" />
-    <None Include="Connected Services\LipigasEntityManagerSoa\configuration.svcinfo" />
-    <None Include="Connected Services\LipigasEntityManagerSoa\Reference.svcmap">
+    <None Include="Connected Services\BPMSEntity\entitymanagersoa.wsdl" />
+    <None Include="Connected Services\BPMSQuery\querysoa.wsdl" />
+    <None Include="Connected Services\BPMSWorkflow\workflowenginesoa.wsdl" />
+    <None Include="Connected Services\BPMSWorkflow\configuration91.svcinfo" />
+    <None Include="Connected Services\BPMSWorkflow\configuration.svcinfo" />
+    <None Include="Connected Services\BPMSWorkflow\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\LipigasWorkflowEngineSoa\configuration91.svcinfo" />
-    <None Include="Connected Services\LipigasWorkflowEngineSoa\configuration.svcinfo" />
-    <None Include="Connected Services\LipigasWorkflowEngineSoa\Reference.svcmap">
+    <None Include="Connected Services\BPMSEntity\configuration91.svcinfo" />
+    <None Include="Connected Services\BPMSEntity\configuration.svcinfo" />
+    <None Include="Connected Services\BPMSEntity\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\LipigasQuerySoa\configuration91.svcinfo" />
-    <None Include="Connected Services\LipigasQuerySoa\configuration.svcinfo" />
-    <None Include="Connected Services\LipigasQuerySoa\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DemoLipiWorkflow\configuration91.svcinfo" />
-    <None Include="Connected Services\DemoLipiWorkflow\configuration.svcinfo" />
-    <None Include="Connected Services\DemoLipiWorkflow\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DemoLipiEntity\configuration91.svcinfo" />
-    <None Include="Connected Services\DemoLipiEntity\configuration.svcinfo" />
-    <None Include="Connected Services\DemoLipiEntity\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DemoLipiQuery\configuration91.svcinfo" />
-    <None Include="Connected Services\DemoLipiQuery\configuration.svcinfo" />
-    <None Include="Connected Services\DemoLipiQuery\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DesEntity\configuration91.svcinfo" />
-    <None Include="Connected Services\DesEntity\configuration.svcinfo" />
-    <None Include="Connected Services\DesEntity\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DesWorkflow\configuration91.svcinfo" />
-    <None Include="Connected Services\DesWorkflow\configuration.svcinfo" />
-    <None Include="Connected Services\DesWorkflow\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\DesQuery\configuration91.svcinfo" />
-    <None Include="Connected Services\DesQuery\configuration.svcinfo" />
-    <None Include="Connected Services\DesQuery\Reference.svcmap">
+    <None Include="Connected Services\BPMSQuery\configuration91.svcinfo" />
+    <None Include="Connected Services\BPMSQuery\configuration.svcinfo" />
+    <None Include="Connected Services\BPMSQuery\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -378,15 +306,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\DemoLipiEntity\" />
-    <WCFMetadataStorage Include="Connected Services\DemoLipiQuery\" />
-    <WCFMetadataStorage Include="Connected Services\DemoLipiWorkflow\" />
-    <WCFMetadataStorage Include="Connected Services\DesEntity\" />
-    <WCFMetadataStorage Include="Connected Services\DesQuery\" />
-    <WCFMetadataStorage Include="Connected Services\DesWorkflow\" />
-    <WCFMetadataStorage Include="Connected Services\LipigasEntityManagerSoa\" />
-    <WCFMetadataStorage Include="Connected Services\LipigasQuerySoa\" />
-    <WCFMetadataStorage Include="Connected Services\LipigasWorkflowEngineSoa\" />
+    <WCFMetadataStorage Include="Connected Services\BPMSEntity\" />
+    <WCFMetadataStorage Include="Connected Services\BPMSQuery\" />
+    <WCFMetadataStorage Include="Connected Services\BPMSWorkflow\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

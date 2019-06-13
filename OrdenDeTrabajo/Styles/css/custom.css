@@ -1015,4 +1015,42 @@ ul {
 #txtArchivo{
     width: 300px;
 }
-/*FIN NUEVOS ESTILOS*/
+/*NUMERO PAGINACION ACTUAL*/
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: darkblue;
+    border-color: #aeaeae;
+    margin-top: 11px;
+    margin-left: 1px;
+    padding: 13px;
+}
+/*NUMERO PAGINACION*/
+.pagination > li > a {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: #fcce01;
+    border-color: #aeaeae;
+    margin-top: 11px;
+    margin-left: 1px;
+    padding: 13px;
+}
+/*BOTON SIGUIENTE*/
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    background-color: #fcce01;
+    font-family: Oswald, Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 17px;
+    padding-bottom: 14px;
+    margin: 11px 0px 0px 2px;
+    border-radius: 0;
+    border: 1px solid #aeaeae;
+    -webkit-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    -moz-box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    box-shadow: 4px 4px 0px 0px rgba(209, 209, 209, 0.75);
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}

@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSolicitudes.DesQuery {
+namespace WebSolicitudes.BPMSQuery {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DesQuery.QueryFormSOASoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BPMSQuery.QueryFormSOASoap")]
     public interface QueryFormSOASoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/QueryCases", ReplyAction="*")]
@@ -33,12 +33,12 @@ namespace WebSolicitudes.DesQuery {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface QueryFormSOASoapChannel : WebSolicitudes.DesQuery.QueryFormSOASoap, System.ServiceModel.IClientChannel {
+    public interface QueryFormSOASoapChannel : WebSolicitudes.BPMSQuery.QueryFormSOASoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class QueryFormSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.DesQuery.QueryFormSOASoap>, WebSolicitudes.DesQuery.QueryFormSOASoap {
+    public partial class QueryFormSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.BPMSQuery.QueryFormSOASoap>, WebSolicitudes.BPMSQuery.QueryFormSOASoap {
         
         public QueryFormSOASoapClient() {
         }

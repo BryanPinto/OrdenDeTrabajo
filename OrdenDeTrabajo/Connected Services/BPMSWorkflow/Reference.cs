@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSolicitudes.DemoLipiWorkflow {
+namespace WebSolicitudes.BPMSWorkflow {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DemoLipiWorkflow.WorkflowEngineSOASoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BPMSWorkflow.WorkflowEngineSOASoap")]
     public interface WorkflowEngineSOASoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ping", ReplyAction="*")]
@@ -189,12 +189,12 @@ namespace WebSolicitudes.DemoLipiWorkflow {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface WorkflowEngineSOASoapChannel : WebSolicitudes.DemoLipiWorkflow.WorkflowEngineSOASoap, System.ServiceModel.IClientChannel {
+    public interface WorkflowEngineSOASoapChannel : WebSolicitudes.BPMSWorkflow.WorkflowEngineSOASoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WorkflowEngineSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.DemoLipiWorkflow.WorkflowEngineSOASoap>, WebSolicitudes.DemoLipiWorkflow.WorkflowEngineSOASoap {
+    public partial class WorkflowEngineSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.BPMSWorkflow.WorkflowEngineSOASoap>, WebSolicitudes.BPMSWorkflow.WorkflowEngineSOASoap {
         
         public WorkflowEngineSOASoapClient() {
         }

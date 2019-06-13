@@ -79,6 +79,7 @@ $(function(){
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="float:right">
         <nav>
 <ul class="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
@@ -90,7 +91,8 @@ $(function(){
         	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
         	</li>
         </ul>
-</nav><br /><br />
+</nav>
+        </div><br /><br />
     <form id="formTratarCaso" enctype="multipart/form-data">
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
@@ -273,10 +275,15 @@ $(function(){
                 <label for="txtFechaDeVisita">Fecha visita</label>
                 <input type="date" class="form-control casoModificable" style="background-color:#ffffbf" id="txtFechaDeVisita" readonly name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
-                <label for="txtArchivoSoliL" id="txtArchivoSoliL"<%-- style="color:#f9f9fb"--%>>Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" style="background-color:#ffffbf" disabled name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
-            </fieldset>
+            <fieldset class="form-group tratarcaso modificable col-md-4">
+                <% if(ViewData["txtArchivosCargados"] != null)
+                    {%>
+                <label for="txtArchivoCargados" id="txtArchivoCargados">Archivo cargados</label>
+                <% if(ViewData["txtArchivosCargados"] != null)%>
+                    <%= ViewData["txtArchivosCargados"] %>
+                <%--<input type="file" class="form-control" id="txtArchivoCargados1" name="txtArchivoCargados1" multiple value="<%= ViewData["txtArchivosCargados"] %>"/>--%>
+                 <%}%>
+            </fieldset>  
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
                 <textarea class="form-control casoModificable" id="txtComentarioCierre" style="background-color:#ffffbf" readonly name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>

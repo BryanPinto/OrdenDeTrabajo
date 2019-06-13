@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebSolicitudes.DemoLipiEntity {
+namespace WebSolicitudes.BPMSEntity {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DemoLipiEntity.EntityManagerSOASoap")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BPMSEntity.EntityManagerSOASoap")]
     public interface EntityManagerSOASoap {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/getEntitiesAsString", ReplyAction="*")]
@@ -105,12 +105,12 @@ namespace WebSolicitudes.DemoLipiEntity {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface EntityManagerSOASoapChannel : WebSolicitudes.DemoLipiEntity.EntityManagerSOASoap, System.ServiceModel.IClientChannel {
+    public interface EntityManagerSOASoapChannel : WebSolicitudes.BPMSEntity.EntityManagerSOASoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class EntityManagerSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.DemoLipiEntity.EntityManagerSOASoap>, WebSolicitudes.DemoLipiEntity.EntityManagerSOASoap {
+    public partial class EntityManagerSOASoapClient : System.ServiceModel.ClientBase<WebSolicitudes.BPMSEntity.EntityManagerSOASoap>, WebSolicitudes.BPMSEntity.EntityManagerSOASoap {
         
         public EntityManagerSOASoapClient() {
         }

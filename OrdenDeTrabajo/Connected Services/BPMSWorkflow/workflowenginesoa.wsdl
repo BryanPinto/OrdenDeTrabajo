@@ -3035,16 +3035,16 @@
   </wsdl:binding>
   <wsdl:service name="WorkflowEngineSOA">
     <wsdl:port name="WorkflowEngineSOASoap" binding="tns:WorkflowEngineSOASoap">
-      <soap:address location="http://35.247.198.31/Des_Lipigas/webservices/workflowenginesoa.asmx" />
+      <soap:address location="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" />
     </wsdl:port>
     <wsdl:port name="WorkflowEngineSOASoap12" binding="tns:WorkflowEngineSOASoap12">
-      <soap12:address location="http://35.247.198.31/Des_Lipigas/webservices/workflowenginesoa.asmx" />
+      <soap12:address location="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" />
     </wsdl:port>
     <wsdl:port name="WorkflowEngineSOAHttpGet" binding="tns:WorkflowEngineSOAHttpGet">
-      <http:address location="http://35.247.198.31/Des_Lipigas/webservices/workflowenginesoa.asmx" />
+      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" />
     </wsdl:port>
     <wsdl:port name="WorkflowEngineSOAHttpPost" binding="tns:WorkflowEngineSOAHttpPost">
-      <http:address location="http://35.247.198.31/Des_Lipigas/webservices/workflowenginesoa.asmx" />
+      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

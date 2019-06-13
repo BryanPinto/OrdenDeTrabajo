@@ -106,7 +106,7 @@ namespace WebSolicitudes.Controllers
 
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                 //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
-                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+                BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
 
                 respuestaCasos = servicioQuery.getEntitiesAsString(queryLogin);
                 respuestaCasos = respuestaCasos.Replace("\n", "");

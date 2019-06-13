@@ -88,10 +88,8 @@ namespace WebSolicitudes.Controllers
                 //    fechaTermino = DateTime.ParseExact(txtFechaHasta, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
 
-
-                //LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
-                //DemoLipiQuery.QueryFormSOASoapClient servicioQuery = new DemoLipiQuery.QueryFormSOASoapClient();
-                DesQuery.QueryFormSOASoapClient servicioQuery = new DesQuery.QueryFormSOASoapClient();
+                
+                BPMSQuery.QueryFormSOASoapClient servicioQuery = new BPMSQuery.QueryFormSOASoapClient();
 
                 int cantidadCasos = 20;
                 string respuestaCasos = "";
@@ -376,10 +374,8 @@ namespace WebSolicitudes.Controllers
                 #endregion
 
                 #region Queries
-
-                //LipigasQuerySoa.QueryFormSOASoapClient servicioQuery = new LipigasQuerySoa.QueryFormSOASoapClient();
-                //DemoLipiQuery.QueryFormSOASoapClient servicioQuery = new DemoLipiQuery.QueryFormSOASoapClient();
-                DesQuery.QueryFormSOASoapClient servicioQuery = new DesQuery.QueryFormSOASoapClient();
+                
+                BPMSQuery.QueryFormSOASoapClient servicioQuery = new BPMSQuery.QueryFormSOASoapClient();
 
                 int cantidadCasos = 20;
                 string respuestaCasos = "";

@@ -299,9 +299,7 @@ namespace WebSolicitudes.Controllers
             try
             {
                 int numCasoXML = id;
-                //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
-                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+                BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a trabajar", "ObtenerCaso", Convert.ToString(numCasoXML));
@@ -412,7 +410,7 @@ namespace WebSolicitudes.Controllers
 
                 //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
                 //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
-                DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+                BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
 
                 //Escribir log CSV
                 UtilController.EscribirLog("Caso a actualizar", "ActualizarCaso", Convert.ToString(numCaso));
@@ -510,10 +508,8 @@ namespace WebSolicitudes.Controllers
                             }
                         }
                     }
-
-                    //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                    //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
-                    DesEntity.EntityManagerSOASoapClient servicioQuery = new DesEntity.EntityManagerSOASoapClient();
+                    
+                    BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
 
                     //Escribir log CSV
                     UtilController.EscribirLog("Caso a actualizar", "ActualizarCasoArchivos", Convert.ToString(numCaso));
@@ -572,7 +568,7 @@ namespace WebSolicitudes.Controllers
 
                 //LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient servicioQuery = new LipigasWorkflowEngineSoa.WorkflowEngineSOASoapClient();
                 //DemoLipiWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DemoLipiWorkflow.WorkflowEngineSOASoapClient();
-                DesWorkflow.WorkflowEngineSOASoapClient servicioQuery = new DesWorkflow.WorkflowEngineSOASoapClient();
+                BPMSWorkflow.WorkflowEngineSOASoapClient servicioQuery = new BPMSWorkflow.WorkflowEngineSOASoapClient();
 
 
 
