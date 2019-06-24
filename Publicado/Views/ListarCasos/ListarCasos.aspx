@@ -38,6 +38,18 @@
                 }
             });
 
+            //Filtrar la lista de submotivos una vez seleccionado un motivo
+            //var motivoSel = $("#txtMotivoSelect").val();
+            $("#txtMotivoSelect").change(function () {
+                var motivo = $("#txtMotivoSelect").find('option:selected').text(); // guardar valor de motivo seleccionado
+                if (motivo != "Seleccione opción") {
+                    $("#option-container").children().appendTo("#txtSubMotivoSelect"); // mueve <option> contenida en #option-container de vuelta a su <select>
+                    var toMove = $("#txtSubMotivoSelect").children("[data-father!='" + motivo + "']"); // mover submotivos filtrados por motivo distinto al seleccionado
+                    toMove.appendTo("#option-container"); // mover valores de submotivo a #option-container
+                    $("#txtSubMotivoSelect").removeAttr("disabled"); // 
+                }
+            });
+
             $("#formBusqueda").submit(function (e) {
                 e.preventDefault();
                 // Buscar cabeceras
@@ -47,8 +59,6 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        console.log("data");
-                        console.log(data);
                         if (data != "error") {
                             $('#tablaordenes').find('tbody').hide();
                             table.clear();
@@ -190,7 +200,7 @@ $(function(){
                    <fieldset class="form-group col-md-2">
                         <label for="txtSubMotivoSelect">Sub motivo</label>
                         <select name="txtSubMotivoSelect" id="txtSubMotivoSelect" class="form-control">
-                            <option value="0">Seleccione opción</option>
+                            <option data-father="null" value="0">Seleccione opción</option>
                             <%=ViewData["txtSubMotivoSelect1"]%>
                         </select>
                     </fieldset>
@@ -198,6 +208,7 @@ $(function(){
                     </fieldset>
                     <fieldset class="form-group col-md-1">
                         <%--<div id="buscarListar">--%>
+                            <span id="option-container" style="visibility: hidden; position:absolute;"></span>
                             <input type="submit" id="btnBuscarListar" value="Buscar" class="buscar">
                         <%--</div>--%>
                     </fieldset>
