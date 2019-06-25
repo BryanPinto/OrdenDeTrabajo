@@ -375,9 +375,12 @@ namespace WebSolicitudes.Controllers
             string idRegistro = "";
             try
             {
-                IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
-                Convert.ToInt32(IDUsuario);
-                ViewData["IDUsuario"] = IDUsuario;
+                if (System.Web.HttpContext.Current.Session["IDUsuario"] != null)
+                {
+                    IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                    Convert.ToInt32(IDUsuario);
+                    ViewData["IDUsuario"] = IDUsuario;
+                }
                 int numCaso          = Convert.ToInt32(collection["txtNumCaso"]);
                 var fechaVisita      = collection["txtFechaDeVisita"];
                 var archivoSoli      = collection["txtArchivoContratista"];
@@ -479,10 +482,13 @@ namespace WebSolicitudes.Controllers
             {
                 if (System.Web.HttpContext.Current.Session["NroCasoTemp"] != null)
                 {
-                    idRegistro = System.Web.HttpContext.Current.Session["IdRegistro"].ToString();
-                    IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
-                    Convert.ToInt32(IDUsuario);
-                    ViewData["IDUsuario"] = IDUsuario;
+                    if (System.Web.HttpContext.Current.Session["IdRegistro"] != null && System.Web.HttpContext.Current.Session["IDUsuario"] != null)
+                    {
+                        idRegistro = System.Web.HttpContext.Current.Session["IdRegistro"].ToString();
+                        IDUsuario = System.Web.HttpContext.Current.Session["IDUsuario"].ToString();
+                        Convert.ToInt32(IDUsuario);
+                        ViewData["IDUsuario"] = IDUsuario;
+                    }
                     int numCaso = Convert.ToInt32(System.Web.HttpContext.Current.Session["NroCasoTemp"]);
                     var archivoSoli = collection["txtArchivoContratista"];
 

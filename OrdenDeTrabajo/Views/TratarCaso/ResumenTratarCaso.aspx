@@ -262,9 +262,12 @@ $(function(){
                 <textarea class="form-control caso" id="txtComentarioSolicitud" name="txtComentarioSolicitud" placeholder="Comentario solicitud" disabled ><%= ViewData["txtComentarioSolicitud"] %></textarea>
             </fieldset>
             <fieldset class="form-group tratarcaso archivo col-md-4">
+                <% if(ViewData["txtArchivo"] != null)
+                    {%>
                 <label for="txtArchivo">Archivo</label>
                 <% if(ViewData["txtArchivo"] != null)%>
                             <%= ViewData["txtArchivo"] %>
+                <%}%>
                 <%--<input type="file" class="form-control" id="txtArchivo" name="txtArchivo" disabled value="<%= ViewData["txtArchivo"] %>"/>--%>
             </fieldset>
         </div>
@@ -286,7 +289,7 @@ $(function(){
             </fieldset>  
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" style="background-color:#ffffbf" readonly name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" style="background-color:#ffffbf" readonly name="txtComentarioCierre"><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>
