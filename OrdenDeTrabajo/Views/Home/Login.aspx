@@ -41,7 +41,7 @@
                 swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
         });
             </script>
-    <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
+    <link href="<%: Url.Content("~/Styles/css/custom.css")%>" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
