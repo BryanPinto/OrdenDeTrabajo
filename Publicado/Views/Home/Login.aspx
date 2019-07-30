@@ -18,8 +18,6 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        console.log("data");
-                        console.log(data);
                         if (data != "error") {
                             $('#form-signin').find('tbody').hide();
                             table.clear();

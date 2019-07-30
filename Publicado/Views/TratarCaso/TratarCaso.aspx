@@ -1,22 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>
+    <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>    
+    <script src="<%: Url.Content("~/Styles/js/moment.js") %>"></script>
+    <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
+    <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Tratar caso</title>
    <script>
-       $(document).ready(function () {           
+       $(document).ready(function () {     
+           var mostrarNotificacion = true;
+           console.log("valor mostrarNotificacion inicializado :"+mostrarNotificacion);
            $("#btnGuardar").click(function (e) {
                e.preventDefault();
-               console.log("1");
                var formulario = $("#formTratarCaso").serialize(); //ESTO ESTABA ANTES
-               var archivos = new FormData(formulario);    //ESTO ESTABA ANTES
-               //var formulario = $("#formTratarCaso"); // ESTO HAY QUE PROBARLO
-               //var archivos = new FormData();   //ESTO HAY QUE PROBARLO
-                             
-               //var datos = $(formulario, archivos).serialize(); //se envia como data
+               var archivos = new FormData();
 
-
+               
+               
                // Buscar cabeceras
                $.ajax({
                    url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
@@ -66,16 +67,17 @@
                    contentType: false,
                    processData: false,
                    enctype: "multipart/form-data",
-                   success: function (data) {
-                       console.log("data formulario");
-                       console.log(data);
-                       swal({
-                           title: 'Modificación exitosa',
-                           text: 'La información del caso ha sido actualizada',
-                           icon: 'success'
-                       }).then(function () {
-                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                       });
+                    success: function (data) {
+                        console.log("valor mostrarNotificacion guardar:"+mostrarNotificacion);
+                       if(mostrarNotificacion)
+                           swal({
+                               title: 'Modificación exitosa',
+                               text: 'La información del caso ha sido actualizada',
+                               icon: 'success'
+                           }).then(function () {
+                               window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
+                               });
+                       mostrarNotificacion = true;
                        if (data != "error") {
                        }
                        else
@@ -93,35 +95,44 @@
                });
            });
 
+
            $("#btnFinalizar").click(function (e) {
                e.preventDefault();
-               $("#btnGuardar").submit();
-               // Buscar cabeceras
-               $.ajax({                   
-                   url: '<%: Url.Content("~/TratarCaso/FinalizarCaso/") %>',
-                   data: $("#formTratarCaso").serialize(),
-                   cache: false,
-                   type: "POST",
-                   success: function (data) {
-                       console.log("data");
-                       console.log(data);
-                       //swal("Caso finalizado exitosamente", "Puedes ver el resumen de este caso en la pestaña de casos históricos", "success");
-                       swal({
-                           title: 'Caso finalizado exitosamente',
-                           text: 'Puedes ver el resumen de este caso en la pestaña de casos históricos',
-                           icon: 'success'
-                       }).then(function () {
-                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                       });
-                       if (data != "error") {
+               mostrarNotificacion = false;
+               console.log("valor mostrarNotificacion finalizar :"+mostrarNotificacion);
+               $("#btnGuardar").click();
+               if ($("#txtFechaDeVisita").val() != "" && $("#txtComentarioCierre").val() != "") {
+                   // Buscar cabeceras
+                   $.ajax({
+                       url: '<%: Url.Content("~/TratarCaso/FinalizarCaso/") %>',
+                       data: $("#formTratarCaso").serialize(),
+                       cache: false,
+                       type: "POST",
+                       success: function (data) {                           
+                           swal({
+                               title: 'Caso finalizado exitosamente',
+                               text: 'Puedes ver el resumen de este caso en la pestaña de casos históricos',
+                               icon: 'success'
+                           }).then(function () {
+                               window.location.href = '<%: Url.Content("~/Home/Index") %>';
+                           });
+                           if (data != "error") {
+                           }
+                           else
+                               swal("Error al finalizar el caso", "Contacte a un administrador", "error");
+                       },
+                       error: function () {
+                           swal("Se produjo un error", "Contacte a un administrador", "warning");
                        }
-                       else
-                           swal("Error al finalizar el caso", "Contacte a un administrador", "error");
-                   },
-                   error: function () {
-                       swal("Se produjo un error", "Contacte a un administrador", "warning");
-                   }
-               });
+                   });
+               }
+               else {
+                   swal({
+                       title: 'Campos obligatorios',
+                       text: 'La fecha de visita y comentario de cierre no pueden estar vacíos para finalizar el caso',
+                       icon: 'warning'
+                   });
+               }
            });
 
            if ("<%=ViewData["txtSinCuenta"]%>" != "") {
@@ -400,7 +411,7 @@ $(function(){
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtFechaDeVisitaL">Fecha visita</label>
-                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
+                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso archivoModificable col-md-4">
                 <label for="txtArchivoSoliL" id="txtArchivoSoliL">Archivo</label>
@@ -417,7 +428,7 @@ $(function(){
             </fieldset>               
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" required placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>
