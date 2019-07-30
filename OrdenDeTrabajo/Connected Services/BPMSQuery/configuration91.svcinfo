@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="rZeraDxp1q72dcxGm59zbaibpLk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="sGSaAmDhoKwXHNA8Vw8sclGL9/Y=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="QueryFormSOASoap3">
+    <bindingConfiguration bindingType="basicHttpBinding" name="QueryFormSOASoap">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>QueryFormSOASoap3</serializedValue>
+          <serializedValue>QueryFormSOASoap</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="QueryFormSOASoap123">
+    <bindingConfiguration bindingType="customBinding" name="QueryFormSOASoap12">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>QueryFormSOASoap123</serializedValue>
+          <serializedValue>QueryFormSOASoap12</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -263,10 +263,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="QueryFormSOASoap3" contract="BPMSQuery.QueryFormSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" bindingConfiguration="QueryFormSOASoap3">
+    <endpoint name="QueryFormSOASoap" contract="BPMSQuery.QueryFormSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" bindingConfiguration="QueryFormSOASoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -275,7 +275,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>QueryFormSOASoap3</serializedValue>
+          <serializedValue>QueryFormSOASoap</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSQuery.QueryFormSOASoap</serializedValue>
@@ -338,7 +338,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>QueryFormSOASoap3</serializedValue>
+          <serializedValue>QueryFormSOASoap</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -348,10 +348,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="QueryFormSOASoap12" contract="BPMSQuery.QueryFormSOASoap" bindingType="customBinding" address="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" bindingConfiguration="QueryFormSOASoap123">
+    <endpoint name="QueryFormSOASoap12" contract="BPMSQuery.QueryFormSOASoap" bindingType="customBinding" address="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" bindingConfiguration="QueryFormSOASoap12">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -360,7 +360,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>QueryFormSOASoap123</serializedValue>
+          <serializedValue>QueryFormSOASoap12</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSQuery.QueryFormSOASoap</serializedValue>

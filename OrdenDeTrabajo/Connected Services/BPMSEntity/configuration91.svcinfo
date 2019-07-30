@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Wx1FDkx6NXJCaYYtT0hClVuDrqY=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="S0CST9G0BZF05k/IG/8ViiKptlY=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="EntityManagerSOASoap3">
+    <bindingConfiguration bindingType="basicHttpBinding" name="EntityManagerSOASoap">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EntityManagerSOASoap3</serializedValue>
+          <serializedValue>EntityManagerSOASoap</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="EntityManagerSOASoap123">
+    <bindingConfiguration bindingType="customBinding" name="EntityManagerSOASoap12">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EntityManagerSOASoap123</serializedValue>
+          <serializedValue>EntityManagerSOASoap12</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -263,10 +263,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EntityManagerSOASoap3" contract="BPMSEntity.EntityManagerSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" bindingConfiguration="EntityManagerSOASoap3">
+    <endpoint name="EntityManagerSOASoap" contract="BPMSEntity.EntityManagerSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" bindingConfiguration="EntityManagerSOASoap">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -275,7 +275,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EntityManagerSOASoap3</serializedValue>
+          <serializedValue>EntityManagerSOASoap</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSEntity.EntityManagerSOASoap</serializedValue>
@@ -338,7 +338,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EntityManagerSOASoap3</serializedValue>
+          <serializedValue>EntityManagerSOASoap</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -348,10 +348,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="EntityManagerSOASoap12" contract="BPMSEntity.EntityManagerSOASoap" bindingType="customBinding" address="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" bindingConfiguration="EntityManagerSOASoap123">
+    <endpoint name="EntityManagerSOASoap12" contract="BPMSEntity.EntityManagerSOASoap" bindingType="customBinding" address="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" bindingConfiguration="EntityManagerSOASoap12">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -360,7 +360,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EntityManagerSOASoap123</serializedValue>
+          <serializedValue>EntityManagerSOASoap12</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSEntity.EntityManagerSOASoap</serializedValue>

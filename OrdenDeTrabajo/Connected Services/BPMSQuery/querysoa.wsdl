@@ -293,16 +293,16 @@
   </wsdl:binding>
   <wsdl:service name="QueryFormSOA">
     <wsdl:port name="QueryFormSOASoap" binding="tns:QueryFormSOASoap">
-      <soap:address location="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" />
+      <soap:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" />
     </wsdl:port>
     <wsdl:port name="QueryFormSOASoap12" binding="tns:QueryFormSOASoap12">
-      <soap12:address location="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" />
+      <soap12:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" />
     </wsdl:port>
     <wsdl:port name="QueryFormSOAHttpGet" binding="tns:QueryFormSOAHttpGet">
-      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" />
+      <http:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" />
     </wsdl:port>
     <wsdl:port name="QueryFormSOAHttpPost" binding="tns:QueryFormSOAHttpPost">
-      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/querysoa.asmx" />
+      <http:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/querysoa.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

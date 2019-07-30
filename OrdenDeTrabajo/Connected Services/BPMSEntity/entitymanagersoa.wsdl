@@ -1495,16 +1495,16 @@
   </wsdl:binding>
   <wsdl:service name="EntityManagerSOA">
     <wsdl:port name="EntityManagerSOASoap" binding="tns:EntityManagerSOASoap">
-      <soap:address location="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" />
+      <soap:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" />
     </wsdl:port>
     <wsdl:port name="EntityManagerSOASoap12" binding="tns:EntityManagerSOASoap12">
-      <soap12:address location="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" />
+      <soap12:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" />
     </wsdl:port>
     <wsdl:port name="EntityManagerSOAHttpGet" binding="tns:EntityManagerSOAHttpGet">
-      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" />
+      <http:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" />
     </wsdl:port>
     <wsdl:port name="EntityManagerSOAHttpPost" binding="tns:EntityManagerSOAHttpPost">
-      <http:address location="http://192.168.2.117/Desa_BPMS/webservices/entitymanagersoa.asmx" />
+      <http:address location="http://192.168.2.117/Test_Desa_BPMS/webservices/entitymanagersoa.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
