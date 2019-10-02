@@ -5,12 +5,32 @@
     <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="<%: Url.Content("~/Styles/css/newdatatables.min.css") %>" rel="stylesheet" />
+    <script src="<%: Url.Content("~/Styles/js/newdatatables.min.js") %>"></script>
+    <%--<script src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script>--%>
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>--%>
+    <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
     <title>Casos pendientes</title>
     <script>
         $(document).ready(function () {
             // Datatable y propiedades
             var table = $('#tablaindex').DataTable({
-                "sDom": '<"top">rt<"bottom"ip><"clear">',
+                //"sDom": '<"top">rt<"bottom"ip><"clear">',
+                "dom": 'lBfrtip',
+                "buttons": [
+                    {
+                        extend: 'collection',
+                        text: 'Descargar',
+                        buttons: [
+                            'excel',
+                            'csv',
+                            'pdf'
+                        ]
+                    }
+                ],
                 "order": [[0, "desc"]],
                 "language": {
                     "sProcessing": "Procesando...",
@@ -50,17 +70,6 @@
                 }
             });
 
-            
-            
-
-            //$("#province").change(function () {
-            //    var province = $("#province").find('option:selected').text(); // stores province
-            //     $("#option-container").children().appendTo("#city"); // moves <option> contained in #option-container back to their <select>
-            //     var toMove = $("#city").children("[data-province!='"+province+"']"); // selects city elements to move out
-            //     toMove.appendTo("#option-container"); // moves city elements in #option-container
-            //     $("#city").removeAttr("disabled"); // enables select
-            //});
-
             $("#formIndex").submit(function (e) {
                 e.preventDefault();
                 // Buscar cabeceras
@@ -85,91 +94,95 @@
                     }
                 });
             });
+
             $("#formIndex").submit();
-            
+
             // Validar números
             $("#txtNroCaso").numeric("{ negative : false , decimalPlaces : 0 , decimal : ',' }");
 
             var maxHeight = 400;
+        
 
-$(function(){
+            console.log("Antes a funcion");
+            $(function () {
+                console.log("0");
+                $("#dropdown > li").hover(function () {
+                    console.log("1");
+                    var $container = $(this),
+                        $list = $container.find("ul"),
+                        $anchor = $container.find("a"),
+                        height = $list.height() * 1.1,       // make sure there is enough room at the bottom
+                        multiplier = height / maxHeight;     // needs to move faster if list is taller
+                    console.log("2");
 
-    $(".dropdown > li").hover(function() {
-    
-         var $container = $(this),
-             $list = $container.find("ul"),
-             $anchor = $container.find("a"),
-             height = $list.height() * 1.1,       // make sure there is enough room at the bottom
-             multiplier = height / maxHeight;     // needs to move faster if list is taller
-        
-        // need to save height here so it can revert on mouseout            
-        $container.data("origHeight", $container.height());
-        
-        // so it can retain it's rollover color all the while the dropdown is open
-        $anchor.addClass("hover");
-        
-        // make sure dropdown appears directly below parent list item    
-        $list
-            .show()
-            .css({
-                paddingTop: $container.data("origHeight")
-            });
-        
-        // don't do any animation if list shorter than max
-        if (multiplier > 1) {
-            $container
-                .css({
-                    height: maxHeight,
-                    overflow: "hidden"
-                })
-                .mousemove(function(e) {
-                    var offset = $container.offset();
-                    var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
-                    if (relativeY > $container.data("origHeight")) {
-                        $list.css("top", -relativeY + $container.data("origHeight"));
-                    };
+                    // need to save height here so it can revert on mouseout            
+                    $container.data("origHeight", $container.height());
+                    console.log("3");
+                    // so it can retain it's rollover color all the while the dropdown is open
+                    $anchor.addClass("hover");
+                    console.log("4");
+                    // make sure dropdown appears directly below parent list item    
+                    $list
+                        .show()
+                        .css({
+                            paddingTop: $container.data("origHeight")
+                        });
+                    console.log("5");
+                    // don't do any animation if list shorter than max
+                    if (multiplier > 1) {
+                        console.log("6");
+                        $container
+                            .css({
+                                height: maxHeight,
+                                overflow: "hidden"
+                            })
+                            .mousemove(function (e) {
+                                var offset = $container.offset();
+                                var relativeY = ((e.pageY - offset.top) * multiplier) - ($container.data("origHeight") * multiplier);
+                                if (relativeY > $container.data("origHeight")) {
+                                    $list.css("top", -relativeY + $container.data("origHeight"));
+                                };
+                            });
+                        console.log("7");
+                    }
+
+                }, function () {
+
+                    var $el = $(this);
+
+                    // put things back to normal
+                    $el
+                        .height($(this).data("origHeight"))
+                        .find("ul")
+                        .css({ top: 0 })
+                        .hide()
+                        .end()
+                        .find("a")
+                        .removeClass("hover");
+
                 });
-        }
-        
-    }, function() {
-    
-        var $el = $(this);
-        
-        // put things back to normal
-        $el
-            .height($(this).data("origHeight"))
-            .find("ul")
-            .css({ top: 0 })
-            .hide()
-            .end()
-            .find("a")
-            .removeClass("hover");
-    
-    });  
-    
             });
-            // Mostrar mensaje de creación o error
-            if ("<%= ViewData["estado"] %>" == "1")
-                swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
-            else if ("<%= ViewData["estado"] %>" == "0")
-                swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
         });
-
-        
-        //}));
+                        // Mostrar mensaje de creación o error
+                        if ("<%= ViewData["estado"] %>" == "1")
+                            swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
+                        else if ("<%= ViewData["estado"] %>" == "0")
+                            swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
     </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div style="float:right">
 <nav>
-<ul class="dropdown">
-        	<li class="drop"><a href="#">Solicitudes</a>
+<ul id="dropdown">
+        	<%--<li class="drop"><a href="#">Solicitudes</a>
         		<ul class="sub_menu">
         			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
-        	</li>
+        	</li>--%>
+            <li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
+            <li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
@@ -230,7 +243,7 @@ $(function(){
             </div>
         </div>
     </form>
-
+   <%-- <a href='<%: Url.Content("~/Home/Exportar/") %>' id="descargarTabla" class="btn btn-default" role="button">Descargar plantilla</a>--%>
     <%--TABLA--%>
     <div class="table-responsive">
         <table class="table table-bordered table-hover" id="tablaindex">

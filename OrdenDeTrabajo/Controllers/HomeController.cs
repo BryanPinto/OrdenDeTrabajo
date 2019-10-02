@@ -86,12 +86,20 @@ namespace WebSolicitudes.Controllers
                     txtPass.Trim();
                 }
 
-                //Escribir log CSV
-                UtilController.EscribirLog("Credenciales ingresadas", "Login", "Correo: " + txtCorreo + ", Clave: " + txtPass);
-                //Fin CSV
+                //if (txtCorreo == "1" && txtPass == "2")
+                //{
+                //    idUsuario = "1";
+                //    Convert.ToInt32(idUsuario);
+                //}
+                //else
+                //{
 
-                //Consultar a tabla si correo y password coinciden
-                string queryLogin = @"<BizAgiWSParam>
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Credenciales ingresadas", "Login", "Correo: " + txtCorreo + ", Clave: " + txtPass);
+                    //Fin CSV
+
+                    //Consultar a tabla si correo y password coinciden
+                    string queryLogin = @"<BizAgiWSParam>
 	                                    <EntityData>
 		                                    <EntityName>ContratistasOTMedidor</EntityName>
 		                                    <Filters>
@@ -100,54 +108,55 @@ namespace WebSolicitudes.Controllers
 	                                    </EntityData>
                                     </BizAgiWSParam>";
 
-                //Escribir log CSV
-                UtilController.EscribirLog("Consultar credenciales", "Login", queryLogin);
-                //Fin CSV
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Consultar credenciales", "Login", queryLogin);
+                    //Fin CSV
 
-                //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
-                //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
-                BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
+                    //LipigasEntityManagerSoa.EntityManagerSOASoapClient servicioQuery = new LipigasEntityManagerSoa.EntityManagerSOASoapClient();
+                    //DemoLipiEntity.EntityManagerSOASoapClient servicioQuery = new DemoLipiEntity.EntityManagerSOASoapClient();
+                    BPMSEntity.EntityManagerSOASoapClient servicioQuery = new BPMSEntity.EntityManagerSOASoapClient();
 
-                respuestaCasos = servicioQuery.getEntitiesAsString(queryLogin);
-                respuestaCasos = respuestaCasos.Replace("\n", "");
-                respuestaCasos = respuestaCasos.Replace("\t", "");
-                respuestaCasos = respuestaCasos.Replace("\r", "");
+                    respuestaCasos = servicioQuery.getEntitiesAsString(queryLogin);
+                    respuestaCasos = respuestaCasos.Replace("\n", "");
+                    respuestaCasos = respuestaCasos.Replace("\t", "");
+                    respuestaCasos = respuestaCasos.Replace("\r", "");
 
-                //Escribir log CSV
-                UtilController.EscribirLog("Respuesta", "Login", respuestaCasos);
-                //Fin CSV
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Respuesta", "Login", respuestaCasos);
+                    //Fin CSV
 
-                //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(respuestaCasos);
+                    //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
+                    XmlDocument doc = new XmlDocument();
+                    doc.LoadXml(respuestaCasos);
 
-                string correo = "";
-                string password = "";
-                //Obtener correo y pass de respuesta
-                if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText != null)
-                {
-                    correo = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText;
-                }
-                if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText != null)
-                {
-                    password = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText;
-                }
-
-                //Escribir log CSV
-                UtilController.EscribirLog("Credenciales rescatadas", "Login", "Correo: " + correo + ", Clave: " + password);
-                //Fin CSV
-
-                if (txtCorreo == correo && txtPass == password)
-                {
-                    // Recorrer los resultados
-                    foreach (XmlNode item in doc.SelectNodes("/BizAgiWSResponse/Entities/ContratistasOTMedidor"))
+                    string correo = "";
+                    string password = "";
+                    //Obtener correo y pass de respuesta
+                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText != null)
                     {
-                        // Obtener campos
-                        idUsuario = item.Attributes["key"].Value;
-                        Convert.ToInt32(idUsuario);
+                        correo = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText;
                     }
-                    //Url.Action("ListarCasos", "CasosPendientes", new { collection = txtVacio, IDUsuario = idUsuario });
-                }
+                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText != null)
+                    {
+                        password = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText;
+                    }
+
+                    //Escribir log CSV
+                    UtilController.EscribirLog("Credenciales rescatadas", "Login", "Correo: " + correo + ", Clave: " + password);
+                    //Fin CSV
+
+                    if (txtCorreo == correo && txtPass == password)
+                    {
+                        // Recorrer los resultados
+                        foreach (XmlNode item in doc.SelectNodes("/BizAgiWSResponse/Entities/ContratistasOTMedidor"))
+                        {
+                            // Obtener campos
+                            idUsuario = item.Attributes["key"].Value;
+                            Convert.ToInt32(idUsuario);
+                        }
+                        //Url.Action("ListarCasos", "CasosPendientes", new { collection = txtVacio, IDUsuario = idUsuario });
+                    }
+                //}
             }
             catch (Exception ex)
             {

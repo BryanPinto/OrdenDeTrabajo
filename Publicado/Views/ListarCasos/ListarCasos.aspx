@@ -11,7 +11,7 @@
             // Datatable y propiedades
             var table = $('#tablaordenes').DataTable({
                 "sDom": '<"top">rt<"bottom"ip><"clear">',
-                "order": [[0, "desc"]],
+                "order": [[3, "desc"]],
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",

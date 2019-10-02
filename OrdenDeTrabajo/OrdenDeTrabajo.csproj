@@ -231,6 +231,7 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Styles\css\bootstrap-toggle.min.css" />
     <Content Include="Styles\css\jquery-ui.css" />
+    <Content Include="Styles\css\newdatatables.min.css" />
     <Content Include="Styles\js\bootstrap-combobox.js" />
     <Content Include="Styles\css\bootstrap-theme.css" />
     <Content Include="Styles\css\bootstrap-theme.min.css" />
@@ -253,6 +254,7 @@
     <Content Include="Styles\js\jquery.Rut.js" />
     <Content Include="Styles\js\jquery.ui.js" />
     <Content Include="Styles\js\moment.js" />
+    <Content Include="Styles\js\newdatatables.min.js" />
     <Content Include="Styles\js\npm.js" />
     <Content Include="Styles\css\Style.css" />
     <Content Include="Views\Home\Error404.aspx" />
