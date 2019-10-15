@@ -4,14 +4,28 @@
     <script src="<%: Url.Content("~/Styles/js/moment.js") %>"></script>
     <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
     <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
-
+    <link href="<%: Url.Content("~/Styles/css/newdatatables.min.css") %>" rel="stylesheet" />
+    <script src="<%: Url.Content("~/Styles/js/newdatatables.min.js") %>"></script>
+    <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
     <title>Histórico de casos</title>
     <script>
         $(document).ready(function () {
             // Datatable y propiedades
             var table = $('#tablaordenes').DataTable({
-                "sDom": '<"top">rt<"bottom"ip><"clear">',
-                "order": [[3, "desc"]],
+                //"sDom": '<"top">rt<"bottom"ip><"clear">',
+                "dom": 'lBfrtip',
+                "buttons": [
+                    {
+                        extend: 'collection',
+                        text: 'Descargar',
+                        buttons: [
+                            'excel',
+                            'csv',
+                            'pdf'
+                        ]
+                    }
+                ],
+                "order": [[0, "desc"]],
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
@@ -83,7 +97,7 @@
 
 $(function(){
 
-    $(".dropdown > li").hover(function() {
+    $("#dropdown > li").hover(function() {
     
          var $container = $(this),
              $list = $container.find("ul"),
@@ -143,14 +157,16 @@ $(function(){
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div style="float:right">
-    <nav>
-<ul class="dropdown">
-        	<li class="drop"><a href="#">Solicitudes</a>
+<nav>
+<ul id="dropdown">
+        	<%--<li class="drop"><a href="#">Solicitudes</a>
         		<ul class="sub_menu">
         			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
-        	</li>
+        	</li>--%>
+            <li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
+            <li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>

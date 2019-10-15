@@ -20,7 +20,7 @@
 
 $(function(){
 
-    $(".dropdown > li").hover(function() {
+    $("#dropdown > li").hover(function() {
     
          var $container = $(this),
              $list = $container.find("ul"),
@@ -81,7 +81,7 @@ $(function(){
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div style="float:right">
         <nav>
-<ul class="dropdown">
+<ul id="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
         		<ul class="sub_menu">
         			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
