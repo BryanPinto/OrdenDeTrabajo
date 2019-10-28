@@ -156,6 +156,10 @@ namespace WebSolicitudes.Controllers
                         }
                         //Url.Action("ListarCasos", "CasosPendientes", new { collection = txtVacio, IDUsuario = idUsuario });
                     }
+                    else
+                    {
+                        return RedirectToAction("Login", "Home", new { estado = 0 });
+                    }
                 //}
             }
             catch (Exception ex)
