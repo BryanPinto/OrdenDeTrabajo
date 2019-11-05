@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="FS3Vh7TdNB4wv9Sg7hPUphOhpOc=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="4sLuSeC6l4+Ec72kKB872nr5wXo=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="WorkflowEngineSOASoap3">
+    <bindingConfiguration bindingType="basicHttpBinding" name="WorkflowEngineSOASoap1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap3</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -110,10 +110,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="WorkflowEngineSOASoap123">
+    <bindingConfiguration bindingType="customBinding" name="WorkflowEngineSOASoap121">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap123</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap121</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -263,10 +263,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WorkflowEngineSOASoap3" contract="BPMSWorkflow.WorkflowEngineSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" bindingConfiguration="WorkflowEngineSOASoap3">
+    <endpoint name="WorkflowEngineSOASoap1" contract="BPMSWorkflow.WorkflowEngineSOASoap" bindingType="basicHttpBinding" address="http://192.168.2.209/Prod_Sol_Dcto/webservices/workflowenginesoa.asmx" bindingConfiguration="WorkflowEngineSOASoap1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.209/Prod_Sol_Dcto/webservices/workflowenginesoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -275,7 +275,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap3</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSWorkflow.WorkflowEngineSOASoap</serializedValue>
@@ -338,7 +338,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap3</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -348,10 +348,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="WorkflowEngineSOASoap12" contract="BPMSWorkflow.WorkflowEngineSOASoap" bindingType="customBinding" address="http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx" bindingConfiguration="WorkflowEngineSOASoap123">
+    <endpoint name="WorkflowEngineSOASoap121" contract="BPMSWorkflow.WorkflowEngineSOASoap" bindingType="customBinding" address="http://192.168.2.209/Prod_Sol_Dcto/webservices/workflowenginesoa.asmx" bindingConfiguration="WorkflowEngineSOASoap121">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://192.168.2.117/Desa_BPMS/webservices/workflowenginesoa.asmx</serializedValue>
+          <serializedValue>http://192.168.2.209/Prod_Sol_Dcto/webservices/workflowenginesoa.asmx</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -360,7 +360,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap123</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap121</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BPMSWorkflow.WorkflowEngineSOASoap</serializedValue>
@@ -423,7 +423,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>WorkflowEngineSOASoap12</serializedValue>
+          <serializedValue>WorkflowEngineSOASoap121</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

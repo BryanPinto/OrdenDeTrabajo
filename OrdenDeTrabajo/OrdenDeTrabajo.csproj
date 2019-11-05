@@ -200,16 +200,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <None Include="Connected Services\BPMSEntity\entitymanagersoa.wsdl" />
     <None Include="Connected Services\BPMSQuery\querysoa.wsdl" />
-    <None Include="Connected Services\BPMSWorkflow\workflowenginesoa.wsdl" />
-    <None Include="Connected Services\BPMSWorkflow\configuration91.svcinfo" />
-    <None Include="Connected Services\BPMSWorkflow\configuration.svcinfo" />
-    <None Include="Connected Services\BPMSWorkflow\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Connected Services\BPMSEntity\configuration91.svcinfo" />
     <None Include="Connected Services\BPMSEntity\configuration.svcinfo" />
     <None Include="Connected Services\BPMSEntity\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\BPMSWorkflow\configuration91.svcinfo" />
+    <None Include="Connected Services\BPMSWorkflow\configuration.svcinfo" />
+    <None Include="Connected Services\BPMSWorkflow\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -223,6 +222,7 @@
     <Content Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
+    <None Include="Connected Services\BPMSWorkflow\workflowenginesoa.wsdl" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\bootstrap-toggle.min.js" />
