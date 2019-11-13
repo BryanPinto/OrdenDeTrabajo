@@ -101,7 +101,7 @@ namespace WebSolicitudes.Controllers
                     //Consultar a tabla si correo y password coinciden
                     string queryLogin = @"<BizAgiWSParam>
 	                                    <EntityData>
-		                                    <EntityName>ContratistasOTMedidor</EntityName>
+		                                    <EntityName>P_OTContratista</EntityName>
 		                                    <Filters>
 			                                    <![CDATA[CorreoElectronico = '" + txtCorreo + @"' AND Pass = '" + txtPass + @"']]>
 		                                    </Filters>
@@ -132,13 +132,13 @@ namespace WebSolicitudes.Controllers
                     string correo = "";
                     string password = "";
                     //Obtener correo y pass de respuesta
-                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText != null)
+                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/P_OTContratista/CorreoElectronico").InnerText != null)
                     {
-                        correo = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/CorreoElectronico").InnerText;
+                        correo = doc.SelectSingleNode("/BizAgiWSResponse/Entities/P_OTContratista/CorreoElectronico").InnerText;
                     }
-                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText != null)
+                    if (doc.SelectSingleNode("/BizAgiWSResponse/Entities/P_OTContratista/Pass").InnerText != null)
                     {
-                        password = doc.SelectSingleNode("/BizAgiWSResponse/Entities/ContratistasOTMedidor/Pass").InnerText;
+                        password = doc.SelectSingleNode("/BizAgiWSResponse/Entities/P_OTContratista/Pass").InnerText;
                     }
 
                     //Escribir log CSV
@@ -148,7 +148,7 @@ namespace WebSolicitudes.Controllers
                     if (txtCorreo == correo && txtPass == password)
                     {
                         // Recorrer los resultados
-                        foreach (XmlNode item in doc.SelectNodes("/BizAgiWSResponse/Entities/ContratistasOTMedidor"))
+                        foreach (XmlNode item in doc.SelectNodes("/BizAgiWSResponse/Entities/P_OTContratista"))
                         {
                             // Obtener campos
                             idUsuario = item.Attributes["key"].Value;
