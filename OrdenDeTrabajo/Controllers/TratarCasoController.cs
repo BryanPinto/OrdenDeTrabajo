@@ -47,8 +47,8 @@ namespace WebSolicitudes.Controllers
             string txtComunas         = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas.Comuna']").InnerText;
 
             //REQUERIMIENTO
-            string txtContratistasOT    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre']").InnerText;
-            string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico']").InnerText;
+            string txtContratistasOT    = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistaOT.Nombre']").InnerText;
+            string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistaOT.CorreoElectronico']").InnerText;
             string txtMotivoOT          = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT.Motivo']").InnerText;
             string txtSubMotivoOT       = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT.Submotivo']").InnerText;
             string txtComentarioSolici  = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioSolicitud']").InnerText;
@@ -188,8 +188,8 @@ namespace WebSolicitudes.Controllers
             string txtComunas = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.Comunas.Comuna']").InnerText;
 
             //REQUERIMIENTO
-            string txtContratistasOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre']").InnerText;
-            string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico']").InnerText;
+            string txtContratistasOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistaOT.Nombre']").InnerText;
+            string txtCorreoContratista = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ContratistaOT.CorreoElectronico']").InnerText;
             string txtMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.MotivoOT.Motivo']").InnerText;
             string txtSubMotivoOT = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.SubMotivoOT.Submotivo']").InnerText;
             string txtComentarioSolici = doc.SelectSingleNode("/BizAgiWSResponse/XPath[@XPath='OrdendeTrabajoMedidor.ComentarioSolicitud']").InnerText;
@@ -332,8 +332,8 @@ namespace WebSolicitudes.Controllers
                         <XPath XPath=""OrdendeTrabajoMedidor.Contacto.Celular""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Region.Nombre""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.Comunas.Comuna""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistasOTMedidor.Nombre""/>
-                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistasOTMedidor.CorreoElectronico""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistaOT.Nombre""/>
+                        <XPath XPath=""OrdendeTrabajoMedidor.ContratistaOT.CorreoElectronico""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.MotivoOT.Motivo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.SubMotivoOT.Submotivo""/>
                         <XPath XPath=""OrdendeTrabajoMedidor.ComentarioSolicitud""/>

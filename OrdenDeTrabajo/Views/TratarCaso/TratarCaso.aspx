@@ -218,12 +218,14 @@ $(function(){
     <div style="float:right">
 <nav>
 <ul id="dropdown">
-        	<li class="drop"><a href="#">Solicitudes</a>
+        	<%--<li class="drop"><a href="#">Solicitudes</a>
         		<ul class="sub_menu">
         			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
-        	</li>
+        	</li>--%>
+    <li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
+					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>
         </ul>
@@ -369,7 +371,7 @@ $(function(){
     </div>
     
     <div class="datosSolicitante">
-        <h3>Requirimiento</h3>
+        <h3>Requerimiento</h3>
         
         <div class="row">
             <fieldset class="form-group tratarcaso col-md-4">

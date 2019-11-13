@@ -130,7 +130,7 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
                       <XPaths>
-                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + UsuarioLogueado + "</XPath>";
+                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistaOT' Include='true'>" + UsuarioLogueado + "</XPath>";
                 //ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
@@ -391,7 +391,7 @@ namespace WebSolicitudes.Controllers
                           <Internal Name='idWfClass' Include='true'>26</Internal>
                       </Internals>
                       <XPaths>
-                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistasOTMedidor' Include='true'>" + UsuarioLogueado + "</XPath>";//ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
+                        <XPath Path= 'OrdendeTrabajoMedidor.ContratistaOT' Include='true'>" + UsuarioLogueado + "</XPath>";//ESTA LINEA CORRESPONDE AL FILTRO POR USUARIO
                 if (Convert.ToInt32(txtMotivoSelect) != 0)
                 {
                     queryCasos += @"<XPath Path='OrdendeTrabajoMedidor.MotivoOT.Cod' Include='true'>" + motivo + "</XPath>";
