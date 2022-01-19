@@ -163,6 +163,7 @@ namespace WebSolicitudes.Controllers
                       </XPaths>
                   </QueryParams>
                   <Parameters>
+                      <Parameter Name ='idEnt'>10135</Parameter>
                       <Parameter Name ='pag'>1</Parameter>
                        <Parameter Name='PageSize'>" + cantidadCasos + @"</Parameter>
                     </Parameters>
@@ -182,10 +183,14 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(respuestaCasos);
-                XmlNodeList rows = doc.GetElementsByTagName("Row");
-                
+                XmlDocument doc3 = new XmlDocument();
+                doc3.LoadXml(respuestaCasos);
+                XmlNodeList CaseTable = doc3.GetElementsByTagName("CaseTable");
+                XmlDocument doc4 = new XmlDocument();
+                var CT = CaseTable[0].LastChild.OuterXml;
+                doc4.LoadXml(CT);
+                XmlNodeList rows = doc4.GetElementsByTagName("Row");
+
 
                 //#region Crear JSON
                 List<List<string>> registros = new List<List<string>>();
@@ -436,6 +441,7 @@ namespace WebSolicitudes.Controllers
                       </XPaths>
                   </QueryParams>
                   <Parameters>
+                      <Parameter Name ='idEnt'>10135</Parameter>
                       <Parameter Name ='pag'>1</Parameter>
                        <Parameter Name='PageSize'>" + cantidadCasos + @"</Parameter>
                     </Parameters>
@@ -455,9 +461,13 @@ namespace WebSolicitudes.Controllers
                 //Fin CSV
 
                 //Transformar respuesta STRING de Bizagi a XML para poder recorrer los nodos
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(respuestaCasos);
-                XmlNodeList rows = doc.GetElementsByTagName("Row");
+                XmlDocument doc3 = new XmlDocument();
+                doc3.LoadXml(respuestaCasos);
+                XmlNodeList CaseTable = doc3.GetElementsByTagName("CaseTable");
+                XmlDocument doc4 = new XmlDocument();
+                var CT = CaseTable[0].LastChild.OuterXml;
+                doc4.LoadXml(CT);
+                XmlNodeList rows = doc4.GetElementsByTagName("Row");
 
                 #endregion
 
