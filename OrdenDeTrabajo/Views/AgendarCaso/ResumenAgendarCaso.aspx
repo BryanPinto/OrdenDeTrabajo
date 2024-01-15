@@ -1,140 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>    
-    <script src="<%: Url.Content("~/Styles/js/moment.js") %>"></script>
-    <script src="<%: Url.Content("~/Styles/js/datatable.min.js") %>"></script>
-    <link href="<%: Url.Content("~/Styles/css/datatable.min.css") %>" rel="stylesheet" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="<%: Url.Content("~/Styles/js/jquery-3.2.1.js") %>"></script>
     <title>Tratar caso</title>
    <script>
-       $(document).ready(function () {     
-           var mostrarNotificacion = true;
-           console.log("valor mostrarNotificacion inicializado :"+mostrarNotificacion);
-           $("#btnGuardar").click(function (e) {
-               e.preventDefault();
-               var formulario = $("#formTratarCaso").serialize(); //ESTO ESTABA ANTES
-               var archivos = new FormData();
-
-               
-               
-               // Buscar cabeceras
-               $.ajax({
-                   url: '<%: Url.Content("~/TratarCaso/ActualizarCaso/") %>',
-                   //data: formulario.extends(archivos), /*SERIALIZANDO FORMULARIO FUNCIONA, CUANDO DATA ES "ARCHIVOS" NO CONSIDERA LOS CAMPOS EN CONTROLADOR*/
-                   //data: datos, //ESTO HAY QUE PROBARLO
-                   data: $("#formTratarCaso").serialize(),
-                   cache: false,
-                   async: false, //ESTO DEBO PROBARLO 
-                   type: "POST",
-                   processData: false,
-                   enctype: "multipart/form-data",
-                   success: function (data) {
-                       console.log("data");
-                       console.log(data);
-                       <%--swal({
-                           title: 'Modificación exitosa',
-                           text: 'La información del caso ha sido actualizada',
-                           icon: 'success'
-                       }).then(function () {
-                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                       });--%>
-                       if (data != "error") {
-                       }
-                       else
-                        swal("Modificación sin éxito", "Contacte a un administrador", "error");
-                   },
-                   error: function () {
-                       swal("Problemas al cargar los casos", "Contacte a un administrador", "warning");
-                   }
-               });
-
-
-               console.log("-----------ARCHIVOS------------");
-               console.log(archivos);
-               console.log(archivos);
-               jQuery.each(jQuery('#txtArchivoContratista')[0].files, function (i, file) { 
-                   archivos.append('txtArchivoContratista' + i, file);
-                   //formulario.append('txtArchivoContratista', file);
-                   console.log(file);
-               }); 
-                $.ajax({
-                   url: '<%: Url.Content("~/TratarCaso/ActualizarCasoArchivos/") %>',
-                   data: archivos,
-                   cache: false,
-                   dataType: "json",
-                   type: "POST",
-                   contentType: false,
-                   processData: false,
-                   enctype: "multipart/form-data",
-                    success: function (data) {
-                        console.log("valor mostrarNotificacion guardar:"+mostrarNotificacion);
-                       if(mostrarNotificacion)
-                           swal({
-                               title: 'Modificación exitosa',
-                               text: 'La información del caso ha sido actualizada',
-                               icon: 'success'
-                           }).then(function () {
-                               window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                               });
-                       mostrarNotificacion = true;
-                       if (data != "error") {
-                       }
-                       else
-                        swal("Modificación sin éxito", "Contacte a un administrador", "error");
-                   },
-                   error: function () {
-                       swal({
-                           title: 'Modificación exitosa',
-                           text: 'La información del caso ha sido actualizada',
-                           icon: 'success'
-                       }).then(function () {
-                           window.location.href = '<%: Url.Content("~/Home/Index") %>';                          
-                       });
-                   }
-               });
-           });
-
-
-           $("#btnFinalizar").click(function (e) {
-               e.preventDefault();
-               mostrarNotificacion = false;
-               console.log("valor mostrarNotificacion finalizar :"+mostrarNotificacion);
-               $("#btnGuardar").click();
-               if ($("#txtFechaDeVisita").val() != "" && $("#txtComentarioCierre").val() != "") {
-                   // Buscar cabeceras
-                   $.ajax({
-                       url: '<%: Url.Content("~/TratarCaso/FinalizarCaso/") %>',
-                       data: $("#formTratarCaso").serialize(),
-                       cache: false,
-                       type: "POST",
-                       success: function (data) {                           
-                           swal({
-                               title: 'Caso finalizado exitosamente',
-                               text: 'Puedes ver el resumen de este caso en la pestaña de casos históricos',
-                               icon: 'success'
-                           }).then(function () {
-                               window.location.href = '<%: Url.Content("~/Home/Index") %>';
-                           });
-                           if (data != "error") {
-                           }
-                           else
-                               swal("Error al finalizar el caso", "Contacte a un administrador", "error");
-                       },
-                       error: function () {
-                           swal("Se produjo un error", "Contacte a un administrador", "warning");
-                       }
-                   });
-               }
-               else {
-                   swal({
-                       title: 'Campos obligatorios',
-                       text: 'La fecha de visita y comentario de cierre no pueden estar vacíos para finalizar el caso',
-                       icon: 'warning'
-                   });
-               }
-           });
-
+       $(document).ready(function () {                      
            if ("<%=ViewData["txtSinCuenta"]%>" != "") {
                if ("<%=ViewData["txtSinCuenta"].ToString()%>" == "True") {
                    $("#txtCuentaContrato").hide();
@@ -145,12 +15,6 @@
                    $("#txtCuentaContratoL").show();
                }
            }
-
-           // Mostrar mensaje de creación o error
-           if ("<%= ViewData["estado"] %>" == "correcto")
-               swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
-           else if ("<%= ViewData["estado"] %>" == "error")
-               swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
 
            var maxHeight = 400;
 
@@ -216,19 +80,19 @@ $(function(){
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div style="float:right">
-<nav>
+        <nav>
 <ul id="dropdown">
         	<li class="drop"><a href="#">Solicitudes</a>
         		<ul class="sub_menu">
         			<li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
-                    <li><a href="<%: Url.Content("~/AgendarVisitasTecnicas/AgendarVisitasTecnicas") %>">Agendar visitas técnicas</a></li>
 					<li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         		</ul>
         	</li>
-        	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
+        	<li><a href="<%: Url.Content("~/Home/Login") %>">Cerrar sesión</a>
         	</li>
         </ul>
-</nav></div><br /><br />
+</nav>
+        </div><br /><br />
     <form id="formTratarCaso" enctype="multipart/form-data">
     <div class="datosSolicitante">
         <h3>Datos solicitante</h3>
@@ -304,7 +168,7 @@ $(function(){
                 <label for="txtCiudadL" id="txtCiudadL"<%-- style="color:#f9f9fb"--%>>Ciudad</label>
                 <input type="text" class="form-control caso" id="txtCiudad" name="txtCiudad" placeholder="Ciudad" readonly value="<%= ViewData["txtCiudad"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso col-md-4">
+            <fieldset class="form-group tratarcaso col-md-6">
                 <label for="txtDireccionL" id="txtDireccionL"<%-- style="color:#f9f9fb"--%>>Dirección</label>
                 <input type="text" class="form-control caso" id="txtDireccion" name="txtDireccion" placeholder="Dirección" readonly value="<%= ViewData["txtDireccion"] %>"/>
             </fieldset>
@@ -411,12 +275,8 @@ $(function(){
         <div class="row">
             <h3>Campos obligatorios</h3>
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <label for="txtFechaDeVisitaL">Fecha visita</label>
-                <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required value="<%= ViewData["txtFechaDeVisita"] %>"/>
-            </fieldset>
-            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
-                <label for="txtArchivoSoliL" id="txtArchivoSoliL">Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
+                <label for="txtFechaDeVisita">Fecha visita</label>
+                <input type="date" class="form-control casoModificable" style="background-color:#ffffbf" id="txtFechaDeVisita" readonly name="txtFechaDeVisita" value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <% if(ViewData["txtArchivosCargados"] != null)
@@ -426,23 +286,23 @@ $(function(){
                     <%= ViewData["txtArchivosCargados"] %>
                 <%--<input type="file" class="form-control" id="txtArchivoCargados1" name="txtArchivoCargados1" multiple value="<%= ViewData["txtArchivosCargados"] %>"/>--%>
                  <%}%>
-            </fieldset>               
+            </fieldset>  
             <fieldset class="form-group tratarcaso modificable col-md-4">
                 <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" required placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" style="background-color:#ffffbf" readonly name="txtComentarioCierre"><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>
 
-    <div class="botones">
+    <%--<div class="botones">
         <div class="row">
             <fieldset class="form-group botones col-md-4">
                 <input type="hidden" name="txtNumCaso" id="txtNumCaso" value="<%= Request.Url.Segments.LastOrDefault() %>"/>
                 <input type="submit" id="btnGuardar" value="Guardar" class="guardar">
-                <input type="button" id="btnFinalizar" value="Finalizar" class="finalizar">
+                <input type="submit" id="btnFinalizar" value="Finalizar" class="finalizar">
             </fieldset>
         </div>
-    </div>
+    </div>--%>
         </form>
 
 </asp:Content>

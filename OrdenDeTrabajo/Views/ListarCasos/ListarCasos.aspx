@@ -166,6 +166,7 @@ $(function(){
         		</ul>
         	</li>--%>
             <li><a href="<%: Url.Content("~/Home/Index") %>">Casos pendientes</a></li>
+            <li><a href="<%: Url.Content("~/AgendarVisitasTecnicas/AgendarVisitasTecnicas") %>">Agendar visitas técnicas</a></li>
             <li><a href="<%: Url.Content("~/ListarCasos/ListarCasos") %>">Histórico de casos</a></li>
         	<li><a href="<%: Url.Content("~/Home/CerrarSesion") %>">Cerrar sesión</a>
         	</li>

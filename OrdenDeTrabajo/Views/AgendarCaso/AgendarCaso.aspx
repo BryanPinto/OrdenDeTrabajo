@@ -409,27 +409,23 @@ $(function(){
         </div>
         <br />
         <div class="row">
-            <h3>Campos obligatorios</h3>
+            <h3>Campos agenda visita</h3>
+           
+
+             <fieldset class="form-group tratarcaso modificable col-md-4">
+             <label for="txtSPC" id="txtSPC">¿Se pudo contactar?</label>
+             <input id="checkProp" name="checkSCP" type="checkbox" />
+             </fieldset>
+             
+
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <label for="txtFechaDeVisitaL">Fecha visita</label>
+                <label for="txtFechaDeVisitaL">Fecha coordinada</label>
                 <input type="date" class="form-control casoModificable" id="txtFechaDeVisita" name="txtFechaDeVisita" required value="<%= ViewData["txtFechaDeVisita"] %>"/>
             </fieldset>
-            <fieldset class="form-group tratarcaso archivoModificable col-md-4">
-                <label for="txtArchivoSoliL" id="txtArchivoSoliL">Archivo</label>
-                <input type="file" class="form-control" id="txtArchivoContratista" name="txtArchivoContratista" multiple value="<%= ViewData["txtArchivoContratista"] %>"/>
-            </fieldset>
+            
             <fieldset class="form-group tratarcaso modificable col-md-4">
-                <% if(ViewData["txtArchivosCargados"] != null)
-                    {%>
-                <label for="txtArchivoCargados" id="txtArchivoCargados">Archivo cargados</label>
-                <% if(ViewData["txtArchivosCargados"] != null)%>
-                    <%= ViewData["txtArchivosCargados"] %>
-                <%--<input type="file" class="form-control" id="txtArchivoCargados1" name="txtArchivoCargados1" multiple value="<%= ViewData["txtArchivosCargados"] %>"/>--%>
-                 <%}%>
-            </fieldset>               
-            <fieldset class="form-group tratarcaso modificable col-md-4">
-                <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario cierre</label>
-                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" required placeholder="Comentario cierre de solicitud"><%= ViewData["txtComentarioCierre"] %></textarea>
+                <label for="txtComentarioCierreL" id="txtComentarioCierreL"<%-- style="color:#f9f9fb"--%>>Comentario de agenda de visita técnica</label>
+                <textarea class="form-control casoModificable" id="txtComentarioCierre" name="txtComentarioCierre" required placeholder="Comentario de agenda de visita técnica"><%= ViewData["txtComentarioCierre"] %></textarea>
             </fieldset>
         </div>
     </div>

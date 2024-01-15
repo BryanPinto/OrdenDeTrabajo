@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>--%>
     <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
-    <title>Casos pendientes</title>
+    <title>Agendar Visitas Técnicas</title>
     <script>
         $(document).ready(function () {
             // Datatable y propiedades
@@ -74,7 +74,7 @@
                 e.preventDefault();
                 // Buscar cabeceras
                 $.ajax({
-                    url: '<%: Url.Content("~/ListarCasos/CasosPendientes/") %>',
+                    url: '<%: Url.Content("~/ListarCasos/CasosPendientesAgenda/") %>',
                     data: $("#formIndex").serialize(),
                     cache: false,
                     type: "POST",
@@ -167,7 +167,7 @@
                         if ("<%= ViewData["estado"] %>" == "1")
                             swal("Inicio de sesión exitoso", "Redirigiendo a vista de casos", "success");
                         else if ("<%= ViewData["estado"] %>" == "0")
-                            swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
+            swal("Error al iniciar sesión", "Pudo ser debido a credenciales inválidas o hubo un error al consultar los datos. Intente nuevamente", "error");
     </script>
 </asp:Content>
 
@@ -188,7 +188,7 @@
         	</li>
         </ul>
 </nav></div><br /><br />
-    <h2 style="text-align:center;color:#AEAEAE">Casos pendientes</h2><br />
+    <h2 style="text-align:center;color:#AEAEAE">Agendar Visitas Técnicas</h2><br />
 
     <%--FILTROS--%>
     <form id="formIndex">
